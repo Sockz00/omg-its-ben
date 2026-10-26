@@ -1,6 +1,6 @@
 import { Generative } from '../components/Cover';
 import { Breadcrumbs } from '../components/ui';
-import { DISCIPLINES, NOW, profile, SITE } from '../data/site';
+import { DISCIPLINES, NOW, SITE } from '../data/site';
 import { countFor, sectionFor, usedDisciplines } from '../lib/content';
 import { Link } from '../lib/router';
 
@@ -10,7 +10,7 @@ export default function About() {
     <div className="page about">
       <Breadcrumbs trail={[{ label: 'About' }]} />
       <header className="phead">
-        <h1 className="phead__title"><span>About</span> <em className="serif">{profile.shortName}</em></h1>
+        <h1 className="phead__title"><span>About</span> <em className="serif">Ben</em></h1>
         <p className="phead__lede serif">This page is a frame. Everything in brackets is an editable placeholder — no biography has been invented.</p>
       </header>
       <div className="about__grid">
@@ -19,7 +19,7 @@ export default function About() {
           <figcaption className="mono">[EDIT] Replace with a portrait — /public/images/about/portrait.jpg</figcaption>
         </figure>
         <div className="about__text prose">
-          <p className="about__big serif">{profile.author} is a <mark>{profile.bio}</mark> based in <mark>{profile.location}</mark>, working across sound, image and code.</p>
+          <p className="about__big serif">Ben is a <mark>[EDIT: one-line description]</mark> based in <mark>{SITE.location}</mark>, working across sound, image and code.</p>
           <h2>Practice</h2>
           <p>The archive treats music, photography, drawing, design, software, AI and security research as one practice rather than many careers. Projects cross-reference each other on purpose: a field recording becomes a plotter drawing; a synth module becomes a piece of code; a dither algorithm becomes a way of looking at photographs.</p>
           <h2>Philosophy</h2>

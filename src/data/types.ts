@@ -144,7 +144,6 @@ export interface JournalEntry {
   body: string;
   tags: string[];
   demo?: boolean;
-  draft?: boolean;
   related?: string[];
 }
 

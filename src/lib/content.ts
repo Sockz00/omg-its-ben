@@ -1,10 +1,6 @@
 import { projects } from '../data/projects';
-import { DISCIPLINES } from '../data/site';
-import type { Cover, Discipline, ImageAsset, JournalEntry, Project } from '../data/types';
-
-const journalModules = import.meta.glob('../content/journal/*.json', { eager: true, import: 'default' }) as Record<string, JournalEntry>;
-export const journal = Object.values(journalModules).filter((entry) => !entry.draft);
-
+import { DISCIPLINES, journal } from '../data/site';
+import type { Cover, Discipline, ImageAsset, Project } from '../data/types';
 
 export const byDateDesc = (a: Project, b: Project) => b.published.localeCompare(a.published);
 

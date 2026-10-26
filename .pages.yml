@@ -369,89 +369,14 @@ content:
                 type: string
               - name: label
                 type: string
-          - name: timeline
-            type: object
-            list: true
-            fields:
-              - name: date
-                type: string
-              - name: label
-                type: string
-
-  - name: journal
-    label: Journal
-    path: src/content/journal
-    format: json
-    filename: '{slug}.json'
-    fields:
-      - name: slug
-        type: string
-      - name: title
-        type: string
-      - name: date
-        type: string
-      - name: kind
-        type: select
-        options:
-          values: [essay, note, research, technical, log]
-      - name: demo
-        type: boolean
-      - name: draft
-        type: boolean
-      - name: summary
-        type: text
-      - name: body
-        type: markdown
-      - name: tags
-        type: string
-        list: true
-      - name: related
-        type: string
-        list: true
-
-  - name: profile
-    label: Profile
-    path: src/content
-    format: json
-    filename: profile.json
-    singleton: true
-    fields:
-      - name: name
-        type: string
-      - name: shortName
-        type: string
-      - name: url
-        type: string
-      - name: description
-        type: text
-      - name: author
-        type: string
-      - name: location
-        type: string
-      - name: email
-        type: string
-      - name: bio
-        type: text
-      - name: currentActivity
-        type: string
-        list: true
-      - name: updated
-        type: string
-      - name: listening
-        type: string
-      - name: reading
-        type: string
-      - name: socials
+      - name: timeline
         type: object
         list: true
         fields:
+          - name: date
+            type: string
           - name: label
             type: string
-          - name: href
-            type: string
-          - name: handle
-            type: string
-
       - name: process
         type: object
         list: true
