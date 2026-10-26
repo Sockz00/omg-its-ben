@@ -1,7 +1,7 @@
 // Cloudflare Workers — static assets only (no Worker script / backend required).
 // Deploy (when YOU choose to):  npm run build && npx wrangler deploy
 {
-  "previews": {}
+  "previews": {},
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "omg-its-ben",
   "compatibility_date": "2025-01-01",
