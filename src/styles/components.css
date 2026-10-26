@@ -113,8 +113,18 @@
 .phead__lede { grid-column: 9 / 13; margin: 0; font-size: var(--fs-l); line-height: 1.2; color: var(--ink-2); }
 .phead__count { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 0; color: var(--ink-3); }
 .phead__count b { color: var(--ink); font-weight: 500; font-size: 14px; }
-.phead__wing { grid-column: 1 / -1; color: var(--accent); }
-@media (max-width: 900px) { .phead__title, .phead__lede { grid-column: 1 / -1; }}
+  .phead__wing { grid-column: 1 / -1; color: var(--accent); }
+  .phead__eyebrow { margin: 0 0 14px; color: var(--accent); }
+  .tech__head, .journal__head { margin-bottom: 0; }
+  .tech__head > div, .journal__head > div { grid-column: 1 / 9; }
+  .tech__head .phead__title, .journal__head .phead__title { grid-column: auto; }
+  .tech__head .phead__lede, .journal__head .phead__lede { grid-column: 9 / 13; }
+  .tech__rule { height: 22px; border-bottom: 1px solid var(--line-2); margin-bottom: 10px; }
+  .journal__toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .journal__toolbar > .mono { color: var(--ink-3); }
+  .journal__toolbar .filters__disc { margin: 0; }
+  @media (max-width: 900px) { .phead__title, .phead__lede, .tech__head > div, .journal__head > div, .tech__head .phead__lede, .journal__head .phead__lede { grid-column: 1 / -1; }}
+  @media (max-width: 600px) { .journal__toolbar { align-items: flex-start; flex-direction: column; gap: 10px; }}
 
 .shead { display: grid; grid-template-columns: 80px 1fr auto; align-items: end; gap: 6px 18px; padding-bottom: 18px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
 .shead__no { color: var(--accent); align-self: start; padding-top: 8px; }

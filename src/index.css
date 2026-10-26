@@ -51,6 +51,8 @@
   --sel: rgba(255, 74, 28, .35);
   --texture: repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px);
   --shadow: 0 30px 80px -30px rgba(0,0,0,.8);
+  --surface-card: color-mix(in srgb, var(--bg-2) 84%, transparent);
+  --surface-hover: color-mix(in srgb, var(--accent) 9%, var(--bg));
   color-scheme: dark;
 }
 
@@ -70,6 +72,8 @@
   --sel: rgba(31, 59, 255, .22);
   --texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --shadow: 0 30px 60px -30px rgba(40,30,10,.35);
+  --surface-card: color-mix(in srgb, var(--bg-2) 72%, transparent);
+  --surface-hover: color-mix(in srgb, var(--accent) 7%, var(--bg));
   color-scheme: light;
 }
 
