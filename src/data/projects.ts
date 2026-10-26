@@ -19,7 +19,6 @@ const img = (src: string, width: number, height: number, alt: string, extra: Par
   width,
   height,
   alt,
-  variants: true,
   ...extra,
 });
 
