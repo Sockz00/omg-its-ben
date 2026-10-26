@@ -31,6 +31,13 @@ No test runner, linter, formatter, or CI is configured. `tsconfig.json` extends 
 
 - `src/pages/index.astro` shows a full-screen "Enter the archive" overlay before the homepage content. Clicking "ENTER" dismisses it (client-side, no persistence) — it appears on every homepage visit. Keep this in mind when editing the page structure or frontmatter.
 
+## Shared layout behaviors (`src/layouts/BaseLayout.astro`)
+
+- A custom mouse cursor (`#cursor`) follows the pointer and grows on hover over interactive elements (`a`, `button`, `.project-card`, etc.). It uses `mix-blend-mode: difference`.
+- Sections with the `.reveal` class fade in on scroll via an `IntersectionObserver` (threshold 0.12). Added to homepage sections and archive items.
+- `main` has a page-entrance fade (`@keyframes fadeIn`).
+- `prefers-reduced-motion` disables all transitions/animations.
+
 ## Gotchas
 
 - `.gitignore` excludes `node_modules/`, `dist/`, `.wrangler/`, `.dev.vars`, `.DS_Store`.

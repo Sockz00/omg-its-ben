@@ -11,7 +11,7 @@ import { projects, categories } from '../data/projects';
     <div class="archive-intro"><span class="section-kicker">INDEX / 001—{String(projects.length).padStart(3, '0')}</span><h1>The archive<span class="heading-period">.</span></h1><p>A collection of projects, studies, experiments and ongoing work. An incomplete record, by design.</p></div>
     <div class="archive-toolbar"><div class="filter-list" role="group" aria-label="Filter projects">{categories.map((category) => <button class="filter-button" data-filter={category} aria-pressed={category === 'All' ? 'true' : 'false'}>{category}</button>)}</div><label class="search-box"><span>⌕</span><input id="project-search" type="search" placeholder="Search the archive" aria-label="Search projects" /></label></div>
     <div class="archive-count"><span id="result-count">{projects.length} ENTRIES</span><span>NEWEST FIRST</span></div>
-    <div class="project-grid archive-grid" id="archive-grid">{projects.map((project) => <div class="archive-item" data-category={project.category} data-search={`${project.title} ${project.description} ${project.medium} ${project.category}`.toLowerCase()}><ProjectCard project={project} /></div>)}</div>
+    <div class="project-grid archive-grid" id="archive-grid">{projects.map((project) => <div class="archive-item reveal" data-category={project.category} data-search={`${project.title} ${project.description} ${project.medium} ${project.category}`.toLowerCase()}><ProjectCard project={project} /></div>)}</div>
     <p class="empty-state" id="empty-state" hidden>No entries match that search.</p>
   </main>
   <SiteFooter />
