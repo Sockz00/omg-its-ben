@@ -3,7 +3,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 const SITE = process.env.SITE_URL ?? 'https://omg-its-ben.example';
 const slugs = (file) => [...readFileSync(file, 'utf8').matchAll(/slug: '([^']+)'/g)].map((m) => m[1]);
-const pages = ['', 'archive', 'visual', 'sound', 'film', 'lab', 'map', 'skills', 'journal', 'activity', 'about', 'contact'];
+const pages = ['', 'photo', 'music', 'tech', 'journal', 'about'];
 const urls = [
   ...pages.map((p) => (p ? `${SITE}/#/${p}` : `${SITE}/`)),
   ...slugs('src/data/projects.ts').map((s) => `${SITE}/#/project/${s}`),

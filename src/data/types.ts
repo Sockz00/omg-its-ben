@@ -7,7 +7,6 @@ export type Discipline =
   | 'music'
   | 'sound'
   | 'photography'
-  | 'film'
   | 'digital-art'
   | 'drawing'
   | 'design'
@@ -82,19 +81,6 @@ export interface AudioRelease {
   allowSpeed?: boolean;
 }
 
-export interface VideoAsset {
-  kind: 'youtube' | 'vimeo' | 'file' | 'generative';
-  title: string;
-  id?: string;
-  src?: string;
-  poster?: ImageAsset;
-  captions?: { src: string; label: string; lang: string }[];
-  aspect?: string;
-  note?: string;
-  /** For `generative` video: the canvas program to run. */
-  program?: 'afterimage' | 'scanlines';
-}
-
 export interface CodeSample {
   lang: 'ts' | 'js' | 'py' | 'glsl' | 'bash' | 'rust' | 'c';
   filename: string;
@@ -128,7 +114,6 @@ export interface Project {
   galleryLayout?: 'masonry' | 'asymmetric' | 'sequence' | 'horizontal';
   compare?: { before: ImageAsset; after: ImageAsset; beforeFilter?: string; label?: string };
   audio?: AudioRelease;
-  video?: VideoAsset[];
   downloads?: { label: string; href: string; size?: string }[];
   credits?: { role: string; name: string }[];
   collaborators?: string[];

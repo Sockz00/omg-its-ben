@@ -28,14 +28,13 @@ export const NOW = {
   updated: '2025-02-01',
   listening: '[EDIT: what you are listening to]',
   reading: '[EDIT: what you are reading]',
-  making: ['Extending the Flowfield Instrument (demo)', 'Room Tone Studies — new textures (demo)', 'Honeypot write-up, part two (demo)'],
+  making: ['Extending the Flowfield Instrument (demo)', 'Night Crossings — new plates (demo)', 'Tiny Language Model — next notes (demo)'],
 };
 
 export const DISCIPLINES: Record<Discipline, { label: string; short: string; glyph: string; blurb: string }> = {
   music: { label: 'Music', short: 'MUS', glyph: '♪', blurb: 'Composition and production' },
   sound: { label: 'Sound', short: 'SND', glyph: '∿', blurb: 'Audio engineering & sound design' },
   photography: { label: 'Photography', short: 'PHO', glyph: '◐', blurb: 'Series, studies, single frames' },
-  film: { label: 'Film', short: 'FLM', glyph: '▶', blurb: 'Videography & moving image' },
   'digital-art': { label: 'Digital Art', short: 'DIG', glyph: '◇', blurb: 'Generative & digital work' },
   drawing: { label: 'Drawing', short: 'DRW', glyph: '✎', blurb: 'Traditional drawing & illustration' },
   design: { label: 'Design', short: 'DES', glyph: '▦', blurb: 'Graphic design & typography' },
@@ -55,7 +54,7 @@ export const journal: JournalEntry[] = [
     demo: true,
     summary: 'Why photography, synthesis and security research might be the same activity wearing different clothes.',
     tags: ['practice', 'process'],
-    related: ['signal-bloom', 'honeypot-notes'],
+    related: ['flowfield-instrument', 'tiny-language-model'],
     body: `**Demonstration journal entry.** Replace with your own writing.
 
 Every discipline in this archive rewards the same thing: patient attention to a signal. A photograph is light sampled at a moment. A mix is energy distributed across frequencies. A packet capture is behaviour, written down by a machine.
@@ -77,7 +76,7 @@ This website is built on the same idea: one archive, one index, one graph of rel
     demo: true,
     summary: 'A Bayer matrix, a threshold and a canvas — how the archive’s dither treatment works.',
     tags: ['graphics', 'canvas', 'technical'],
-    related: ['weather-index'],
+    related: ['night-crossings'],
     body: `**Demonstration journal entry.**
 
 Ordered dithering compares each pixel's luminance against a repeating threshold matrix. The 4×4 Bayer matrix is enough for a convincing print-like texture:
@@ -113,7 +112,7 @@ Divide by 16, compare with luminance, output ink or paper. In the archive the th
     demo: true,
     summary: 'Defensive principles for running security experiments at home without endangering your own network.',
     tags: ['security', 'homelab'],
-    related: ['honeypot-notes'],
+    related: ['tiny-language-model'],
     body: `**Demonstration journal entry — general educational notes, not a guide to attacking anything.**
 
 ## Principles
@@ -124,19 +123,15 @@ Divide by 16, compare with luminance, output ink or paper. In the archive the th
 ];
 
 export const activity: ActivityItem[] = [
-  { date: '2025-02-01', type: 'now', text: 'Archive rebuilt from a single content file.', href: '#/project/archive-engine' },
+  { date: '2025-02-01', type: 'now', text: 'Site reduced to five sections: photo, music, tech, journal, about.', href: '#/tech' },
   { date: '2025-01-20', type: 'note', text: 'Journal: “One practice, many instruments”.', href: '#/journal/one-practice' },
-  { date: '2025-01-10', type: 'project', text: 'Published Honeypot Notes (demo).', href: '#/project/honeypot-notes' },
+  { date: '2025-01-10', type: 'project', text: 'Honeypot Notes — home-lab research log.', href: '#/project/honeypot-notes' },
   { date: '2024-12-02', type: 'note', text: 'Technical note on ordered dithering.', href: '#/journal/dither-notes' },
-  { date: '2024-11-02', type: 'experiment', text: 'Afterimage — a real-time film — enters the archive.', href: '#/project/afterimage' },
-  { date: '2024-09-14', type: 'project', text: 'Room Tone Studies begins (ongoing).', href: '#/project/room-tone-studies' },
-  { date: '2024-09-03', type: 'experiment', text: 'Interference shader released in the Lab.', href: '#/project/interference-shader' },
+  { date: '2024-09-03', type: 'experiment', text: 'Interference — a raw WebGL shader.', href: '#/project/interference-shader' },
   { date: '2024-08-20', type: 'project', text: 'Tiny Language Model — browser demo online.', href: '#/project/tiny-language-model' },
   { date: '2024-06-21', type: 'project', text: 'Low Tide EP published (demo).', href: '#/project/low-tide' },
   { date: '2024-06-12', type: 'experiment', text: 'Type Field: interactive typography.', href: '#/project/type-field' },
-  { date: '2024-05-19', type: 'project', text: 'Signal Bloom plotter series.', href: '#/project/signal-bloom' },
   { date: '2024-04-01', type: 'experiment', text: 'Flowfield Instrument v1.', href: '#/project/flowfield-instrument' },
   { date: '2024-03-03', type: 'project', text: 'Night Crossings series published.', href: '#/project/night-crossings' },
-  { date: '2024-01-15', type: 'project', text: 'Tunnel Vision short film.', href: '#/project/tunnel-vision' },
-  { date: '2023-12-20', type: 'update', text: 'Sketchbook 04 scanned and archived.', href: '#/project/sketchbook-04' },
+  { date: '2024-02-20', type: 'project', text: 'Modular Bench — hardware notes, rev C.', href: '#/project/modular-bench' },
 ];

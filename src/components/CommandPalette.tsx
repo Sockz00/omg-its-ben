@@ -1,23 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { DISCIPLINES } from '../data/site';
-import type { Discipline } from '../data/types';
-import { allProjects, getProject, journalSorted, randomProject } from '../lib/content';
+import { allProjects, getProject, journalSorted, randomProject, sectionOf } from '../lib/content';
 import { navigate } from '../lib/router';
 import { getRecent, toggleTheme } from '../lib/store';
 
 export const PAGES = [
   { label: 'Index', to: '/', key: 'h' },
-  { label: 'Archive', to: '/archive', key: 'a' },
-  { label: 'Image — photography & visual art', to: '/visual', key: 'i' },
-  { label: 'Sound — music & audio', to: '/sound', key: 's' },
-  { label: 'Moving image — film & video', to: '/film', key: 'f' },
-  { label: 'Lab — code, AI, security, experiments', to: '/lab', key: 'l' },
-  { label: 'Relationship map', to: '/map', key: 'm' },
-  { label: 'Skills map', to: '/skills', key: 'k' },
+  { label: 'Photo — photography & visual work', to: '/photo', key: 'p' },
+  { label: 'Music — releases & sound', to: '/music', key: 'm' },
+  { label: 'Tech — software, AI, security, hardware', to: '/tech', key: 't' },
   { label: 'Journal', to: '/journal', key: 'j' },
-  { label: 'Activity log', to: '/activity', key: 'y' },
   { label: 'About', to: '/about', key: 'b' },
-  { label: 'Contact', to: '/contact', key: 'c' },
 ];
 
 interface Item { id: string; group: string; label: string; hint?: string; run: () => void }
@@ -37,8 +30,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       { id: 'a-theme', group: 'Actions', label: 'Toggle light / dark', hint: 'T', run: () => { toggleTheme(); onClose(); } },
       { id: 'a-copy', group: 'Actions', label: 'Copy link to this page', run: () => { navigator.clipboard?.writeText(location.href); onClose(); } },
       ...PAGES.map((p) => ({ id: `p-${p.to}`, group: 'Pages', label: p.label, hint: `G ${p.key.toUpperCase()}`, run: go(p.to) })),
-      ...allProjects.map((p) => ({ id: `pr-${p.slug}`, group: 'Projects', label: p.title, hint: `${DISCIPLINES[p.category].label} · ${p.tags.slice(0, 2).join(', ')}`, run: go(`/project/${p.slug}`) })),
-      ...(Object.keys(DISCIPLINES) as Discipline[]).map((d) => ({ id: `d-${d}`, group: 'Disciplines', label: DISCIPLINES[d].label, hint: DISCIPLINES[d].blurb, run: go(`/archive?d=${d}`) })),
+      ...allProjects.map((p) => ({ id: `pr-${p.slug}`, group: 'Projects', label: p.title, hint: `${sectionOf(p).label} · ${DISCIPLINES[p.category].label}`, run: go(`/project/${p.slug}`) })),
       ...journalSorted.map((j) => ({ id: `j-${j.slug}`, group: 'Journal', label: j.title, hint: j.kind, run: go(`/journal/${j.slug}`) })),
     ];
   }, [open, onClose]);
@@ -80,7 +72,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
             ref={input}
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search projects, pages, disciplines, journal…"
+            placeholder="Search projects, pages, journal…"
             role="combobox"
             aria-expanded="true"
             aria-controls="cmdk-list"

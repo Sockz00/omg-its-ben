@@ -12,7 +12,9 @@ export default function NotFound() {
       <p className="serif nf__text">This shelf is empty. The object may have moved, or never existed.</p>
       <div className="nf__links">
         <Link to="/" className="btn btn--solid">Back to the index</Link>
-        <Link to="/archive" className="btn">Browse the archive</Link>
+        <Link to="/photo" className="btn">Photo</Link>
+        <Link to="/music" className="btn">Music</Link>
+        <Link to="/tech" className="btn">Tech</Link>
         <Link to={`/project/${r.slug}`} className="btn">Something random: {r.title}</Link>
       </div>
     </div>

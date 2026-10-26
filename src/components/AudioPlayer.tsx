@@ -3,10 +3,10 @@ import type { AudioRelease, Track } from '../data/types';
 import { isImage } from '../lib/content';
 import { loadFile, peaks, renderRecipe } from '../lib/synth';
 import { useTheme } from '../lib/store';
+import { palette } from '../lib/palette';
 import { Generative, Picture } from './Cover';
 
 const fmt = (s: number) => (isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}` : '–:––');
-const cssVar = (n: string) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
 async function resolve(t: { src?: string; synth?: Track['synth'] }) {
   if (t.src) return loadFile(t.src);
@@ -19,7 +19,7 @@ function drawWave(c: HTMLCanvasElement, pk: Float32Array | null, progress: numbe
   const w = (c.width = c.clientWidth * dpr), h = (c.height = c.clientHeight * dpr);
   const g = c.getContext('2d')!;
   g.clearRect(0, 0, w, h);
-  const ink = cssVar('--ink-3'), acc = cssVar('--accent'), line = cssVar('--line-2');
+  const { ink3: ink, accent: acc, line2: line } = palette();
   if (!pk) {
     g.fillStyle = line;
     for (let i = 0; i < 120; i++) g.fillRect((i / 120) * w, h / 2 - 1, w / 240, 2);
@@ -35,7 +35,7 @@ function drawWave(c: HTMLCanvasElement, pk: Float32Array | null, progress: numbe
     g.font = `${10 * dpr}px "JetBrains Mono", monospace`;
     track.markers?.forEach((m) => {
       const x = (m.time / duration) * w;
-      g.fillStyle = cssVar('--ink'); g.fillRect(x, 0, dpr, h);
+      g.fillStyle = palette().ink; g.fillRect(x, 0, dpr, h);
       g.fillText(m.label.toUpperCase(), x + 4 * dpr, 11 * dpr);
     });
     track.annotations?.forEach((a) => {
@@ -149,8 +149,8 @@ export function AudioPlayer({ release, title }: { release: AudioRelease; title: 
     const g = c.getContext('2d')!;
     let raf = 0;
     const dpr = Math.min(2, devicePixelRatio);
-    if (c.width !== c.clientWidth * dpr) { c.width = c.clientWidth * dpr; c.height = c.clientHeight * dpr; g.fillStyle = cssVar('--bg-2'); g.fillRect(0, 0, c.width, c.height); }
-    const acc = cssVar('--accent');
+    if (c.width !== c.clientWidth * dpr) { c.width = c.clientWidth * dpr; c.height = c.clientHeight * dpr; g.fillStyle = palette().bg2; g.fillRect(0, 0, c.width, c.height); }
+    const pal = palette();
     const loop = () => {
       const an = graph.current?.an;
       if (an && c.width && c.height) {
@@ -161,8 +161,8 @@ export function AudioPlayer({ release, title }: { release: AudioRelease; title: 
         for (let y = 0; y < h; y++) {
           const idx = Math.floor(Math.pow(1 - y / h, 2.2) * bins.length * 0.7);
           const v = bins[idx] / 255;
-          g.fillStyle = cssVar('--bg-2'); g.globalAlpha = 1; g.fillRect(c.width - 2, y, 2, 1);
-          g.globalAlpha = v; g.fillStyle = v > 0.72 ? acc : cssVar('--ink'); g.fillRect(c.width - 2, y, 2, 1);
+          g.fillStyle = pal.bg2; g.globalAlpha = 1; g.fillRect(c.width - 2, y, 2, 1);
+          g.globalAlpha = v; g.fillStyle = v > 0.72 ? pal.accent : pal.ink; g.fillRect(c.width - 2, y, 2, 1);
         }
         g.globalAlpha = 1;
       }

@@ -7,9 +7,11 @@ import type { ImageAsset, Project } from './types';
    to exercise the content system — none of it describes real work,
    clients, awards or achievements. Replace freely.
 
-   To add a project: copy any object, change the slug, and fill in the
-   fields you need. Listings, filters, the relationship map, the
-   command palette and the project page are all generated from here.
+   The archive currently ships five demonstration objects, one per
+   wing (Sound, Image, Film, Lab × 2). To add a project: copy any
+   object, change the slug, and fill in the fields you need. Listings,
+   filters, the relationship map, the command palette and the project
+   page are all generated from here.
    ════════════════════════════════════════════════════════════════ */
 
 const img = (src: string, width: number, height: number, alt: string, extra: Partial<ImageAsset> = {}): ImageAsset => ({
@@ -38,26 +40,16 @@ export const IMAGES = {
     caption: 'Market hall, 17:52. Placeholder image.',
     exif: { camera: '[EDIT] 35mm SLR', lens: '50mm f/1.4', aperture: 'f/2.8', shutter: '1/250s', iso: 400 },
   }),
-  bloom: img('/images/digital-art/signal-bloom.jpg', 1024, 1536, 'Dense generative line drawing blooming in red and black ink', {
-    caption: 'Signal Bloom, plate 03. Placeholder image.',
-  }),
   ink: img('/images/drawing/ink-studies.jpg', 1024, 1536, 'Sketchbook page of ink studies: hands, a cassette recorder, a microphone', {
     caption: 'Sketchbook spread. Placeholder image.',
   }),
-  poster: img('/images/design/poster-series.jpg', 1024, 1536, 'Typographic poster with black grotesque shapes and fluorescent orange forms', {
-    caption: 'Poster system, sheet A. Placeholder image.',
-  }),
   tide: img('/images/music/cover-low-tide.jpg', 1254, 1254, 'Album artwork: a single orange horizon over deep blue-black'),
-  tunnel: img('/images/film/still-tunnel.jpg', 1938, 812, 'Film still: a silhouetted figure far down a green fluorescent tunnel', {
-    caption: 'Frame 01:12:04. Placeholder image.',
-  }),
   bench: img('/images/tech/workbench.jpg', 1536, 1024, 'Overhead view of an electronics workbench with an oscilloscope and circuit boards', {
     caption: 'Bench, revision C. Placeholder image.',
   }),
 };
 
 export const projects: Project[] = [
-  /* ─────────────────────────────── MUSIC ─────────────────────────────── */
   {
     slug: 'low-tide',
     title: 'Low Tide',
@@ -114,40 +106,8 @@ The audio you hear is *not a recording*. Every track is generated procedurally i
 - Pads: detuned oscillators through a slowly modulated low-pass filter.
 - Space: feedback delay into a long convolution-style tail.
 - Texture: pink noise shaped as a tape-hiss bed.`,
-    related: ['room-tone-studies', 'flowfield-instrument', 'modular-bench'],
+    related: ['flowfield-instrument', 'night-crossings'],
   },
-  {
-    slug: 'room-tone-studies',
-    title: 'Room Tone Studies',
-    demo: true,
-    description: 'Sound design sketches exploring texture, noise and resonance — the sound of rooms with nothing in them.',
-    category: 'sound',
-    disciplines: ['sound', 'research'],
-    tags: ['sound-design', 'noise', 'field-recording', 'spectral'],
-    created: '2024-08-02',
-    published: '2024-09-14',
-    status: 'ongoing',
-    cover: { generative: 'bars', seed: 42, label: 'RTS' },
-    audio: {
-      format: 'sound-design',
-      allowSpeed: true,
-      tracks: [
-        { title: 'Study 01 — Hum', synth: { kind: 'drone', seconds: 30, seed: 9, root: 33 }, annotations: [ { time: 5, text: 'Mains hum harmonics at 50 Hz multiples.' }, { time: 18, text: 'Notice the beating between partials.' } ] },
-        { title: 'Study 02 — Grain', synth: { kind: 'texture', seconds: 30, seed: 14 }, annotations: [ { time: 10, text: 'Band-passed noise grains, randomised centre frequency.' } ] },
-        { title: 'Study 03 — Clock', synth: { kind: 'beat', seconds: 28, seed: 2, bpm: 110 }, markers: [ { time: 0, label: 'Tick' }, { time: 14, label: 'Double-time' } ] },
-      ],
-    },
-    software: ['Web Audio API', 'Reaper', 'iZotope RX'],
-    equipment: ['Portable field recorder [EDIT]', 'Contact microphone'],
-    techniques: ['Spectral analysis', 'Granular synthesis', 'Field recording'],
-    body: `## Brief
-**Demonstration project.** A sound-design entry. Open the spectrogram view on the player to watch frequency content in real time — the hum study shows clean harmonic stripes, the grain study a shifting cloud.
-
-Playback speed is enabled here because study material benefits from slow listening.`,
-    related: ['low-tide', 'interference-shader'],
-  },
-
-  /* ─────────────────────────── PHOTOGRAPHY ─────────────────────────── */
   {
     slug: 'night-crossings',
     title: 'Night Crossings',
@@ -172,193 +132,8 @@ Playback speed is enabled here because study material benefits from slow listeni
 **Demonstration project — images are AI-generated placeholders.** Replace them with your own photographs and keep the metadata structure.
 
 The series demonstrates an asymmetric gallery, a full-screen lightbox (arrow keys, \`+\`/\`−\` to zoom, drag to pan), per-image EXIF data, and a before/after comparison slider showing a flat scan against a finished grade.`,
-    related: ['weather-index', 'concrete-grammar', 'tunnel-vision'],
+    related: ['tunnel-vision', 'low-tide'],
   },
-  {
-    slug: 'weather-index',
-    title: 'Weather Index',
-    demo: true,
-    description: 'Coastal fog photographed over a single week, presented through an ordered-dither filter that reveals on hover.',
-    category: 'photography',
-    disciplines: ['photography', 'creative-coding'],
-    tags: ['landscape', 'fog', 'dither', 'medium-format'],
-    created: '2024-01-12',
-    published: '2024-02-01',
-    status: 'complete',
-    cover: { ...IMAGES.fog, effect: 'dither' },
-    galleryLayout: 'masonry',
-    gallery: [ { ...IMAGES.fog, effect: 'dither' }, { ...IMAGES.market, effect: 'halftone' }, { ...IMAGES.stair, effect: 'pixel' } ],
-    software: ['Capture One', 'Canvas 2D'],
-    techniques: ['Ordered dithering', 'Halftone', 'Pixelation'],
-    body: `## Presentation
-**Demonstration project.** This entry shows the optional image *treatments*. Each image declares an \`effect\` — dither, halftone or pixel — rendered on a canvas and dissolved as your cursor approaches. Images without an \`effect\` are shown untouched; the treatment is a choice, never a default.`,
-    related: ['night-crossings', 'signal-bloom'],
-  },
-  {
-    slug: 'concrete-grammar',
-    title: 'Concrete Grammar',
-    demo: true,
-    description: 'Black-and-white studies of brutalist geometry, shown with depth parallax and a cursor-driven distortion.',
-    category: 'photography',
-    disciplines: ['photography', 'design'],
-    tags: ['architecture', 'black-and-white', 'geometry'],
-    created: '2023-06-18',
-    published: '2023-07-30',
-    status: 'archived',
-    cover: { ...IMAGES.stair, effect: 'parallax' },
-    galleryLayout: 'sequence',
-    gallery: [ { ...IMAGES.stair, effect: 'distort' }, { ...IMAGES.night, effect: 'parallax' }, IMAGES.market ],
-    software: ['Lightroom'],
-    techniques: ['Image sequencing', 'Parallax'],
-    body: `## Notes
-**Demonstration project.** A *sequence* layout: images are read one after another like a photobook, with a frame counter. The first plate responds to the cursor with a ripple distortion; the second floats with parallax depth.`,
-    related: ['night-crossings', 'poster-system'],
-  },
-
-  /* ─────────────────────────── VISUAL ART ─────────────────────────── */
-  {
-    slug: 'signal-bloom',
-    title: 'Signal Bloom',
-    demo: true,
-    description: 'Generative plotter drawings grown from audio spectra — sound turned into ink.',
-    category: 'digital-art',
-    disciplines: ['digital-art', 'creative-coding', 'sound'],
-    tags: ['generative', 'plotter', 'print', 'audio-visual'],
-    created: '2024-04-04',
-    published: '2024-05-19',
-    status: 'complete',
-    featured: true,
-    accent: '#ff4a1c',
-    cover: IMAGES.bloom,
-    gallery: [ IMAGES.bloom, { ...IMAGES.bloom, effect: 'halftone', caption: 'Halftone proof of plate 03.' } ],
-    galleryLayout: 'asymmetric',
-    software: ['TypeScript', 'Canvas 2D', 'vpype'],
-    equipment: ['Pen plotter [EDIT]', 'Archival paper'],
-    techniques: ['Flow fields', 'FFT analysis', 'Pen plotting'],
-    code: [
-      {
-        lang: 'ts',
-        filename: 'bloom.ts',
-        source: `// Grow a line through a flow field biased by spectral energy
-export function grow(spectrum: Float32Array, seed: number) {
-  const rand = mulberry32(seed);
-  const path: [number, number][] = [];
-  let x = 0.5, y = 0.5;
-  for (let i = 0; i < 4000; i++) {
-    const band = spectrum[i % spectrum.length]; // 0..1
-    const angle = noise2(x * 3, y * 3) * Math.PI * 2 + band;
-    x += Math.cos(angle) * 0.002;
-    y += Math.sin(angle) * 0.002;
-    if (rand() < 0.001) continue; // lift the pen
-    path.push([x, y]);
-  }
-  return path;
-}`,
-      },
-    ],
-    body: `## Method
-**Demonstration project — artwork image is an AI-generated placeholder.** The intended process: analyse a piece of music, map frequency bands to the curvature of a flow field, then let lines grow through it. The live version of the field is in the Lab as *Flowfield Instrument*.`,
-    related: ['flowfield-instrument', 'low-tide', 'weather-index'],
-  },
-  {
-    slug: 'sketchbook-04',
-    title: 'Sketchbook 04',
-    demo: true,
-    description: 'Ink and graphite studies — instruments, hands, and objects from the studio, drawn from life.',
-    category: 'drawing',
-    disciplines: ['drawing'],
-    tags: ['ink', 'graphite', 'observational', 'sketchbook'],
-    created: '2023-03-01',
-    published: '2023-12-20',
-    status: 'complete',
-    cover: { ...IMAGES.ink, effect: 'pixel' },
-    gallery: [IMAGES.ink],
-    galleryLayout: 'masonry',
-    equipment: ['Fineliner 0.1–0.5', '2B graphite', 'A5 sketchbook'],
-    techniques: ['Cross-hatching', 'Observational drawing'],
-    body: `## Pages
-**Demonstration project — scan is an AI-generated placeholder.** Traditional drawing lives in the archive beside code and sound because the habit of looking closely is the same habit everywhere.`,
-    related: ['poster-system', 'signal-bloom'],
-  },
-  {
-    slug: 'poster-system',
-    title: 'Poster System',
-    demo: true,
-    description: 'A modular typographic poster system for a fictional concert series, built on a 12-column grid.',
-    category: 'design',
-    disciplines: ['design'],
-    tags: ['typography', 'grid', 'print', 'identity'],
-    created: '2024-05-05',
-    published: '2024-07-08',
-    status: 'complete',
-    cover: IMAGES.poster,
-    gallery: [IMAGES.poster, { ...IMAGES.poster, effect: 'halftone', caption: 'Halftone print proof.' }],
-    galleryLayout: 'masonry',
-    software: ['Figma', 'InDesign'],
-    techniques: ['Grid systems', 'Halftone'],
-    body: `## System
-**Demonstration project — fictional brief, placeholder image.** Each poster is generated from the same set of rules: type size is set by the event's tempo, colour by the time of day.`,
-    related: ['sketchbook-04', 'concrete-grammar'],
-  },
-
-  /* ──────────────────────────── FILM ──────────────────────────── */
-  {
-    slug: 'tunnel-vision',
-    title: 'Tunnel Vision',
-    demo: true,
-    description: 'A short experimental film about walking the same underpass every morning for a year.',
-    category: 'film',
-    disciplines: ['film', 'sound'],
-    tags: ['short-film', 'experimental', '16mm', 'sound-design'],
-    created: '2023-09-09',
-    published: '2024-01-15',
-    status: 'complete',
-    featured: true,
-    accent: '#7ee07a',
-    cover: IMAGES.tunnel,
-    video: [
-      {
-        kind: 'youtube',
-        id: 'aqz-KE-bpKQ',
-        title: 'Placeholder embed — “Big Buck Bunny”',
-        poster: IMAGES.tunnel,
-        note: 'PLACEHOLDER: Blender Foundation open movie (CC BY 3.0), used only to demonstrate YouTube embeds. Replace the id with your own film.',
-      },
-    ],
-    gallery: [IMAGES.tunnel],
-    galleryLayout: 'horizontal',
-    credits: [ { role: 'Direction, camera, edit', name: 'Ben [EDIT]' }, { role: 'Sound', name: 'Ben [EDIT]' }, { role: 'Colour', name: '[EDIT]' } ],
-    equipment: ['16mm camera [EDIT]', 'Shotgun microphone'],
-    software: ['DaVinci Resolve', 'Reaper'],
-    technical: [ { label: 'Runtime', value: '[EDIT] 08:40' }, { label: 'Aspect', value: '2.39:1' }, { label: 'Captions', value: 'Supported via WebVTT' } ],
-    body: `## Synopsis
-**Demonstration project.** The embedded video is a *placeholder* (a Creative Commons open movie) to prove the YouTube integration works. Embeds load only when you press play — no third-party requests before that.`,
-    related: ['afterimage', 'night-crossings', 'room-tone-studies'],
-  },
-  {
-    slug: 'afterimage',
-    title: 'Afterimage',
-    demo: true,
-    description: 'An experimental moving-image piece generated in real time — feedback, persistence of vision, scanlines.',
-    category: 'film',
-    disciplines: ['film', 'creative-coding', 'digital-art'],
-    tags: ['generative', 'video-art', 'real-time', 'installation'],
-    created: '2024-10-10',
-    published: '2024-11-02',
-    status: 'ongoing',
-    cover: { generative: 'orbit', seed: 77, label: 'AFT' },
-    video: [
-      { kind: 'generative', program: 'afterimage', title: 'Afterimage (real-time render)', note: 'Rendered live on a canvas — no video file.' },
-      { kind: 'vimeo', id: '1084537', title: 'Placeholder Vimeo embed', note: 'PLACEHOLDER: Blender Foundation open movie on Vimeo (CC BY 3.0), demonstrating Vimeo support.' },
-    ],
-    software: ['Canvas 2D', 'TouchDesigner'],
-    techniques: ['Video feedback', 'Real-time graphics'],
-    body: `## Installation notes
-**Demonstration project.** Shows two more video types: a *generative* film rendered live, and a Vimeo embed. Local files (\`kind: 'file'\`) support posters and WebVTT captions.`,
-    related: ['tunnel-vision', 'interference-shader'],
-  },
-
-  /* ───────────────────────── LAB / TECHNICAL ───────────────────────── */
   {
     slug: 'flowfield-instrument',
     title: 'Flowfield Instrument',
@@ -379,64 +154,7 @@ export function grow(spectrum: Float32Array, seed: number) {
     github: 'https://github.com/[EDIT]',
     body: `## How to play
 **Demonstration project — fully original and genuinely interactive.** Move or drag across the canvas to stir currents. Press **Sound** to let the field emit a soft tone shaped by particle velocity (opt-in; nothing plays automatically).`,
-    related: ['signal-bloom', 'type-field', 'interference-shader'],
-  },
-  {
-    slug: 'type-field',
-    title: 'Type Field',
-    demo: true,
-    description: 'Interactive typography: letterforms sampled into thousands of particles that scatter and reassemble.',
-    category: 'creative-coding',
-    disciplines: ['creative-coding', 'design'],
-    tags: ['interactive', 'typography', 'particles', 'live'],
-    created: '2024-06-01',
-    published: '2024-06-12',
-    status: 'complete',
-    cover: { generative: 'grid', seed: 19, label: 'TYP' },
-    experiment: 'typefield',
-    software: ['TypeScript', 'Canvas 2D'],
-    techniques: ['Particle systems', 'Spring physics'],
-    body: `## Notes
-**Demonstration project.** Type any word in the field below the canvas. Each glyph is rasterised, sampled into points, and every point springs home after your cursor pushes it away.`,
-    related: ['flowfield-instrument', 'poster-system'],
-  },
-  {
-    slug: 'interference-shader',
-    title: 'Interference',
-    demo: true,
-    description: 'A raw WebGL fragment shader of moiré interference patterns, steered by the cursor.',
-    category: 'creative-coding',
-    disciplines: ['creative-coding', 'research'],
-    tags: ['webgl', 'shader', 'glsl', 'live'],
-    created: '2024-09-01',
-    published: '2024-09-03',
-    status: 'complete',
-    cover: { generative: 'noise', seed: 55, label: 'GLSL' },
-    experiment: 'shader',
-    software: ['WebGL', 'GLSL'],
-    techniques: ['Shaders', 'Wave interference'],
-    code: [
-      {
-        lang: 'glsl',
-        filename: 'interference.frag',
-        source: `precision mediump float;
-uniform vec2 u_res;
-uniform vec2 u_mouse;
-uniform float u_time;
-
-void main() {
-  vec2 uv = (gl_FragCoord.xy - 0.5 * u_res) / u_res.y;
-  vec2 m = (u_mouse - 0.5 * u_res) / u_res.y;
-  float a = sin(length(uv - m) * 60.0 - u_time * 2.0);
-  float b = sin(length(uv + m) * 58.0 + u_time * 1.6);
-  float v = smoothstep(-0.2, 0.2, a * b);
-  gl_FragColor = vec4(vec3(v), 1.0);
-}`,
-      },
-    ],
-    body: `## Why raw WebGL?
-**Demonstration project.** A full 3D library is unnecessary for a single full-screen quad. This experiment is ~80 lines with no dependencies, and falls back to a message if WebGL is unavailable.`,
-    related: ['flowfield-instrument', 'afterimage', 'room-tone-studies'],
+    related: ['tiny-language-model', 'low-tide'],
   },
   {
     slug: 'tiny-language-model',
@@ -503,7 +221,64 @@ def sample(model, seed: str, n: int = 200, temperature: float = 1.0):
 - Higher order = more memorised, less novel.
 - Temperature reshapes the distribution: \`w ** (1 / T)\`.
 - No data leaves the page.`,
-    related: ['honeypot-notes', 'archive-engine'],
+    related: ['honeypot-notes', 'flowfield-instrument'],
+  },
+  {
+    slug: 'type-field',
+    title: 'Type Field',
+    demo: true,
+    description: 'Interactive typography: letterforms sampled into thousands of particles that scatter and reassemble.',
+    category: 'creative-coding',
+    disciplines: ['creative-coding', 'design'],
+    tags: ['interactive', 'typography', 'particles', 'live'],
+    created: '2024-06-01',
+    published: '2024-06-12',
+    status: 'complete',
+    cover: { generative: 'grid', seed: 19, label: 'TYP' },
+    experiment: 'typefield',
+    software: ['TypeScript', 'Canvas 2D'],
+    techniques: ['Particle systems', 'Spring physics'],
+    body: `## Notes
+**Demonstration project.** Type any word in the field below the canvas. Each glyph is rasterised, sampled into points, and every point springs home after your cursor pushes it away.`,
+    related: ['flowfield-instrument', 'interference-shader'],
+  },
+  {
+    slug: 'interference-shader',
+    title: 'Interference',
+    demo: true,
+    description: 'A raw WebGL fragment shader of moiré interference patterns, steered by the cursor.',
+    category: 'creative-coding',
+    disciplines: ['creative-coding', 'research'],
+    tags: ['webgl', 'shader', 'glsl', 'live'],
+    created: '2024-09-01',
+    published: '2024-09-03',
+    status: 'complete',
+    cover: { generative: 'noise', seed: 55, label: 'GLSL' },
+    experiment: 'shader',
+    software: ['WebGL', 'GLSL'],
+    techniques: ['Shaders', 'Wave interference'],
+    code: [
+      {
+        lang: 'glsl',
+        filename: 'interference.frag',
+        source: `precision mediump float;
+uniform vec2 u_res;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+void main() {
+  vec2 uv = (gl_FragCoord.xy - 0.5 * u_res) / u_res.y;
+  vec2 m = (u_mouse - 0.5 * u_res) / u_res.y;
+  float a = sin(length(uv - m) * 60.0 - u_time * 2.0);
+  float b = sin(length(uv + m) * 58.0 + u_time * 1.6);
+  float v = smoothstep(-0.2, 0.2, a * b);
+  gl_FragColor = vec4(vec3(v), 1.0);
+}`,
+      },
+    ],
+    body: `## Why raw WebGL?
+**Demonstration project.** A full 3D library is unnecessary for a single full-screen quad. This experiment is ~80 lines with no dependencies, and falls back to a message if WebGL is unavailable.`,
+    related: ['flowfield-instrument', 'type-field'],
   },
   {
     slug: 'honeypot-notes',
@@ -595,53 +370,5 @@ void on_gate_rising(void) {
     body: `## Notes
 **Demonstration project — image is a placeholder.** Hardware sits where music and code meet: the module produces voltages that play synthesisers.`,
     related: ['low-tide', 'honeypot-notes'],
-  },
-  {
-    slug: 'archive-engine',
-    title: 'Archive Engine',
-    demo: true,
-    description: 'The software behind this website — a static archive generated from a single typed content file.',
-    category: 'code',
-    disciplines: ['code', 'design'],
-    tags: ['web', 'typescript', 'static-site', 'open-source'],
-    created: '2025-01-01',
-    published: '2025-02-01',
-    status: 'ongoing',
-    cover: { generative: 'contour', seed: 2025, label: 'OIB' },
-    software: ['TypeScript', 'React', 'Vite', 'Canvas 2D', 'WebGL', 'Web Audio API'],
-    techniques: ['Static generation', 'Hash routing', 'Force-directed graphs'],
-    code: [
-      {
-        lang: 'ts',
-        filename: 'projects.ts',
-        source: `// Adding a project = adding an object
-export const projects: Project[] = [
-  {
-    slug: 'my-new-work',
-    title: 'My New Work',
-    category: 'photography',
-    tags: ['series'],
-    created: '2025-03-01',
-    published: '2025-03-10',
-    status: 'complete',
-    cover: { src: '/images/photography/x.jpg', width: 1600, height: 1067, alt: '…' },
-    body: '## Statement\\nWords here.',
-  },
-];`,
-      },
-    ],
-    diagram: {
-      nodes: [
-        { id: 'd', label: 'projects.ts', x: 10, y: 50, kind: 'store' },
-        { id: 'i', label: 'Indexes', x: 35, y: 25, kind: 'process' },
-        { id: 'g', label: 'Graph', x: 35, y: 75, kind: 'process' },
-        { id: 'p', label: 'Pages', x: 65, y: 50, kind: 'process' },
-        { id: 'c', label: 'Cloudflare assets', x: 90, y: 50, kind: 'external' },
-      ],
-      edges: [ { from: 'd', to: 'i' }, { from: 'd', to: 'g' }, { from: 'i', to: 'p' }, { from: 'g', to: 'p' }, { from: 'p', to: 'c', label: 'static' } ],
-    },
-    body: `## Architecture
-**Demonstration entry describing this codebase.** One typed file drives every listing, filter, page, the command palette and the relationship map. See the README for the full guide.`,
-    related: ['tiny-language-model', 'poster-system'],
   },
 ];

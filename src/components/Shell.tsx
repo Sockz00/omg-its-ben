@@ -1,19 +1,17 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { SITE } from '../data/site';
-import { allProjects, randomProject } from '../lib/content';
+import { randomProject } from '../lib/content';
 import { Link, navigate } from '../lib/router';
 import { prefersReducedMotion, toggleTheme, useTheme } from '../lib/store';
+import { rafThrottle } from '../lib/raf';
 import { CommandPalette, PAGES } from './CommandPalette';
 
 export const NAV = [
-  { no: '01', label: 'Archive', to: '/archive' },
-  { no: '02', label: 'Image', to: '/visual' },
-  { no: '03', label: 'Sound', to: '/sound' },
-  { no: '04', label: 'Moving', to: '/film' },
-  { no: '05', label: 'Lab', to: '/lab' },
-  { no: '06', label: 'Map', to: '/map' },
-  { no: '07', label: 'Journal', to: '/journal' },
-  { no: '08', label: 'About', to: '/about' },
+  { no: '01', label: 'Photo', to: '/photo' },
+  { no: '02', label: 'Music', to: '/music' },
+  { no: '03', label: 'Tech', to: '/tech' },
+  { no: '04', label: 'Journal', to: '/journal' },
+  { no: '05', label: 'About', to: '/about' },
 ];
 
 function Clock() {
@@ -46,7 +44,10 @@ export function Shell({ path, children }: { path: string; children: ReactNode })
   }, [path]);
 
   useEffect(() => {
-    const on = () => { const h = document.documentElement.scrollHeight - innerHeight; setScroll(h > 0 ? Math.round((scrollY / h) * 100) : 0); };
+    const on = rafThrottle(() => {
+      const h = document.documentElement.scrollHeight - innerHeight;
+      setScroll(h > 0 ? Math.round((scrollY / h) * 100) : 0);
+    });
     window.addEventListener('scroll', on, { passive: true });
     on();
     return () => window.removeEventListener('scroll', on);
@@ -55,8 +56,8 @@ export function Shell({ path, children }: { path: string; children: ReactNode })
   // global keyboard shortcuts
   useEffect(() => {
     const on = (e: KeyboardEvent) => {
-      const el = e.target as HTMLElement;
-      const typing = el.closest('input, textarea, select, [contenteditable="true"]');
+      const el = e.target;
+      const typing = el instanceof Element && !!el.closest('input, textarea, select, [contenteditable="true"]');
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setCmd((v) => !v); return; }
       if (typing || e.metaKey || e.ctrlKey || e.altKey || cmd) return;
       if (e.key === 'Escape') { setMenu(false); setHelp(false); return; }
@@ -112,13 +113,13 @@ export function Shell({ path, children }: { path: string; children: ReactNode })
       </header>
 
       <div id="mmenu" className={`mmenu ${menu ? 'is-open' : ''}`} aria-hidden={!menu} inert={!menu}>
-        <div className="mmenu__top mono"><span>Index of sections</span><button type="button" onClick={() => setMenu(false)}>Close ✕</button></div>
+        <div className="mmenu__top mono"><span>Sections</span><button type="button" onClick={() => setMenu(false)}>Close ✕</button></div>
         <ul>
-          {[...NAV, { no: '09', label: 'Activity', to: '/activity' }, { no: '10', label: 'Contact', to: '/contact' }].map((n, i) => (
-            <li key={n.to} style={{ transitionDelay: `${menu ? 60 + i * 35 : 0}ms` }}><Link to={n.to}><span className="mono">{n.no}</span>{n.label}</Link></li>
+          {NAV.map((n, i) => (
+            <li key={n.to} style={{ transitionDelay: `${menu ? 60 + i * 45 : 0}ms` }}><Link to={n.to}><span className="mono">{n.no}</span>{n.label}</Link></li>
           ))}
         </ul>
-        <button type="button" className="mmenu__search mono" onClick={() => { setMenu(false); setCmd(true); }}>Search the archive →</button>
+        <button type="button" className="mmenu__search mono" onClick={() => { setMenu(false); setCmd(true); }}>Search →</button>
       </div>
 
       <main id="main" ref={main} tabIndex={-1} className="main">{children}</main>
@@ -127,9 +128,7 @@ export function Shell({ path, children }: { path: string; children: ReactNode })
 
       <div className="status mono" aria-hidden>
         <span>§ {path === '/' ? '/index' : path}</span>
-        <span>{allProjects.length} objects</span>
         <span className="status__bar"><i style={{ width: `${scroll}%` }} /></span>
-        <span>{String(scroll).padStart(2, '0')}%</span>
         <Clock />
         <button type="button" onClick={() => setHelp(true)} tabIndex={-1}>? keys</button>
       </div>
@@ -165,32 +164,34 @@ function Footer() {
       </div>
       <div className="ftr__cols">
         <div>
-          <h2 className="mono">Archive</h2>
-          <ul>{NAV.slice(0, 5).map((n) => <li key={n.to}><Link to={n.to}>{n.label}</Link></li>)}</ul>
-        </div>
-        <div>
-          <h2 className="mono">Discover</h2>
-          <ul>
-            <li><Link to="/map">Relationship map</Link></li>
-            <li><Link to="/skills">Skills map</Link></li>
-            <li><Link to="/activity">Activity log</Link></li>
-            <li><Link to="/journal">Journal</Link></li>
-          </ul>
+          <h2 className="mono">Sections</h2>
+          <ul>{NAV.map((n) => <li key={n.to}><Link to={n.to}>{n.label}</Link></li>)}</ul>
         </div>
         <div>
           <h2 className="mono">Elsewhere</h2>
           <ul>{SITE.socials.map((s) => <li key={s.label}><a href={s.href} target="_blank" rel="noopener noreferrer">{s.label} ↗</a></li>)}</ul>
         </div>
+        <div>
+          <h2 className="mono">Contact</h2>
+          <ul>
+            <li>{SITE.email.includes('[')
+              ? <span className="ftr__mail">{SITE.email}</span>
+              : <a className="ftr__mail" href={`mailto:${SITE.email}`}>{SITE.email}</a>}</li>
+            <li><span className="ftr__mail">{SITE.location}</span></li>
+          </ul>
+          <p className="ftr__note">No contact form: a static site cannot deliver submissions, and a form that silently discarded them would be worse than none.</p>
+        </div>
         <div className="ftr__colophon">
           <h2 className="mono">Colophon</h2>
           <p>Set in Instrument Serif, Archivo &amp; JetBrains Mono (SIL OFL). Built as a static archive: no trackers, no cookies — theme and recently viewed are kept in your browser’s local storage only.</p>
           <p className="mono">Projects marked <span className="demo demo--s">Demo</span> are demonstration content.</p>
+          <p className="mono"><Link to="/journal">Journal</Link> · <Link to="/about">About</Link></p>
         </div>
       </div>
       <div className="ftr__base mono">
         <span>© {new Date().getFullYear()} Ben [EDIT surname]</span>
         <span>{SITE.location}</span>
-        <Link to="/contact">Contact →</Link>
+        {SITE.email.includes('[') ? <span>{SITE.email}</span> : <a href={`mailto:${SITE.email}`}>{SITE.email} →</a>}
         <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })}>Back to top ↑</button>
       </div>
     </footer>

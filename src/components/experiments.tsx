@@ -3,20 +3,28 @@ import type { ExperimentId } from '../data/types';
 import { allProjects } from '../lib/content';
 import { journal } from '../data/site';
 import { makeNoise, mulberry32, useReducedMotion, useTheme } from '../lib/store';
+import { palette } from '../lib/palette';
+import { rafThrottle } from '../lib/raf';
 
-const cssVar = (n: string) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-
-/** Runs `frame` only while the element is on screen (and not reduced-motion-paused). */
+/** Runs `frame` only while the element is on screen, the tab is visible,
+    and the user hasn't asked for reduced motion. */
 function useLoop(el: React.RefObject<HTMLElement | null>, running: boolean, frame: () => void) {
   const f = useRef(frame);
   f.current = frame;
   useEffect(() => {
     let visible = true, raf = 0;
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && running) tick(); });
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
     if (el.current) io.observe(el.current);
-    const tick = () => { cancelAnimationFrame(raf); if (!visible || !running) return; f.current(); raf = requestAnimationFrame(tick); };
-    tick();
-    return () => { io.disconnect(); cancelAnimationFrame(raf); };
+    const tick = () => {
+      raf = 0;
+      if (!visible || !running || document.hidden) return;
+      f.current();
+      raf = requestAnimationFrame(tick);
+    };
+    const start = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    start();
+    document.addEventListener('visibilitychange', start);
+    return () => { io.disconnect(); document.removeEventListener('visibilitychange', start); cancelAnimationFrame(raf); };
   }, [el, running]);
 }
 
@@ -45,7 +53,7 @@ export function FlowField({ compact = false }: { compact?: boolean }) {
 
   useEffect(() => {
     const c = ref.current!;
-    const resize = () => { c.width = c.clientWidth * Math.min(1.5, devicePixelRatio); c.height = c.clientHeight * Math.min(1.5, devicePixelRatio); const g = c.getContext('2d')!; g.fillStyle = cssVar('--bg'); g.fillRect(0, 0, c.width, c.height); };
+    const resize = () => { c.width = c.clientWidth * Math.min(1.5, devicePixelRatio); c.height = c.clientHeight * Math.min(1.5, devicePixelRatio); const g = c.getContext('2d')!; g.fillStyle = palette().bg; g.fillRect(0, 0, c.width, c.height); };
     resize();
     const N = Math.min(compact ? 900 : 2600, Math.floor((c.width * c.height) / 380));
     const r = mulberry32(seed);
@@ -61,11 +69,13 @@ export function FlowField({ compact = false }: { compact?: boolean }) {
     if (!c || !s) return;
     const g = c.getContext('2d')!;
     const w = c.width, h = c.height;
-    g.fillStyle = cssVar('--bg'); g.globalAlpha = 0.07; g.fillRect(0, 0, w, h); g.globalAlpha = 1;
-    const ink = cssVar('--ink'), acc = cssVar('--accent');
+    const { bg, ink, accent } = palette();
+    g.fillStyle = bg; g.globalAlpha = 0.07; g.fillRect(0, 0, w, h); g.globalAlpha = 1;
     s.t += 0.0025;
     let sp = 0;
     const N = s.p.length / 2;
+    // two batched paths per frame instead of a fillStyle change per particle
+    const body = new Path2D(), sparks = new Path2D();
     for (let i = 0; i < N; i++) {
       let x = s.p[i * 2], y = s.p[i * 2 + 1];
       const a = s.n(x * 0.0022, y * 0.0022 + s.t) * Math.PI * 3;
@@ -76,12 +86,13 @@ export function FlowField({ compact = false }: { compact?: boolean }) {
         vx += -dy * f * 0.05 + dx * f * 0.01; vy += dx * f * 0.05 + dy * f * 0.01;
       }
       sp += Math.abs(vx) + Math.abs(vy);
-      g.fillStyle = i % 37 === 0 ? acc : ink;
-      g.fillRect(x, y, 1.3, 1.3);
+      (i % 37 === 0 ? sparks : body).rect(x, y, 1.3, 1.3);
       x += vx * 1.2; y += vy * 1.2;
       if (x < 0 || x > w || y < 0 || y > h) { x = Math.random() * w; y = Math.random() * h; }
       s.p[i * 2] = x; s.p[i * 2 + 1] = y;
     }
+    g.fillStyle = ink; g.fill(body);
+    g.fillStyle = accent; g.fill(sparks);
     s.speed = sp / N;
     if (audio.current) {
       const { o, o2, f, g: gg, ctx } = audio.current;
@@ -106,7 +117,14 @@ export function FlowField({ compact = false }: { compact?: boolean }) {
   };
   useEffect(() => () => { audio.current?.ctx.close(); }, []);
 
-  const pos = (e: React.PointerEvent) => { const r = ref.current!.getBoundingClientRect(); const k = ref.current!.width / r.width; st.current!.m.x = (e.clientX - r.left) * k; st.current!.m.y = (e.clientY - r.top) * k; st.current!.m.on = true; };
+  const rect = useRef({ left: 0, top: 0, k: 1 });
+  const measure = () => { const c = ref.current; if (!c) return; const r = c.getBoundingClientRect(); rect.current = { left: r.left, top: r.top, k: c.width / r.width }; };
+  useEffect(() => { measure(); window.addEventListener('resize', measure, { passive: true }); return () => window.removeEventListener('resize', measure); }, []);
+  const pos = rafThrottle((cx: number, cy: number) => {
+    const m = st.current?.m; if (!m) return;
+    const { left, top, k } = rect.current;
+    m.x = (cx - left) * k; m.y = (cy - top) * k; m.on = true;
+  });
   return (
     <Frame
       hint={compact ? undefined : 'Move to stir · press & drag for a storm'}
@@ -120,8 +138,8 @@ export function FlowField({ compact = false }: { compact?: boolean }) {
         ref={ref}
         className="exp__canvas"
         aria-label="Interactive particle flow field"
-        onPointerMove={pos}
-        onPointerDown={(e) => { pos(e); st.current!.m.down = true; }}
+        onPointerMove={(e) => pos(e.clientX, e.clientY)}
+        onPointerDown={(e) => { pos(e.clientX, e.clientY); st.current!.m.down = true; }}
         onPointerUp={() => (st.current!.m.down = false)}
         onPointerLeave={() => { st.current!.m.on = false; st.current!.m.down = false; }}
       />
@@ -167,18 +185,19 @@ export function TypeField() {
     const c = ref.current!;
     const g = c.getContext('2d')!;
     g.clearRect(0, 0, c.width, c.height);
-    const ink = cssVar('--ink'), acc = cssVar('--accent');
+    const { ink, accent } = palette();
     const { pts, m } = st.current;
+    const body = new Path2D(), hot = new Path2D();
     for (let i = 0; i < pts.length; i++) {
       const p = pts[i];
       const dx = p.x - m.x, dy = p.y - m.y, d2 = dx * dx + dy * dy;
       if (m.on && d2 < 14000) { const f = (14000 - d2) / 14000 * 6; const d = Math.sqrt(d2) || 1; p.vx += (dx / d) * f; p.vy += (dy / d) * f; }
       p.vx += (p.tx - p.x) * 0.045; p.vy += (p.ty - p.y) * 0.045;
-      p.vx *= 0.82; p.vy *= 0.82; p.x += p.vx; p.y += p.vy;
-      const sp = Math.abs(p.vx) + Math.abs(p.vy);
-      g.fillStyle = sp > 3 ? acc : ink;
-      g.fillRect(p.x, p.y, 2.6, 2.6);
+      p.vx *= 0.84; p.vy *= 0.84; p.x += p.vx; p.y += p.vy;
+      (Math.abs(p.vx) + Math.abs(p.vy) > 3 ? hot : body).rect(p.x, p.y, 2.6, 2.6);
     }
+    g.fillStyle = ink; g.fill(body);
+    g.fillStyle = accent; g.fill(hot);
   });
 
   return (
@@ -193,7 +212,7 @@ export function TypeField() {
         ref={ref}
         className="exp__canvas"
         aria-label={`Particle typography spelling ${word}`}
-        onPointerMove={(e) => { const r = ref.current!.getBoundingClientRect(); const k = ref.current!.width / r.width; st.current.m = { x: (e.clientX - r.left) * k, y: (e.clientY - r.top) * k, on: true }; }}
+        onPointerMove={rafThrottle((e: React.PointerEvent) => { const c = ref.current; if (!c) return; const r = c.getBoundingClientRect(); st.current.m = { x: (e.clientX - r.left) * (c.width / r.width), y: (e.clientY - r.top) * (c.width / r.width), on: true }; })}
         onPointerLeave={() => (st.current.m.on = false)}
       />
       {!run && <button type="button" className="exp__resume mono" onClick={() => setRun(true)}>▶ Start experiment</button>}
@@ -252,7 +271,8 @@ export function Shader() {
     g.viewport(0, 0, w, h);
     g.uniform2f(u.u_res, w, h); g.uniform2f(u.u_mouse, s.m[0], s.m[1]);
     g.uniform1f(u.u_time, (performance.now() - s.t0) / 1000);
-    g.uniform3fv(u.u_ink, hex(cssVar('--ink'))); g.uniform3fv(u.u_bg, hex(cssVar('--bg'))); g.uniform3fv(u.u_acc, hex(cssVar('--accent')));
+    const pal = palette();
+    g.uniform3fv(u.u_ink, hex(pal.ink)); g.uniform3fv(u.u_bg, hex(pal.bg)); g.uniform3fv(u.u_acc, hex(pal.accent));
     g.drawArrays(g.TRIANGLE_STRIP, 0, 4);
   });
   useEffect(() => { /* re-read theme colours */ }, [theme]);
@@ -260,7 +280,7 @@ export function Shader() {
   return (
     <Frame hint="Move the cursor to move the two wave sources" controls={<button type="button" onClick={() => setRun((v) => !v)} aria-pressed={run}>{run ? 'Pause' : 'Play'}</button>}>
       {fail ? <p className="exp__fail mono">WebGL is unavailable in this browser — the rest of the archive works without it.</p> : (
-        <canvas ref={ref} className="exp__canvas" aria-label="WebGL interference pattern" onPointerMove={(e) => { const r = ref.current!.getBoundingClientRect(); if (gl.current) gl.current.m = [e.clientX - r.left, r.height - (e.clientY - r.top)]; }} />
+        <canvas ref={ref} className="exp__canvas" aria-label="WebGL interference pattern" onPointerMove={rafThrottle((e: React.PointerEvent) => { const c = ref.current; if (!c || !gl.current) return; const r = c.getBoundingClientRect(); gl.current.m = [e.clientX - r.left, r.height - (e.clientY - r.top)]; })} />
       )}
       {!run && !fail && <button type="button" className="exp__resume mono" onClick={() => setRun(true)}>▶ Start experiment</button>}
     </Frame>

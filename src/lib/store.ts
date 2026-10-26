@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
+import { invalidatePalette } from './palette';
 
 /* ── Theme (persisted) ── */
 export type Theme = 'dark' | 'light';
@@ -10,6 +11,7 @@ export const setTheme = (t: Theme) => {
   document.documentElement.dataset.theme = t;
   try { localStorage.setItem(THEME_KEY, t); } catch { /* private mode */ }
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', t === 'dark' ? '#0e0e0c' : '#ece8de');
+  invalidatePalette();
   themeListeners.forEach((l) => l());
 };
 export const toggleTheme = () => setTheme(getTheme() === 'dark' ? 'light' : 'dark');
@@ -25,15 +27,6 @@ export const pushRecent = (slug: string) => {
   const list = [slug, ...getRecent().filter((s) => s !== slug)].slice(0, 8);
   try { localStorage.setItem(RECENT_KEY, JSON.stringify(list)); } catch { /* ignore */ }
 };
-
-/* ── Generic persisted state ── */
-export function usePersisted<T>(key: string, initial: T) {
-  const [v, setV] = useState<T>(() => {
-    try { const s = localStorage.getItem(key); return s ? (JSON.parse(s) as T) : initial; } catch { return initial; }
-  });
-  const set = useCallback((nv: T) => { setV(nv); try { localStorage.setItem(key, JSON.stringify(nv)); } catch { /* ignore */ } }, [key]);
-  return [v, set] as const;
-}
 
 /* ── Reduced motion ── */
 export const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;

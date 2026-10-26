@@ -1,6 +1,6 @@
 import { projects } from '../data/projects';
 import { DISCIPLINES, journal } from '../data/site';
-import type { Cover, Discipline, GenerativeCover, ImageAsset, Project } from '../data/types';
+import type { Cover, Discipline, ImageAsset, Project } from '../data/types';
 
 export const byDateDesc = (a: Project, b: Project) => b.published.localeCompare(a.published);
 
@@ -11,21 +11,20 @@ export const getJournal = (slug: string) => journal.find((j) => j.slug === slug)
 export const journalSorted = [...journal].sort((a, b) => b.date.localeCompare(a.date));
 
 export const disciplinesOf = (p: Project): Discipline[] => Array.from(new Set([p.category, ...(p.disciplines ?? [])]));
-export const allTags = Array.from(new Set(allProjects.flatMap((p) => p.tags))).sort();
 export const usedDisciplines = (Object.keys(DISCIPLINES) as Discipline[]).filter((d) => allProjects.some((p) => disciplinesOf(p).includes(d)));
 export const countFor = (d: Discipline) => allProjects.filter((p) => disciplinesOf(p).includes(d)).length;
 
 export const isImage = (c: Cover | undefined): c is ImageAsset => !!c && 'src' in c;
-export const isGenerative = (c: Cover | undefined): c is GenerativeCover => !!c && 'generative' in c;
 
 /** Archive index number — stable, chronological by creation date. */
 const byCreated = [...projects].sort((a, b) => a.created.localeCompare(b.created));
 export const indexOf = (slug: string) => String(byCreated.findIndex((p) => p.slug === slug) + 1).padStart(3, '0');
 
-/** Related projects: explicit list first, then scored by shared disciplines/tags/software. */
-export function relatedTo(p: Project, n = 4): Project[] {
-  const explicit = (p.related ?? []).map(getProject).filter(Boolean) as Project[];
-  const scored = allProjects
+/** Related projects: explicit list first, then scored by shared disciplines/tags/software.
+ *  Pass `pool` to keep suggestions inside one section. */
+export function relatedTo(p: Project, n = 4, pool: Project[] = allProjects): Project[] {
+  const explicit = (p.related ?? []).map(getProject).filter((x): x is Project => !!x && pool.includes(x));
+  const scored = pool
     .filter((q) => q.slug !== p.slug && !explicit.includes(q))
     .map((q) => {
       let s = 0;
@@ -56,36 +55,44 @@ export const randomProject = (exclude?: string) => {
   return pool[Math.floor(Math.random() * pool.length)];
 };
 
-/* ── Relationship graph ── */
-export type NodeKind = 'project' | 'discipline' | 'software' | 'equipment' | 'technique' | 'tag';
-export interface GNode { id: string; label: string; kind: NodeKind; href?: string; weight: number }
-export interface GEdge { a: string; b: string }
+/* ── Sections ──────────────────────────────────────────────────
+   The site has three work sections. A project belongs to a section
+   through its disciplines, so nothing has to be assigned by hand.
+   ─────────────────────────────────────────────────────────────── */
+export const PHOTO_DISCIPLINES: Discipline[] = ['photography', 'digital-art', 'drawing', 'design'];
+export const MUSIC_DISCIPLINES: Discipline[] = ['music', 'sound'];
+export const TECH_DISCIPLINES: Discipline[] = ['code', 'ai', 'security', 'creative-coding', 'research'];
 
-export function buildGraph(opts: { include?: NodeKind[] } = {}) {
-  const include = new Set<NodeKind>(opts.include ?? ['project', 'discipline', 'software', 'equipment', 'technique']);
-  const nodes = new Map<string, GNode>();
-  const edges: GEdge[] = [];
-  const add = (id: string, label: string, kind: NodeKind, href?: string) => {
-    const n = nodes.get(id);
-    if (n) n.weight++;
-    else nodes.set(id, { id, label, kind, href, weight: 1 });
-  };
-  for (const p of allProjects) {
-    const pid = `p:${p.slug}`;
-    add(pid, p.title, 'project', `#/project/${p.slug}`);
-    const link = (id: string, label: string, kind: NodeKind) => {
-      if (!include.has(kind)) return;
-      add(id, label, kind);
-      edges.push({ a: pid, b: id });
-    };
-    disciplinesOf(p).forEach((d) => link(`d:${d}`, DISCIPLINES[d].label, 'discipline'));
-    (p.software ?? []).forEach((s) => link(`s:${s}`, s, 'software'));
-    (p.equipment ?? []).forEach((s) => link(`e:${s}`, s.replace(/\s*\[EDIT\]/, ''), 'equipment'));
-    (p.techniques ?? []).forEach((s) => link(`t:${s}`, s, 'technique'));
-    if (include.has('tag')) p.tags.forEach((s) => link(`g:${s}`, `#${s}`, 'tag'));
-  }
-  return { nodes: [...nodes.values()], edges };
+export type SectionId = 'photo' | 'music' | 'tech';
+export const SECTIONS: Record<SectionId, { label: string; to: string; disciplines: Discipline[] }> = {
+  photo: { label: 'Photo', to: '/photo', disciplines: PHOTO_DISCIPLINES },
+  music: { label: 'Music', to: '/music', disciplines: MUSIC_DISCIPLINES },
+  tech: { label: 'Tech', to: '/tech', disciplines: TECH_DISCIPLINES },
+};
+
+const inAny = (p: Project, ds: Discipline[]) => disciplinesOf(p).some((d) => ds.includes(d));
+export const isPhoto = (p: Project) => inAny(p, PHOTO_DISCIPLINES);
+export const isMusic = (p: Project) => inAny(p, MUSIC_DISCIPLINES);
+export const isTech = (p: Project) => inAny(p, TECH_DISCIPLINES);
+
+export const photoProjects = allProjects.filter(isPhoto);
+export const musicProjects = allProjects.filter((p) => p.audio);
+export const techProjects = allProjects.filter(isTech);
+
+/** Which section owns a discipline, and where its index lives. */
+export function sectionFor(d: Discipline): { id: SectionId; label: string; to: string } {
+  const id: SectionId = TECH_DISCIPLINES.includes(d) ? 'tech' : MUSIC_DISCIPLINES.includes(d) ? 'music' : 'photo';
+  const s = SECTIONS[id];
+  return { id, label: s.label, to: id === 'tech' ? `/tech?d=${d}` : s.to };
 }
+
+/** Index page a project belongs to — used for breadcrumbs and "back to" links. */
+export function sectionOf(p: Project): { id: SectionId; label: string; to: string } {
+  return sectionFor(p.category);
+}
+
+export const projectsInSection = (id: SectionId) =>
+  id === 'photo' ? photoProjects : id === 'music' ? musicProjects : techProjects;
 
 export const fmtDate = (iso: string, style: 'short' | 'long' | 'year' = 'short') => {
   if (!/^\d{4}-\d{2}/.test(iso)) return iso;

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { DISCIPLINES } from '../data/site';
 import type { Diagram as DiagramT, Project } from '../data/types';
-import { disciplinesOf, fmtDate, indexOf, isImage } from '../lib/content';
+import { disciplinesOf, fmtDate, indexOf, isImage, sectionFor } from '../lib/content';
 import { Link } from '../lib/router';
 import { prefersReducedMotion } from '../lib/store';
 import { Cover, Picture } from './Cover';
@@ -9,22 +9,37 @@ import { Cover, Picture } from './Cover';
 /* ── Scramble text (decodes on mount / hover) ── */
 const GLYPHS = '!<>-_\\/[]{}—=+*^?#01ABEN§◐∿';
 export function Scramble({ text, className, as: Tag = 'span', trigger = 'mount' }: { text: string; className?: string; as?: 'span' | 'h1' | 'h2' | 'strong'; trigger?: 'mount' | 'hover' }) {
-  const [out, setOut] = useState(trigger === 'mount' ? '' : text);
+  const ref = useRef<HTMLSpanElement>(null);
   const raf = useRef(0);
+  /* One DOM write per frame instead of a React render per frame — that was the stutter. */
   const run = () => {
-    if (prefersReducedMotion()) { setOut(text); return; }
-    let f = 0;
+    const el = ref.current;
+    if (!el) return;
+    if (prefersReducedMotion()) { el.textContent = text; return; }
     cancelAnimationFrame(raf.current);
+    let f = 0;
+    const chars = text.split('');
     const step = () => {
       f++;
-      const reveal = f / 1.6;
-      setOut(text.split('').map((ch, i) => (ch === ' ' ? ' ' : i < reveal ? ch : GLYPHS[Math.floor(Math.random() * GLYPHS.length)])).join(''));
-      if (reveal < text.length) raf.current = requestAnimationFrame(step);
+      const reveal = f / 1.7;
+      let out = '';
+      for (let i = 0; i < chars.length; i++) {
+        const ch = chars[i];
+        out += ch === ' ' ? ' ' : i < reveal ? ch : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+      }
+      el.textContent = out;
+      if (reveal < chars.length) raf.current = requestAnimationFrame(step);
+      else el.textContent = text;
     };
     step();
   };
   useEffect(() => { if (trigger === 'mount') run(); return () => cancelAnimationFrame(raf.current); }, [text]); // eslint-disable-line react-hooks/exhaustive-deps
-  return <Tag className={className} aria-label={text} onMouseEnter={trigger === 'hover' ? run : undefined}><span aria-hidden>{out || '\u00a0'}</span></Tag>;
+  return (
+    <Tag className={className} onMouseEnter={trigger === 'hover' ? run : undefined}>
+      <span ref={ref} aria-hidden>{text}</span>
+      <span className="sr-only">{text}</span>
+    </Tag>
+  );
 }
 
 /* ── Reveal on scroll ── */
@@ -65,19 +80,18 @@ export function SectionHead({ no, title, kicker, action }: { no: string; title: 
 
 export const DisciplineChips = ({ p }: { p: Project }) => (
   <span className="chips mono">
-    {disciplinesOf(p).map((d) => <Link key={d} to={`/archive?d=${d}`} className="chip" title={DISCIPLINES[d].blurb}><i>{DISCIPLINES[d].glyph}</i>{DISCIPLINES[d].label}</Link>)}
+    {disciplinesOf(p).map((d) => <Link key={d} to={sectionFor(d).to} className="chip" title={DISCIPLINES[d].blurb}><i>{DISCIPLINES[d].glyph}</i>{DISCIPLINES[d].label}</Link>)}
   </span>
 );
 
-/* ── Project entries in three archive views ── */
+/* ── Project entries: tile (grids) and row (the Tech index) ── */
 export function ProjectTile({ p, i = 0 }: { p: Project; i?: number }) {
   return (
     <article className="tile" style={{ ['--i' as string]: i, ['--pa' as string]: p.accent ?? 'var(--accent)' }}>
       <Link to={`/project/${p.slug}`} className="tile__link" aria-label={`${p.title} — ${p.description}`}>
         <div className="tile__media"><Cover cover={p.cover} sizes="(max-width: 700px) 100vw, 33vw" /></div>
         <div className="tile__meta mono">
-          <span>N°{indexOf(p.slug)}</span>
-          <span>{DISCIPLINES[p.category].short}</span>
+          <span>N°{indexOf(p.slug)} — {DISCIPLINES[p.category].label}</span>
           <span>{fmtDate(p.published, 'year')}</span>
         </div>
         <h3 className="tile__title serif">{p.title}</h3>
@@ -95,7 +109,6 @@ export function ProjectRow({ p, onHover }: { p: Project; onHover?: (p: Project |
         <span className="row__no mono">{indexOf(p.slug)}</span>
         <span className="row__title serif">{p.title}{p.featured && <sup>★</sup>}</span>
         <span className="row__cat mono">{DISCIPLINES[p.category].label}</span>
-        <span className="row__tags mono">{p.tags.slice(0, 3).join(' / ')}</span>
         <span className="row__status mono">{p.status}</span>
         <span className="row__date mono">{fmtDate(p.published)}</span>
       </Link>
@@ -103,32 +116,34 @@ export function ProjectRow({ p, onHover }: { p: Project; onHover?: (p: Project |
   );
 }
 
-export function ProjectEditorial({ p, i }: { p: Project; i: number }) {
-  const side = i % 3;
-  return (
-    <Reveal as="div" className={`ed ed--${side}`}>
-      <article style={{ ['--pa' as string]: p.accent ?? 'var(--accent)' }}>
-        <Link to={`/project/${p.slug}`} className="ed__link">
-          <div className="ed__media"><Cover cover={p.cover} sizes="60vw" /></div>
-          <div className="ed__text">
-            <span className="mono ed__meta">N°{indexOf(p.slug)} — {DISCIPLINES[p.category].label} — {fmtDate(p.published, 'long')} {p.demo && <DemoBadge small />}</span>
-            <h3 className="ed__title">{p.title}</h3>
-            <p className="ed__desc serif">{p.description}</p>
-            <span className="mono ed__more">Enter project →</span>
-          </div>
-        </Link>
-      </article>
-    </Reveal>
-  );
-}
-
 /** Floating hover preview that follows the cursor (list view). */
 export function HoverPreview({ p }: { p: Project | null }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const on = (e: PointerEvent) => { if (ref.current) ref.current.style.transform = `translate(${e.clientX + 24}px, ${e.clientY - 90}px)`; };
-    window.addEventListener('pointermove', on);
-    return () => window.removeEventListener('pointermove', on);
+    const el = ref.current;
+    if (!el) return;
+    const target = { x: 0, y: 0 };
+    const pos = { x: 0, y: 0 };
+    let raf = 0, live = false;
+    const loop = () => {
+      pos.x += (target.x - pos.x) * 0.16;
+      pos.y += (target.y - pos.y) * 0.16;
+      el.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+      raf = live && (Math.abs(target.x - pos.x) > 0.4 || Math.abs(target.y - pos.y) > 0.4) ? requestAnimationFrame(loop) : 0;
+    };
+    // keep the card inside the viewport: it must never widen the document
+    // or hang off-screen near the right/bottom edge
+    const W = 230, H = 210, M = 12;
+    const on = (e: PointerEvent) => {
+      target.x = Math.min(Math.max(M, e.clientX + 26), Math.max(M, innerWidth - W - M));
+      target.y = Math.min(Math.max(M, e.clientY - 96), Math.max(M, innerHeight - H - M));
+      if (!live) { live = true; pos.x = target.x; pos.y = target.y; }
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+    const off = () => { live = false; };
+    window.addEventListener('pointermove', on, { passive: true });
+    window.addEventListener('pointerdown', off);
+    return () => { window.removeEventListener('pointermove', on); window.removeEventListener('pointerdown', off); cancelAnimationFrame(raf); };
   }, []);
   return (
     <div ref={ref} className={`hp ${p ? 'is-on' : ''}`} aria-hidden>
