@@ -4,9 +4,7 @@
   "description": "A photographic series about thresholds — crossings, stairwells and halls at the hours when no one is in them.",
   "category": "photography",
   "disciplines": [
-    [
-      "photography"
-    ]
+    "photography"
   ],
   "tags": [
     "series",
@@ -144,8 +142,5 @@
   "related": [
     "low-tide"
   ],
-  "accent": "#3fd0c9",
-  "audio": {
-    "allowSpeed": false
-  }
+  "accent": "#3fd0c9"
 }

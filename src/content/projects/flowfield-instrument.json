@@ -4,15 +4,9 @@
   "description": "An interactive particle field you can play — drag to stir, hold a key to change the weather.",
   "category": "creative-coding",
   "disciplines": [
-    [
-      "music"
-    ],
-    [
-      "code"
-    ],
-    [
-      "creative-coding"
-    ]
+    "music",
+    "code",
+    "creative-coding"
   ],
   "tags": [
     "interactive",
@@ -65,8 +59,5 @@
     "tiny-language-model",
     "low-tide"
   ],
-  "accent": "#ffd23f",
-  "audio": {
-    "allowSpeed": false
-  }
+  "accent": "#ffd23f"
 }
