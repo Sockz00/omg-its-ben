@@ -4,9 +4,7 @@
   "description": "test",
   "category": "photography",
   "disciplines": [
-    [
-      "photography"
-    ]
+    "photography"
   ],
   "tags": [
     "series",
@@ -147,8 +145,5 @@
   "related": [
     "low-tide"
   ],
-  "accent": "#3fd0c9",
-  "audio": {
-    "allowSpeed": false
-  }
+  "accent": "#3fd0c9"
 }
