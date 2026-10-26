@@ -15,13 +15,19 @@ export function Journal() {
   return (
     <div className="page journal">
       <Breadcrumbs trail={[{ label: 'Journal' }]} />
-      <header className="phead">
-        <h1 className="phead__title"><span>Journal</span> <em className="serif">&amp; notes</em></h1>
-        <p className="phead__lede serif">Long-form writing, research, observations, creative notes and technical documentation.</p>
+      <header className="phead journal__head">
+        <div>
+          <p className="mono phead__eyebrow">Field notes / {String(journalSorted.length).padStart(2, '0')} entries</p>
+          <h1 className="phead__title"><span>Journal</span> <em className="serif">&amp; notes</em></h1>
+        </div>
+        <p className="phead__lede serif">Long-form writing, research, observations, creative notes and technical documentation. Thoughts in progress, made legible.</p>
       </header>
-      <div className="filters__disc" role="group" aria-label="Filter by kind">
-        <button type="button" className="fchip" aria-pressed={!kind} onClick={() => setKind(null)}>All</button>
-        {kinds.map((k) => <button type="button" key={k} className="fchip" aria-pressed={kind === k} onClick={() => setKind(kind === k ? null : k)}>{k}</button>)}
+      <div className="journal__toolbar">
+        <span className="mono">Browse by format</span>
+        <div className="filters__disc" role="group" aria-label="Filter by kind">
+          <button type="button" className="fchip" aria-pressed={!kind} onClick={() => setKind(null)}>All <sup>{journalSorted.length}</sup></button>
+          {kinds.map((k) => <button type="button" key={k} className="fchip" aria-pressed={kind === k} onClick={() => setKind(kind === k ? null : k)}>{k}</button>)}
+        </div>
       </div>
       <ol className="jlist">
         {list.map((j, i) => (

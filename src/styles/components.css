@@ -113,8 +113,18 @@
 .phead__lede { grid-column: 9 / 13; margin: 0; font-size: var(--fs-l); line-height: 1.2; color: var(--ink-2); }
 .phead__count { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 0; color: var(--ink-3); }
 .phead__count b { color: var(--ink); font-weight: 500; font-size: 14px; }
-.phead__wing { grid-column: 1 / -1; color: var(--accent); }
-@media (max-width: 900px) { .phead__title, .phead__lede { grid-column: 1 / -1; }}
+  .phead__wing { grid-column: 1 / -1; color: var(--accent); }
+  .phead__eyebrow { margin: 0 0 14px; color: var(--accent); }
+  .tech__head, .journal__head { margin-bottom: 0; }
+  .tech__head > div, .journal__head > div { grid-column: 1 / 9; }
+  .tech__head .phead__title, .journal__head .phead__title { grid-column: auto; }
+  .tech__head .phead__lede, .journal__head .phead__lede { grid-column: 9 / 13; }
+  .tech__rule { height: 22px; border-bottom: 1px solid var(--line-2); margin-bottom: 10px; }
+  .journal__toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .journal__toolbar > .mono { color: var(--ink-3); }
+  .journal__toolbar .filters__disc { margin: 0; }
+  @media (max-width: 900px) { .phead__title, .phead__lede, .tech__head > div, .journal__head > div, .tech__head .phead__lede, .journal__head .phead__lede { grid-column: 1 / -1; }}
+  @media (max-width: 600px) { .journal__toolbar { align-items: flex-start; flex-direction: column; gap: 10px; }}
 
 .shead { display: grid; grid-template-columns: 80px 1fr auto; align-items: end; gap: 6px 18px; padding-bottom: 18px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
 .shead__no { color: var(--accent); align-self: start; padding-top: 8px; }
@@ -324,3 +334,41 @@
 @media (hover: none) { .hp { display: none; }}
 .ed__media img, .ed__media .gen { width: 100%; aspect-ratio: 16/10; object-fit: cover; transition: transform 1.5s var(--ease-out); will-change: transform; }
 .ed__media .fx { aspect-ratio: 16/10 !important; }
+
+/* ════════ 2026 EDITORIAL SYSTEM ════════ */
+.hdr { height: var(--hdr); background: color-mix(in srgb, var(--bg) 92%, transparent); border-bottom-color: var(--line-2); }
+.hdr__mark { gap: .5em; }
+.hdr__omg { font-size: 21px; letter-spacing: .02em; }
+.hdr__ben { font-size: 29px; }
+.hdr__nav ul { gap: clamp(14px, 2.4vw, 38px); }
+.hdr__nav a { font-size: 11px; letter-spacing: .1em; }
+.hdr__tools > button { border-color: transparent; }
+.hdr__tools > button:hover { background: var(--bg-2); border-color: var(--line); }
+.main { padding-top: var(--hdr); }
+.page { max-width: 1540px; margin: 0 auto; }
+.crumbs { padding-top: 28px; color: var(--ink-3); }
+.phead { padding-top: clamp(54px, 9vw, 140px); border-bottom-color: var(--line-2); }
+.phead__title { font-size: clamp(70px, 12vw, 190px); }
+.phead__lede { font-size: clamp(22px, 2.2vw, 34px); max-width: 18ch; }
+.shead { padding-bottom: 14px; margin-bottom: 30px; border-bottom-color: var(--line-2); }
+.shead__title { font-size: clamp(26px, 3.5vw, 52px); }
+.sect { padding-top: clamp(64px, 10vw, 160px); }
+.hero { min-height: calc(100svh - var(--hdr)); padding-top: 30px; }
+.hero__title { line-height: .72; }
+.hero__intro p.serif { font-size: clamp(22px, 2vw, 31px); }
+.disc__wrap { gap: clamp(28px, 5vw, 90px); }
+.disc__list a { padding: 18px 0; }
+.disc__name { font-size: clamp(34px, 5vw, 76px); }
+.feat__media { background: var(--bg-2); }
+.tile { border-top: 1px solid var(--line-2); padding-top: 10px; }
+.tile__media { background: var(--bg-2); }
+.tile__title { font-size: clamp(31px, 3vw, 48px); }
+.rows__head { padding-top: 10px; text-transform: uppercase; letter-spacing: .12em; }
+.row__link { padding: 21px 0; }
+.row__title { font-size: clamp(26px, 3vw, 44px); }
+.jlist { border-top: 2px solid var(--ink); }
+.jlist__item { min-height: 150px; }
+.ftr { margin-top: 100px; padding-top: 10px; }
+.ftr__big { padding-top: 70px; }
+.ftr__cols { padding-top: 50px; }
+@media (max-width: 800px) { .phead__lede { max-width: none; } .hero { min-height: auto; padding-bottom: 80px; } .ftr { margin-top: 60px; } }

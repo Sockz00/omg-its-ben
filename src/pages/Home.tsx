@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Cover } from '../components/Cover';
-import { FlowField } from '../components/experiments';
-import { DemoBadge, HoverPreview, Marquee, ProjectRow, Reveal, Scramble, SectionHead } from '../components/ui';
+import { Marquee, Reveal, SectionHead } from '../components/ui';
 import { activity, DISCIPLINES, NOW, SITE } from '../data/site';
-import type { Discipline, Project } from '../data/types';
+import type { Discipline } from '../data/types';
 import { allProjects, countFor, fmtDate, indexOf, sectionFor, usedDisciplines } from '../lib/content';
 import { Link } from '../lib/router';
 import { makeNoise, useReducedMotion, useTheme } from '../lib/store';
@@ -92,8 +91,6 @@ function SplitFlap({ words }: { words: string[] }) {
 
 export default function Home() {
   const featured = allProjects.filter((p) => p.featured);
-  const recent = allProjects.slice(0, 6);
-  const [hover, setHover] = useState<Project | null>(null);
   const [hd, setHd] = useState<Discipline | null>(null);
   const discProject = hd ? allProjects.find((p) => p.category === hd || p.disciplines?.includes(hd)) : null;
 
@@ -150,39 +147,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FEATURED ── */}
-      <section className="sect feat" aria-labelledby="feat-h">
-        <SectionHead no="§2" title={<span id="feat-h">Selected <em className="serif">objects</em></span>} kicker="Across photo, music and tech" />
-        <div className="feat__grid">
-          {featured.map((p, i) => (
-            <Reveal key={p.slug} className={`feat__item feat__item--${i % 5}`} delay={i * 60}>
-              <Link to={`/project/${p.slug}`} style={{ ['--pa' as string]: p.accent ?? 'var(--accent)' }}>
-                <div className="feat__media"><Cover cover={p.cover} sizes={i === 0 ? '60vw' : '35vw'} /></div>
-                <div className="feat__cap">
-                  <span className="mono">N°{indexOf(p.slug)} · {DISCIPLINES[p.category].label} · {fmtDate(p.published, 'year')} {p.demo && <DemoBadge small />}</span>
-                  <h3><Scramble text={p.title} trigger="hover" /></h3>
-                  <p className="serif">{p.description}</p>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ── RECENT ── */}
-      <section className="sect" aria-labelledby="recent-h">
-        <SectionHead no="§3" title={<span id="recent-h">Recently <em className="serif">added</em></span>} kicker="Newest first" />
-        <ul className="rows">{recent.map((p) => <ProjectRow key={p.slug} p={p} onHover={setHover} />)}</ul>
-        <HoverPreview p={hover} />
-      </section>
-
       {/* ── LAB + NOW ── */}
-      <section className="sect split" aria-labelledby="lab-h">
-        <div className="split__lab">
-          <SectionHead no="§4" title={<span id="lab-h">A live <em className="serif">instrument</em></span>} kicker="Not a video. Move your cursor." />
-          <div className="split__exp"><FlowField compact /></div>
-          <Link to="/tech" className="ulink mono">More experiments in Tech →</Link>
-        </div>
+      <section className="sect split" aria-labelledby="now-h">
         <aside className="now" aria-labelledby="now-h">
           <h2 id="now-h" className="mono now__h"><i className="pulse" /> Currently</h2>
           <dl className="now__dl">
