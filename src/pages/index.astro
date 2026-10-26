@@ -6,7 +6,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
 const featured = projects.filter((project) => project.featured).slice(0, 3);
 ---
-<BaseLayout title="Ben — Personal Archive" description="An independent archive of creative and technical work across art, sound, film and technology.">
+<BaseLayout title="Ben — Personal Archive" description="An independent archive of creative and technical work across art, sound, film and technology." projects={projects}>
   <div class="enter-overlay" id="enter-overlay">
     <div class="enter-inner">
       <h2 class="enter-heading">Enter the archive.</h2>

@@ -5,7 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects, categories } from '../data/projects';
 ---
-<BaseLayout title="Archive — Ben" description="Browse the complete creative and technical project archive.">
+<BaseLayout title="Archive — Ben" description="Browse the complete creative and technical project archive." projects={projects}>
   <div id="top"></div><SiteHeader />
   <main class="wrap archive-page">
     <div class="archive-intro"><span class="section-kicker">INDEX / 001—{String(projects.length).padStart(3, '0')}</span><h1>The archive<span class="heading-period">.</span></h1><p>A collection of projects, studies, experiments and ongoing work. An incomplete record, by design.</p></div>

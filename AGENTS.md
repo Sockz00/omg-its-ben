@@ -36,7 +36,14 @@ No test runner, linter, formatter, or CI is configured. `tsconfig.json` extends 
 - A custom mouse cursor (`#cursor`) follows the pointer and grows on hover over interactive elements (`a`, `button`, `.project-card`, etc.). It uses `mix-blend-mode: difference`.
 - Sections with the `.reveal` class fade in on scroll via an `IntersectionObserver` (threshold 0.12). Added to homepage sections and archive items.
 - `main` has a page-entrance fade (`@keyframes fadeIn`).
+- A Cmd+K search modal (`#search-modal`) searches the archive and links to matches. It's populated from `window.ARCHIVE_PROJECTS`, which is only set on pages that pass `projects` to `BaseLayout`.
 - `prefers-reduced-motion` disables all transitions/animations.
+
+## Project detail page behaviors (`src/pages/projects/[slug].astro`)
+
+- Reading time is computed from `project.body` (~200 wpm) and shown in the detail data.
+- Prev/next project navigation renders at the bottom when neighbors exist.
+- A share button copies the page URL or triggers the Web Share API.
 
 ## Gotchas
 
