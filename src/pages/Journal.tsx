@@ -60,7 +60,7 @@ export function JournalPost({ slug }: { slug: string }) {
         <p className="post__sum">{j.summary}</p>
       </header>
       <Markdown source={j.body} className="prose post__body" />
-      <div className="tags-inline mono">{j.tags.map((t) => <span key={t} className="tag">#{t}</span>)}</div>
+      {(j.tags ?? []).length > 0 && <div className="tags-inline mono">{(j.tags ?? []).map((t) => <span key={t} className="tag">#{t}</span>)}</div>}
       {related.length > 0 && (
         <section className="psec">
           <h2 className="rel__h">Referenced <em className="serif">objects</em></h2>
