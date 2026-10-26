@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://omg-its-ben.example/sitemap.xml

@@ -1,0 +1,5 @@
+LOW TIDE (DEMONSTRATION RELEASE) — LINER NOTES
+==============================================
+This is a placeholder download that demonstrates the archive's "downloads" field.
+All audio in this demo release is synthesised live in the visitor's browser by
+src/lib/synth.ts — no recordings are shipped. Replace with your own files.
