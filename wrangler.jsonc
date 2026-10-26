@@ -1,8 +1,13 @@
+// Cloudflare Workers — static assets only (no Worker script / backend required).
+// Deploy (when YOU choose to):  npm run build && npx wrangler deploy
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "personal-creative-archive",
-  "compatibility_date": "2026-10-26",
+  "name": "omg-its-ben",
+  "compatibility_date": "2025-01-01",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    // The site uses hash routing, so every route resolves to index.html anyway;
+    // this fallback also catches stray deep links.
+    "not_found_handling": "single-page-application"
   }
 }

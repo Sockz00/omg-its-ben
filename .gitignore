@@ -1,5 +1,9 @@
-node_modules/
-dist/
-.wrangler/
-.dev.vars
-.DS_Store
+node_modules
+dist
+.wrangler
+.env
+*.zip
+# Large originals: keep masters out of git — host them on R2 and set VITE_MEDIA_BASE
+public/audio/**/*.wav
+public/video/**/*.mp4
+public/video/**/*.webm
