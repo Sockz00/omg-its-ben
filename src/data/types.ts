@@ -99,6 +99,8 @@ export interface Project {
   title: string;
   /** Demonstration content flag — rendered as a visible label everywhere. */
   demo?: boolean;
+  /** Unpublished CMS draft; excluded from all public content. */
+  draft?: boolean;
   description: string;
   /** Long-form body in a small Markdown subset (## h, > quote, - list, **b**, *i*, `code`, [a](url)). */
   body: string;

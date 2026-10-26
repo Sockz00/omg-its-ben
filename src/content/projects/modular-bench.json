@@ -1,0 +1,79 @@
+{
+  "slug": "modular-bench",
+  "title": "Modular Bench",
+  "demo": true,
+  "description": "Hardware notes for a small DIY synth module — a microcontroller-driven random voltage source.",
+  "category": "code",
+  "disciplines": [
+    "code",
+    "music",
+    "research"
+  ],
+  "tags": [
+    "hardware",
+    "electronics",
+    "embedded",
+    "synthesis"
+  ],
+  "created": "2023-11-11",
+  "published": "2024-02-20",
+  "status": "ongoing",
+  "cover": {
+    "src": "/images/tech/workbench.jpg",
+    "width": 1536,
+    "height": 1024,
+    "alt": "Overhead view of an electronics workbench with an oscilloscope and circuit boards",
+    "variants": true,
+    "caption": "Bench, revision C. Placeholder image."
+  },
+  "gallery": [
+    {
+      "src": "/images/tech/workbench.jpg",
+      "width": 1536,
+      "height": 1024,
+      "alt": "Overhead view of an electronics workbench with an oscilloscope and circuit boards",
+      "variants": true,
+      "caption": "Bench, revision C. Placeholder image."
+    }
+  ],
+  "galleryLayout": "masonry",
+  "equipment": [
+    "Oscilloscope",
+    "Soldering station",
+    "Microcontroller [EDIT]"
+  ],
+  "software": [
+    "C",
+    "KiCad"
+  ],
+  "techniques": [
+    "PCB design",
+    "Embedded programming"
+  ],
+  "code": [
+    {
+      "lang": "c",
+      "filename": "random_cv.c",
+      "source": "// Sample-and-hold random voltage, clocked by an external gate\nstatic uint32_t state = 0x1234ABCD;\n\nstatic inline uint32_t xorshift(void) {\n  state ^= state << 13;\n  state ^= state >> 17;\n  state ^= state << 5;\n  return state;\n}\n\nvoid on_gate_rising(void) {\n  uint16_t v = xorshift() & 0x0FFF; // 12-bit DAC\n  dac_write(v);\n}"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2023-11",
+      "label": "Breadboard"
+    },
+    {
+      "date": "2024-01",
+      "label": "PCB rev A"
+    },
+    {
+      "date": "2024-02",
+      "label": "Rev C (this)"
+    }
+  ],
+  "body": "## Notes\n**Demonstration project — image is a placeholder.** Hardware sits where music and code meet: the module produces voltages that play synthesisers.",
+  "related": [
+    "low-tide",
+    "honeypot-notes"
+  ]
+}
