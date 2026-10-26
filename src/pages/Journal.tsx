@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Breadcrumbs, DemoBadge, ProjectTile, Reveal } from '../components/ui';
 import type { JournalEntry } from '../data/types';
 import { fmtDate, getJournal, getProject, journalSorted } from '../lib/content';
@@ -9,9 +8,7 @@ import NotFound from './NotFound';
 const readTime = (j: JournalEntry) => Math.max(1, Math.round(j.body.split(/\s+/).length / 220));
 
 export function Journal() {
-  const kinds = Array.from(new Set(journalSorted.map((j) => j.kind)));
-  const [kind, setKind] = useState<string | null>(null);
-  const list = journalSorted.filter((j) => !kind || j.kind === kind);
+  const list = journalSorted;
   return (
     <div className="page journal">
       <Breadcrumbs trail={[{ label: 'Journal' }]} />
@@ -22,6 +19,7 @@ export function Journal() {
         </div>
         <p className="phead__lede serif">Long-form writing, research, observations, creative notes and technical documentation. Thoughts in progress, made legible.</p>
       </header>
+      <p className="journal__meta mono">{String(list.length).padStart(2, '0')} entries · notes from the archive</p>
       <div className="journal__toolbar">
         <span className="mono">Browse by format</span>
         <div className="filters__disc" role="group" aria-label="Filter by kind">

@@ -4,7 +4,7 @@ import type { ImageAsset } from '../data/types';
 import { mediaUrl } from '../lib/content';
 import { EffectImage, Picture } from './Cover';
 
-const full = (im: ImageAsset) => mediaUrl(im.variants ? im.src.replace(/\.(jpe?g|png)$/i, '-1600.webp') : im.src);
+const full = (im: ImageAsset) => mediaUrl(im.src);
 
 /* ── Lightbox ── */
 export function Lightbox({ images, index, onClose, onIndex }: { images: ImageAsset[]; index: number; onClose: () => void; onIndex: (i: number) => void }) {
