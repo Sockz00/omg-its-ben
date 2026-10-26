@@ -1,11 +1,12 @@
 {
-  "slug": "night-crossings",
   "title": "Night Crossings",
-  "demo": true,
+  "slug": "night-crossings",
   "description": "A photographic series about thresholds — crossings, stairwells and halls at the hours when no one is in them.",
   "category": "photography",
   "disciplines": [
-    "photography"
+    [
+      "photography"
+    ]
   ],
   "tags": [
     "series",
@@ -18,31 +19,20 @@
   "published": "2024-03-03",
   "status": "complete",
   "featured": true,
-  "accent": "#3fd0c9",
+  "demo": true,
+  "draft": false,
   "cover": {
-    "src": "/images/photography/night-crossing.jpg",
-    "width": 1536,
-    "height": 1024,
-    "alt": "An empty rain-soaked crossing at night under sodium streetlights",
-    "variants": true,
-    "caption": "Crossing, 02:40. Placeholder image (AI-generated demo asset).",
-    "exif": {
-      "camera": "[EDIT] 35mm rangefinder",
-      "lens": "35mm f/2",
-      "aperture": "f/2",
-      "shutter": "1/30s",
-      "iso": 1600,
-      "film": "Demo / pushed +1"
-    }
+    "_block": "generative",
+    "generative": "bars",
+    "seed": 1
   },
   "galleryLayout": "asymmetric",
   "gallery": [
     {
       "src": "/images/photography/night-crossing.jpg",
+      "alt": "An empty rain-soaked crossing at night under sodium streetlights",
       "width": 1536,
       "height": 1024,
-      "alt": "An empty rain-soaked crossing at night under sodium streetlights",
-      "variants": true,
       "caption": "Crossing, 02:40. Placeholder image (AI-generated demo asset).",
       "exif": {
         "camera": "[EDIT] 35mm rangefinder",
@@ -51,14 +41,14 @@
         "shutter": "1/30s",
         "iso": 1600,
         "film": "Demo / pushed +1"
-      }
+      },
+      "variants": true
     },
     {
-      "src": "/images/photography/market-light.jpg",
+      "src": "/images/retreat-51.jpg",
+      "alt": "Shafts of late light through the windows of an indoor market",
       "width": 1536,
       "height": 1024,
-      "alt": "Shafts of late light through the windows of an indoor market",
-      "variants": true,
       "caption": "Market hall, 17:52. Placeholder image.",
       "exif": {
         "camera": "[EDIT] 35mm SLR",
@@ -66,14 +56,14 @@
         "aperture": "f/2.8",
         "shutter": "1/250s",
         "iso": 400
-      }
+      },
+      "variants": true
     },
     {
       "src": "/images/photography/concrete-stair.jpg",
+      "alt": "Brutalist concrete staircase cut by diagonal shadows",
       "width": 1536,
       "height": 1024,
-      "alt": "Brutalist concrete staircase cut by diagonal shadows",
-      "variants": true,
       "caption": "Stair, noon. Placeholder image.",
       "exif": {
         "camera": "[EDIT] Digital body",
@@ -81,14 +71,14 @@
         "aperture": "f/8",
         "shutter": "1/500s",
         "iso": 100
-      }
+      },
+      "variants": true
     },
     {
       "src": "/images/photography/fog-coast.jpg",
+      "alt": "Basalt rocks dissolving into coastal fog at dawn",
       "width": 1080,
       "height": 1456,
-      "alt": "Basalt rocks dissolving into coastal fog at dawn",
-      "variants": true,
       "caption": "Coast, first light. Placeholder image.",
       "exif": {
         "camera": "[EDIT] Medium format",
@@ -96,16 +86,16 @@
         "aperture": "f/5.6",
         "shutter": "1/125s",
         "iso": 160
-      }
+      },
+      "variants": true
     }
   ],
   "compare": {
     "before": {
       "src": "/images/photography/night-crossing.jpg",
+      "alt": "An empty rain-soaked crossing at night under sodium streetlights",
       "width": 1536,
       "height": 1024,
-      "alt": "An empty rain-soaked crossing at night under sodium streetlights",
-      "variants": true,
       "caption": "Crossing, 02:40. Placeholder image (AI-generated demo asset).",
       "exif": {
         "camera": "[EDIT] 35mm rangefinder",
@@ -114,14 +104,14 @@
         "shutter": "1/30s",
         "iso": 1600,
         "film": "Demo / pushed +1"
-      }
+      },
+      "variants": true
     },
     "after": {
       "src": "/images/photography/night-crossing.jpg",
+      "alt": "An empty rain-soaked crossing at night under sodium streetlights",
       "width": 1536,
       "height": 1024,
-      "alt": "An empty rain-soaked crossing at night under sodium streetlights",
-      "variants": true,
       "caption": "Crossing, 02:40. Placeholder image (AI-generated demo asset).",
       "exif": {
         "camera": "[EDIT] 35mm rangefinder",
@@ -130,27 +120,32 @@
         "shutter": "1/30s",
         "iso": 1600,
         "film": "Demo / pushed +1"
-      }
+      },
+      "variants": true
     },
     "beforeFilter": "saturate(0.35) contrast(0.78) brightness(1.12) sepia(0.12)",
     "label": "Flat scan → final grade"
   },
+  "body": "## Series statement\n\n**Demonstration project — images are AI-generated placeholders.** Replace them with your own photographs and keep the metadata structure.\n\nThe series demonstrates an asymmetric gallery, a full-screen lightbox (arrow keys, `+`/`−` to zoom, drag to pan), per-image EXIF data, and a before/after comparison slider showing a flat scan against a finished grade.",
+  "software": [
+    "Lightroom",
+    "Negative Lab Pro"
+  ],
   "equipment": [
     "[EDIT] 35mm rangefinder",
     "[EDIT] Medium format camera",
     "Flatbed scanner"
-  ],
-  "software": [
-    "Lightroom",
-    "Negative Lab Pro"
   ],
   "techniques": [
     "Push processing",
     "Colour grading",
     "Long exposure"
   ],
-  "body": "## Series statement\n**Demonstration project — images are AI-generated placeholders.** Replace them with your own photographs and keep the metadata structure.\n\nThe series demonstrates an asymmetric gallery, a full-screen lightbox (arrow keys, `+`/`−` to zoom, drag to pan), per-image EXIF data, and a before/after comparison slider showing a flat scan against a finished grade.",
   "related": [
     "low-tide"
-  ]
+  ],
+  "accent": "#3fd0c9",
+  "audio": {
+    "allowSpeed": false
+  }
 }
