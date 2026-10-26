@@ -4,7 +4,7 @@ import type { Cover, Discipline, ImageAsset, Project } from '../data/types';
 
 export const byDateDesc = (a: Project, b: Project) => b.published.localeCompare(a.published);
 
-export const allProjects = [...projects].sort(byDateDesc);
+export const allProjects = projects.filter((p) => !p.draft).sort(byDateDesc);
 export const projectMap = new Map(allProjects.map((p) => [p.slug, p]));
 export const getProject = (slug: string) => projectMap.get(slug);
 export const getJournal = (slug: string) => journal.find((j) => j.slug === slug);

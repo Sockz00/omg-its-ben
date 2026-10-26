@@ -1,0 +1,46 @@
+{
+  "slug": "interference-shader",
+  "title": "Interference",
+  "demo": true,
+  "description": "A raw WebGL fragment shader of moiré interference patterns, steered by the cursor.",
+  "category": "creative-coding",
+  "disciplines": [
+    "creative-coding",
+    "research"
+  ],
+  "tags": [
+    "webgl",
+    "shader",
+    "glsl",
+    "live"
+  ],
+  "created": "2024-09-01",
+  "published": "2024-09-03",
+  "status": "complete",
+  "cover": {
+    "generative": "noise",
+    "seed": 55,
+    "label": "GLSL"
+  },
+  "experiment": "shader",
+  "software": [
+    "WebGL",
+    "GLSL"
+  ],
+  "techniques": [
+    "Shaders",
+    "Wave interference"
+  ],
+  "code": [
+    {
+      "lang": "glsl",
+      "filename": "interference.frag",
+      "source": "precision mediump float;\nuniform vec2 u_res;\nuniform vec2 u_mouse;\nuniform float u_time;\n\nvoid main() {\n  vec2 uv = (gl_FragCoord.xy - 0.5 * u_res) / u_res.y;\n  vec2 m = (u_mouse - 0.5 * u_res) / u_res.y;\n  float a = sin(length(uv - m) * 60.0 - u_time * 2.0);\n  float b = sin(length(uv + m) * 58.0 + u_time * 1.6);\n  float v = smoothstep(-0.2, 0.2, a * b);\n  gl_FragColor = vec4(vec3(v), 1.0);\n}"
+    }
+  ],
+  "body": "## Why raw WebGL?\n**Demonstration project.** A full 3D library is unnecessary for a single full-screen quad. This experiment is ~80 lines with no dependencies, and falls back to a message if WebGL is unavailable.",
+  "related": [
+    "flowfield-instrument",
+    "type-field"
+  ]
+}

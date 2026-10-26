@@ -16,9 +16,9 @@
   --sans: 'Archivo', 'Helvetica Neue', Arial, system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  --pad: clamp(16px, 3.2vw, 48px);
-  --gap: clamp(12px, 1.6vw, 24px);
-  --hdr: 64px;
+  --pad: clamp(18px, 4.5vw, 76px);
+  --gap: clamp(14px, 2vw, 32px);
+  --hdr: 74px;
   --ease: cubic-bezier(.2, .7, .1, 1);
   --ease-in: cubic-bezier(.7, 0, .84, 0);
   /* expo-out: fast start, long silk finish — used for every hover response */
@@ -37,39 +37,43 @@
 
 /* NIGHT ARCHIVE — carbon, bone, vermilion signal, faint scanlines */
 [data-theme='dark'] {
-  --bg: #0e0e0c;
-  --bg-2: #161613;
-  --bg-3: #1f1f1b;
-  --ink: #efece4;
-  --ink-2: #c4c0b5;
-  --ink-3: #8b877c;
-  --line: rgba(239, 236, 228, .12);
-  --line-2: rgba(239, 236, 228, .24);
-  --accent: #ff4a1c;
+  --bg: #101113;
+  --bg-2: #181a1d;
+  --bg-3: #22252a;
+  --ink: #f3f0e8;
+  --ink-2: #b8bcc2;
+  --ink-3: #777d86;
+  --line: rgba(243, 240, 232, .12);
+  --line-2: rgba(243, 240, 232, .26);
+  --accent: #f05b3d;
   --accent-ink: #0e0e0c;
   --hi: #3fd0c9;
   --sel: rgba(255, 74, 28, .35);
   --texture: repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px);
   --shadow: 0 30px 80px -30px rgba(0,0,0,.8);
+  --surface-card: color-mix(in srgb, var(--bg-2) 84%, transparent);
+  --surface-hover: color-mix(in srgb, var(--accent) 9%, var(--bg));
   color-scheme: dark;
 }
 
 /* PAPER ARCHIVE — newsprint, carbon ink, ultramarine stamp, paper grain */
 [data-theme='light'] {
-  --bg: #ece8de;
-  --bg-2: #e3ded1;
-  --bg-3: #d8d2c3;
-  --ink: #121210;
-  --ink-2: #34332e;
-  --ink-3: #6b675d;
-  --line: rgba(18, 18, 16, .14);
-  --line-2: rgba(18, 18, 16, .3);
-  --accent: #1f3bff;
+  --bg: #f1eee7;
+  --bg-2: #e8e4db;
+  --bg-3: #dcd7cc;
+  --ink: #17191d;
+  --ink-2: #4f535b;
+  --ink-3: #858982;
+  --line: rgba(23, 25, 29, .14);
+  --line-2: rgba(23, 25, 29, .28);
+  --accent: #c83d28;
   --accent-ink: #ece8de;
   --hi: #d43a12;
   --sel: rgba(31, 59, 255, .22);
   --texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --shadow: 0 30px 60px -30px rgba(40,30,10,.35);
+  --surface-card: color-mix(in srgb, var(--bg-2) 72%, transparent);
+  --surface-hover: color-mix(in srgb, var(--accent) 7%, var(--bg));
   color-scheme: light;
 }
 

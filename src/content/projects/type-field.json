@@ -1,0 +1,39 @@
+{
+  "slug": "type-field",
+  "title": "Type Field",
+  "demo": true,
+  "description": "Interactive typography: letterforms sampled into thousands of particles that scatter and reassemble.",
+  "category": "creative-coding",
+  "disciplines": [
+    "creative-coding",
+    "design"
+  ],
+  "tags": [
+    "interactive",
+    "typography",
+    "particles",
+    "live"
+  ],
+  "created": "2024-06-01",
+  "published": "2024-06-12",
+  "status": "complete",
+  "cover": {
+    "generative": "grid",
+    "seed": 19,
+    "label": "TYP"
+  },
+  "experiment": "typefield",
+  "software": [
+    "TypeScript",
+    "Canvas 2D"
+  ],
+  "techniques": [
+    "Particle systems",
+    "Spring physics"
+  ],
+  "body": "## Notes\n**Demonstration project.** Type any word in the field below the canvas. Each glyph is rasterised, sampled into points, and every point springs home after your cursor pushes it away.",
+  "related": [
+    "flowfield-instrument",
+    "interference-shader"
+  ]
+}

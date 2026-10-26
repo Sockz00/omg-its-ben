@@ -1,0 +1,489 @@
+media:
+  - name: images
+    label: Project images
+    input: public/images
+    output: /images
+    rename: safe
+    extensions: [jpg, jpeg, png, webp]
+
+components:
+  exif:
+    type: object
+    label: EXIF data
+    fields:
+      - name: camera
+        type: string
+      - name: lens
+        type: string
+      - name: focal
+        type: string
+      - name: aperture
+        type: string
+      - name: shutter
+        type: string
+      - name: iso
+        type: number
+      - name: film
+        type: string
+
+  imageAsset:
+    type: object
+    label: Image
+    fields:
+      - name: src
+        type: image
+        required: true
+        options:
+          media: images
+          extensions: [jpg, jpeg, png, webp]
+      - name: alt
+        type: string
+        required: true
+      - name: width
+        type: number
+        required: true
+      - name: height
+        type: number
+        required: true
+      - name: caption
+        type: text
+      - name: exif
+        component: exif
+      - name: variants
+        type: boolean
+        description: Enable only when -640.webp and -1600.webp siblings exist.
+      - name: effect
+        type: select
+        options:
+          values:
+            - none
+            - halftone
+            - dither
+            - pixel
+            - parallax
+            - distort
+
+  generativeCover:
+    type: object
+    label: Generative cover
+    fields:
+      - name: generative
+        type: select
+        required: true
+        options:
+          values:
+            - contour
+            - grid
+            - orbit
+            - noise
+            - bars
+      - name: seed
+        type: number
+        required: true
+      - name: label
+        type: string
+
+  cover:
+    type: block
+    label: Cover
+    blocks:
+      - name: image
+        label: Image cover
+        fields:
+          - name: src
+            type: image
+            required: true
+            options:
+              media: images
+              extensions: [jpg, jpeg, png, webp]
+          - name: alt
+            type: string
+            required: true
+          - name: width
+            type: number
+            required: true
+          - name: height
+            type: number
+            required: true
+          - name: caption
+            type: text
+          - name: exif
+            component: exif
+          - name: variants
+            type: boolean
+          - name: effect
+            type: select
+            options:
+              values: [none, halftone, dither, pixel, parallax, distort]
+      - name: generative
+        label: Generative cover
+        fields:
+          - name: generative
+            type: select
+            required: true
+            options:
+              values: [contour, grid, orbit, noise, bars]
+          - name: seed
+            type: number
+            required: true
+          - name: label
+            type: string
+
+  imageList:
+    type: object
+    label: Image
+    list: true
+    fields:
+      - name: src
+        type: image
+        required: true
+        options:
+          media: images
+          extensions: [jpg, jpeg, png, webp]
+      - name: alt
+        type: string
+        required: true
+      - name: width
+        type: number
+        required: true
+      - name: height
+        type: number
+        required: true
+      - name: caption
+        type: text
+      - name: exif
+        component: exif
+      - name: variants
+        type: boolean
+      - name: effect
+        type: select
+        options:
+          values: [none, halftone, dither, pixel, parallax, distort]
+
+  synth:
+    type: object
+    label: Synth recipe
+    fields:
+      - name: kind
+        type: select
+        options:
+          values: [ambient, pulse, texture, beat, drone, bells]
+      - name: seconds
+        type: number
+      - name: seed
+        type: number
+      - name: bpm
+        type: number
+      - name: root
+        type: number
+
+content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    format: json
+    subfolders: false
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: slug
+        type: string
+        required: true
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      - name: description
+        type: text
+        required: true
+      - name: category
+        type: select
+        required: true
+        options:
+          values: [music, sound, photography, digital-art, drawing, design, code, ai, security, creative-coding, research]
+      - name: disciplines
+        type: select
+        list: true
+        options:
+          multiple: true
+          values: [music, sound, photography, digital-art, drawing, design, code, ai, security, creative-coding, research]
+      - name: tags
+        type: string
+        list: true
+      - name: created
+        type: date
+        required: true
+      - name: published
+        type: date
+        required: true
+      - name: status
+        type: select
+        required: true
+        options:
+          values: [complete, ongoing, archived, concept]
+      - name: featured
+        type: boolean
+      - name: demo
+        type: boolean
+      - name: draft
+        type: boolean
+      - name: cover
+        component: cover
+        required: true
+      - name: galleryLayout
+        type: select
+        options:
+          values: [masonry, asymmetric, sequence, horizontal]
+      - name: gallery
+        type: object
+        list: true
+        fields:
+          - name: src
+            type: image
+            required: true
+            options:
+              media: images
+              extensions: [jpg, jpeg, png, webp]
+          - name: alt
+            type: string
+            required: true
+          - name: width
+            type: number
+            required: true
+          - name: height
+            type: number
+            required: true
+          - name: caption
+            type: text
+          - name: exif
+            component: exif
+          - name: variants
+            type: boolean
+          - name: effect
+            type: select
+            options:
+              values: [none, halftone, dither, pixel, parallax, distort]
+      - name: compare
+        type: object
+        fields:
+          - name: before
+            component: imageAsset
+            required: true
+          - name: after
+            component: imageAsset
+            required: true
+          - name: beforeFilter
+            type: string
+          - name: label
+            type: string
+      - name: body
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+      - name: software
+        type: string
+        list: true
+      - name: equipment
+        type: string
+        list: true
+      - name: techniques
+        type: string
+        list: true
+      - name: collaborators
+        type: string
+        list: true
+      - name: credits
+        type: object
+        list: true
+        fields:
+          - name: role
+            type: string
+          - name: name
+            type: string
+      - name: technical
+        type: object
+        list: true
+        fields:
+          - name: label
+            type: string
+          - name: value
+            type: text
+      - name: links
+        type: object
+        list: true
+        fields:
+          - name: label
+            type: string
+          - name: href
+            type: string
+      - name: github
+        type: string
+      - name: downloads
+        type: object
+        list: true
+        fields:
+          - name: label
+            type: string
+          - name: href
+            type: string
+          - name: size
+            type: string
+      - name: code
+        type: object
+        list: true
+        fields:
+          - name: lang
+            type: select
+            options:
+              values: [ts, js, py, glsl, bash, rust, c]
+          - name: filename
+            type: string
+          - name: source
+            type: code
+      - name: diagram
+        type: object
+        fields:
+          - name: nodes
+            type: object
+            list: true
+            fields:
+              - name: id
+                type: string
+              - name: label
+                type: string
+              - name: x
+                type: number
+              - name: y
+                type: number
+              - name: kind
+                type: select
+                options:
+                  values: [io, process, store, external]
+          - name: edges
+            type: object
+            list: true
+            fields:
+              - name: from
+                type: string
+              - name: to
+                type: string
+              - name: label
+                type: string
+      - name: timeline
+        type: object
+        list: true
+        fields:
+          - name: date
+            type: string
+          - name: label
+            type: string
+      - name: process
+        type: object
+        list: true
+        fields:
+          - name: title
+            type: string
+          - name: text
+            type: text
+      - name: experiment
+        type: select
+        options:
+          values: [flowfield, typefield, shader, markov, entropy]
+      - name: related
+        type: string
+        list: true
+        description: Project slugs, for example low-tide or night-crossings.
+      - name: accent
+        type: string
+        description: Optional CSS colour such as #3fd0c9.
+      - name: audio
+        type: object
+        fields:
+          - name: format
+            type: select
+            options:
+              values: [album, ep, single, composition, sound-design, experimental, breakdown, mix-master]
+          - name: artwork
+            type: block
+            blocks:
+              - name: image
+                fields:
+                  - name: src
+                    type: image
+                    options:
+                      media: images
+                      extensions: [jpg, jpeg, png, webp]
+                  - name: alt
+                    type: string
+                  - name: width
+                    type: number
+                  - name: height
+                    type: number
+                  - name: caption
+                    type: text
+                  - name: exif
+                    component: exif
+                  - name: variants
+                    type: boolean
+              - name: generative
+                fields:
+                  - name: generative
+                    type: select
+                    options:
+                      values: [contour, grid, orbit, noise, bars]
+                  - name: seed
+                    type: number
+                  - name: label
+                    type: string
+          - name: tracks
+            type: object
+            list: true
+            fields:
+              - name: title
+                type: string
+              - name: src
+                type: string
+              - name: synth
+                component: synth
+              - name: markers
+                type: object
+                list: true
+                fields:
+                  - name: time
+                    type: number
+                  - name: label
+                    type: string
+              - name: annotations
+                type: object
+                list: true
+                fields:
+                  - name: time
+                    type: number
+                  - name: text
+                    type: text
+              - name: notes
+                type: text
+              - name: stems
+                type: object
+                list: true
+                fields:
+                  - name: name
+                    type: string
+                  - name: src
+                    type: string
+                  - name: synth
+                    component: synth
+          - name: allowSpeed
+            type: boolean
+    filename: "{slug}.json"
+    view:
+      primary: title
+      fields: [title, category, published, status, featured, draft]
+      sort: published
+      order: desc
+      search: true
+    operations:
+      create: true
+      edit: true
+      rename: true
+      delete: true

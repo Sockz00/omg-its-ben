@@ -1,0 +1,213 @@
+{
+  "slug": "low-tide",
+  "title": "Low Tide",
+  "demo": true,
+  "description": "A three-track ambient EP built from slow-moving chords, tape hiss and a single recurring melody.",
+  "category": "music",
+  "disciplines": [
+    "music",
+    "sound"
+  ],
+  "tags": [
+    "ambient",
+    "ep",
+    "synthesis",
+    "tape"
+  ],
+  "created": "2024-02-10",
+  "published": "2024-06-21",
+  "status": "complete",
+  "featured": true,
+  "accent": "#ff7a2f",
+  "cover": {
+    "src": "/images/music/cover-low-tide.jpg",
+    "width": 1254,
+    "height": 1254,
+    "alt": "Album artwork: a single orange horizon over deep blue-black",
+    "variants": true
+  },
+  "audio": {
+    "format": "ep",
+    "artwork": {
+      "src": "/images/music/cover-low-tide.jpg",
+      "width": 1254,
+      "height": 1254,
+      "alt": "Album artwork: a single orange horizon over deep blue-black",
+      "variants": true
+    },
+    "tracks": [
+      {
+        "title": "Shelf",
+        "synth": {
+          "kind": "ambient",
+          "seconds": 48,
+          "seed": 7,
+          "root": 50
+        },
+        "markers": [
+          {
+            "time": 0,
+            "label": "Intro"
+          },
+          {
+            "time": 16,
+            "label": "Swell"
+          },
+          {
+            "time": 34,
+            "label": "Tail"
+          }
+        ],
+        "annotations": [
+          {
+            "time": 8,
+            "text": "Detuned pad: two saws, 7 cents apart."
+          },
+          {
+            "time": 22,
+            "text": "Filter opens over 12 seconds."
+          }
+        ],
+        "notes": "The whole track is one chord progression played twice, the second pass an octave lower.",
+        "stems": [
+          {
+            "name": "Pad",
+            "synth": {
+              "kind": "ambient",
+              "seconds": 48,
+              "seed": 7,
+              "root": 50
+            }
+          },
+          {
+            "name": "Drone",
+            "synth": {
+              "kind": "drone",
+              "seconds": 48,
+              "seed": 3,
+              "root": 38
+            }
+          },
+          {
+            "name": "Bells",
+            "synth": {
+              "kind": "bells",
+              "seconds": 48,
+              "seed": 11,
+              "root": 62
+            }
+          }
+        ]
+      },
+      {
+        "title": "Undertow",
+        "synth": {
+          "kind": "pulse",
+          "seconds": 42,
+          "seed": 21,
+          "bpm": 84,
+          "root": 45
+        },
+        "markers": [
+          {
+            "time": 0,
+            "label": "Pulse"
+          },
+          {
+            "time": 20,
+            "label": "Break"
+          }
+        ],
+        "annotations": [
+          {
+            "time": 12,
+            "text": "Sequencer: 16 steps, 5 active."
+          }
+        ]
+      },
+      {
+        "title": "Salt Glass",
+        "synth": {
+          "kind": "bells",
+          "seconds": 40,
+          "seed": 5,
+          "root": 57
+        },
+        "markers": [
+          {
+            "time": 0,
+            "label": "Bells"
+          },
+          {
+            "time": 26,
+            "label": "Decay"
+          }
+        ]
+      }
+    ]
+  },
+  "credits": [
+    {
+      "role": "Composition, production",
+      "name": "Ben [EDIT]"
+    },
+    {
+      "role": "Mastering",
+      "name": "[EDIT: name or self]"
+    }
+  ],
+  "equipment": [
+    "Polyphonic synth [EDIT]",
+    "Cassette deck",
+    "Condenser microphone"
+  ],
+  "software": [
+    "Ableton Live",
+    "Web Audio API"
+  ],
+  "techniques": [
+    "Tape saturation",
+    "Granular synthesis",
+    "Subtractive synthesis"
+  ],
+  "technical": [
+    {
+      "label": "Sample rate",
+      "value": "44.1 kHz"
+    },
+    {
+      "label": "Loudness target",
+      "value": "−16 LUFS integrated"
+    },
+    {
+      "label": "Demo audio",
+      "value": "Synthesised in your browser"
+    }
+  ],
+  "process": [
+    {
+      "title": "Sketch",
+      "text": "Chords were found on a single sustained patch, recorded live without quantisation."
+    },
+    {
+      "title": "Degrade",
+      "text": "Bounced to cassette and back, then layered with the clean signal for depth."
+    },
+    {
+      "title": "Arrange",
+      "text": "Long-form automation replaces arrangement — nothing enters, everything evolves."
+    }
+  ],
+  "downloads": [
+    {
+      "label": "Liner notes (TXT)",
+      "href": "/downloads/low-tide-liner-notes.txt",
+      "size": "1 KB"
+    }
+  ],
+  "body": "## About this release\n**Demonstration project.** This EP exists to show how the archive presents music: artwork, a tracklist, waveform scrubbing, section markers, annotations, a multitrack stem view and a live spectrogram.\n\nThe audio you hear is *not a recording*. Every track is generated procedurally inside your browser by a small synthesis engine (`src/lib/synth.ts`), rendered offline to a WAV and handed to the player. Swap the `synth` field for a `src` pointing at a real file and nothing else changes.\n\n> Nothing enters, everything evolves.\n\n## Production notes\n- Pads: detuned oscillators through a slowly modulated low-pass filter.\n- Space: feedback delay into a long convolution-style tail.\n- Texture: pink noise shaped as a tape-hiss bed.",
+  "related": [
+    "flowfield-instrument",
+    "night-crossings"
+  ]
+}
