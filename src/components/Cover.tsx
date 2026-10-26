@@ -7,10 +7,9 @@ import { clamp, easeTo, rafThrottle } from '../lib/raf';
 
 /* ── Responsive picture: WebP variants + JPEG fallback, lazy + async ── */
 export function Picture({ image, sizes = '(max-width: 800px) 100vw, 50vw', eager, className, style }: { image: ImageAsset; sizes?: string; eager?: boolean; className?: string; style?: CSSProperties }) {
-  const base = image.src.replace(/\.(jpe?g|png)$/i, '');
   return (
     <picture className={className}>
-      {image.variants && <source type="image/webp" srcSet={`${mediaUrl(base)}-640.webp 640w, ${mediaUrl(base)}-1600.webp 1600w`} sizes={sizes} />}
+      {/* Only advertise generated variants when they are actually deployed. The archive ships the original assets, so a missing WebP source would prevent the browser from falling back cleanly. */}
       <img
         src={mediaUrl(image.src)}
         alt={image.alt}
@@ -135,7 +134,7 @@ export function EffectImage({ image, sizes }: { image: ImageAsset; sizes?: strin
     if (!['halftone', 'dither', 'pixel'].includes(effect)) return;
     const c = canvas.current!;
     const im = new Image();
-    im.src = mediaUrl(image.src.replace(/\.(jpe?g|png)$/i, image.variants ? '-640.webp' : '.$1'));
+    im.src = mediaUrl(image.src);
     let alive = true;
     const run = () => {
       if (!alive) return;
