@@ -7,6 +7,23 @@ import { projects } from '../data/projects';
 const featured = projects.filter((project) => project.featured).slice(0, 3);
 ---
 <BaseLayout title="Ben — Personal Archive" description="An independent archive of creative and technical work across art, sound, film and technology.">
+  <div class="enter-overlay" id="enter-overlay">
+    <div class="enter-inner">
+      <h2 class="enter-heading">Enter the archive.</h2>
+      <button class="enter-button" id="enter-button">ENTER</button>
+    </div>
+  </div>
+  <script is:inline>
+    (() => {
+      const overlay = document.getElementById('enter-overlay');
+      const button = document.getElementById('enter-button');
+      if (!overlay || !button) return;
+      button.addEventListener('click', () => {
+        overlay.style.opacity = '0';
+        setTimeout(() => { overlay.style.display = 'none'; }, 400);
+      });
+    })();
+  </script>
   <div id="top"></div>
   <SiteHeader />
   <main>
