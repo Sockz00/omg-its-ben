@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ExperimentId } from '../data/types';
 import { allProjects } from '../lib/content';
-import { journal } from '../data/site';
+import { journal } from '../lib/content';
 import { makeNoise, mulberry32, useReducedMotion, useTheme } from '../lib/store';
 import { palette } from '../lib/palette';
 import { rafThrottle } from '../lib/raf';

@@ -1,14 +1,18 @@
 import { projects } from '../data/projects';
-import { DISCIPLINES, journal } from '../data/site';
-import type { Cover, Discipline, ImageAsset, Project } from '../data/types';
+import { DISCIPLINES } from '../data/site';
+import type { Cover, Discipline, ImageAsset, JournalEntry, Project } from '../data/types';
+
+const journalFiles = import.meta.glob('../content/journal/*.json', { eager: true, import: 'default' }) as Record<string, JournalEntry>;
+export const journal: JournalEntry[] = Object.values(journalFiles);
+export const publicJournal = journal.filter((entry) => !entry.draft);
 
 export const byDateDesc = (a: Project, b: Project) => b.published.localeCompare(a.published);
 
 export const allProjects = projects.filter((p) => !p.draft).sort(byDateDesc);
 export const projectMap = new Map(allProjects.map((p) => [p.slug, p]));
 export const getProject = (slug: string) => projectMap.get(slug);
-export const getJournal = (slug: string) => journal.find((j) => j.slug === slug);
-export const journalSorted = [...journal].sort((a, b) => b.date.localeCompare(a.date));
+export const getJournal = (slug: string) => publicJournal.find((j) => j.slug === slug);
+export const journalSorted = [...publicJournal].sort((a, b) => b.date.localeCompare(a.date));
 
 export const disciplinesOf = (p: Project): Discipline[] => Array.from(new Set([p.category, ...(p.disciplines ?? [])]));
 export const usedDisciplines = (Object.keys(DISCIPLINES) as Discipline[]).filter((d) => allProjects.some((p) => disciplinesOf(p).includes(d)));

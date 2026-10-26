@@ -487,3 +487,104 @@ content:
       edit: true
       rename: true
       delete: true
+
+  - name: journal
+    label: Journal
+    type: collection
+    path: src/content/journal
+    format: json
+    subfolders: false
+    fields:
+      - name: slug
+        type: string
+        required: true
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      - name: title
+        type: string
+        required: true
+      - name: date
+        type: date
+        required: true
+      - name: kind
+        type: select
+        required: true
+        options:
+          values: [essay, note, research, technical, log]
+      - name: summary
+        type: text
+        required: true
+      - name: body
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+      - name: tags
+        type: string
+        list: true
+      - name: demo
+        type: boolean
+      - name: draft
+        type: boolean
+        description: Draft entries are hidden from the public site and command palette.
+      - name: related
+        type: string
+        list: true
+        description: Project slugs referenced by this entry.
+    filename: "{slug}.json"
+    view:
+      primary: title
+      fields: [title, kind, date, draft]
+      sort: date
+      order: desc
+      search: true
+    operations:
+      create: true
+      edit: true
+      rename: true
+      delete: true
+
+  - name: profile
+    label: Profile and site settings
+    type: file
+    path: src/content/profile.json
+    format: json
+    fields:
+      - name: name
+        type: string
+        required: true
+      - name: shortName
+        type: string
+        required: true
+      - name: displayName
+        type: string
+        required: true
+      - name: url
+        type: string
+        required: true
+      - name: description
+        type: text
+        required: true
+      - name: bio
+        type: text
+      - name: location
+        type: string
+      - name: email
+        type: string
+      - name: socials
+        type: object
+        list: true
+        fields:
+          - name: label
+            type: string
+          - name: href
+            type: string
+          - name: handle
+            type: string
+      - name: currentActivity
+        type: string
+        list: true
+      - name: profileImage
+        type: image
+        required: false
+    operations:
+      edit: true

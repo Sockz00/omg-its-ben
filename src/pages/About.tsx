@@ -1,6 +1,7 @@
 import { Generative } from '../components/Cover';
 import { Breadcrumbs } from '../components/ui';
 import { DISCIPLINES, NOW, SITE } from '../data/site';
+import profile from '../content/profile.json';
 import { countFor, sectionFor, usedDisciplines } from '../lib/content';
 import { Link } from '../lib/router';
 
@@ -19,7 +20,7 @@ export default function About() {
           <figcaption className="mono">[EDIT] Replace with a portrait — /public/images/about/portrait.jpg</figcaption>
         </figure>
         <div className="about__text prose">
-          <p className="about__big serif">Ben is a <mark>[EDIT: one-line description]</mark> based in <mark>{SITE.location}</mark>, working across sound, image and code.</p>
+          <p className="about__big serif">{profile.displayName} is a <mark>{profile.bio}</mark> based in <mark>{SITE.location}</mark>, working across sound, image and code.</p>
           <h2>Practice</h2>
           <p>The archive treats music, photography, drawing, design, software, AI and security research as one practice rather than many careers. Projects cross-reference each other on purpose: a field recording becomes a plotter drawing; a synth module becomes a piece of code; a dither algorithm becomes a way of looking at photographs.</p>
           <h2>Philosophy</h2>

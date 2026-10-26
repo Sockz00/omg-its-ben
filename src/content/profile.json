@@ -1,0 +1,23 @@
+{
+  "name": "OMG, IT'S BEN",
+  "shortName": "OIB",
+  "displayName": "Ben",
+  "url": "https://omg-its-ben.example",
+  "description": "A multidisciplinary archive of sound, image, code and everything between — music, photography, film, art, design, AI and security research.",
+  "bio": "[EDIT: one-line description]",
+  "location": "[EDIT: city / timezone]",
+  "email": "[EDIT: hello@your-domain]",
+  "socials": [
+    { "label": "GitHub", "href": "https://github.com/[EDIT]", "handle": "@[EDIT]" },
+    { "label": "Bandcamp", "href": "https://[EDIT].bandcamp.com", "handle": "[EDIT]" },
+    { "label": "Instagram", "href": "https://instagram.com/[EDIT]", "handle": "@[EDIT]" },
+    { "label": "YouTube", "href": "https://youtube.com/@[EDIT]", "handle": "@[EDIT]" },
+    { "label": "Mastodon", "href": "https://[EDIT]", "handle": "@[EDIT]" }
+  ],
+  "currentActivity": [
+    "Extending the Flowfield Instrument (demo)",
+    "Night Crossings — new plates (demo)",
+    "Tiny Language Model — next notes (demo)"
+  ],
+  "profileImage": ""
+}
