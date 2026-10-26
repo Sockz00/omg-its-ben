@@ -1,7 +1,7 @@
 {
-  "title": "Night Crossings",
-  "slug": "night-crossings",
-  "description": "A photographic series about thresholds — crossings, stairwells and halls at the hours when no one is in them.",
+  "title": "Retreat",
+  "slug": "retreat",
+  "description": "test",
   "category": "photography",
   "disciplines": [
     [
@@ -22,9 +22,12 @@
   "demo": true,
   "draft": false,
   "cover": {
-    "_block": "generative",
-    "generative": "bars",
-    "seed": 1
+    "_block": "image",
+    "src": "/images/photography/Retreat-82.jpg",
+    "alt": "water",
+    "width": 1920,
+    "height": 1080,
+    "variants": false
   },
   "galleryLayout": "asymmetric",
   "gallery": [
