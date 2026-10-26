@@ -1,0 +1,126 @@
+{
+  "slug": "tiny-language-model",
+  "title": "Tiny Language Model",
+  "demo": true,
+  "description": "A notebook-scale exploration of how language models predict text, starting from a character-level Markov chain.",
+  "category": "ai",
+  "disciplines": [
+    "ai",
+    "code",
+    "research"
+  ],
+  "tags": [
+    "machine-learning",
+    "nlp",
+    "markov",
+    "python",
+    "live"
+  ],
+  "created": "2024-07-01",
+  "published": "2024-08-20",
+  "status": "ongoing",
+  "featured": true,
+  "accent": "#a3b8ff",
+  "cover": {
+    "generative": "grid",
+    "seed": 88,
+    "label": "LM"
+  },
+  "experiment": "markov",
+  "software": [
+    "Python",
+    "PyTorch",
+    "TypeScript"
+  ],
+  "techniques": [
+    "N-gram models",
+    "Tokenisation",
+    "Sampling temperature"
+  ],
+  "github": "https://github.com/[EDIT]",
+  "code": [
+    {
+      "lang": "py",
+      "filename": "ngram.py",
+      "source": "from collections import defaultdict, Counter\nimport random\n\ndef train(text: str, order: int = 4):\n    model = defaultdict(Counter)\n    for i in range(len(text) - order):\n        model[text[i:i + order]][text[i + order]] += 1\n    return model\n\ndef sample(model, seed: str, n: int = 200, temperature: float = 1.0):\n    out = seed\n    for _ in range(n):\n        counts = model.get(out[-len(seed):])\n        if not counts:\n            break\n        chars, weights = zip(*counts.items())\n        weights = [w ** (1 / temperature) for w in weights]\n        out += random.choices(chars, weights)[0]\n    return out"
+    }
+  ],
+  "diagram": {
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Corpus",
+        "x": 8,
+        "y": 50,
+        "kind": "io"
+      },
+      {
+        "id": "t",
+        "label": "Tokenise",
+        "x": 30,
+        "y": 25,
+        "kind": "process"
+      },
+      {
+        "id": "m",
+        "label": "N-gram table",
+        "x": 52,
+        "y": 50,
+        "kind": "store"
+      },
+      {
+        "id": "s",
+        "label": "Sampler (T)",
+        "x": 74,
+        "y": 25,
+        "kind": "process"
+      },
+      {
+        "id": "o",
+        "label": "Output",
+        "x": 92,
+        "y": 50,
+        "kind": "io"
+      }
+    ],
+    "edges": [
+      {
+        "from": "c",
+        "to": "t"
+      },
+      {
+        "from": "t",
+        "to": "m",
+        "label": "count"
+      },
+      {
+        "from": "m",
+        "to": "s",
+        "label": "p(x|ctx)"
+      },
+      {
+        "from": "s",
+        "to": "o"
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "date": "2024-07",
+      "label": "Character n-grams"
+    },
+    {
+      "date": "2024-08",
+      "label": "Browser demo"
+    },
+    {
+      "date": "[NEXT]",
+      "label": "Small transformer comparison"
+    }
+  ],
+  "body": "## Overview\n**Demonstration project.** Before attention and transformers, there is counting. The live demo below trains a character-level model *in your browser* on the text of this archive, then samples from it. Raise the temperature to watch coherence dissolve.\n\n## What it shows\n- Higher order = more memorised, less novel.\n- Temperature reshapes the distribution: `w ** (1 / T)`.\n- No data leaves the page.",
+  "related": [
+    "honeypot-notes",
+    "flowfield-instrument"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "title": "Flowfield_Instrument",
+  "slug": "flowfield-instrument",
+  "description": "An interactive particle field you can play — drag to stir, hold a key to change the weather.",
+  "category": "creative-coding",
+  "disciplines": [
+    [
+      "music"
+    ],
+    [
+      "code"
+    ],
+    [
+      "creative-coding"
+    ]
+  ],
+  "tags": [
+    "interactive",
+    "particles",
+    "canvas",
+    "audio-reactive",
+    "live"
+  ],
+  "created": "2024-03-14",
+  "published": "2024-04-01",
+  "status": "ongoing",
+  "featured": true,
+  "demo": true,
+  "draft": false,
+  "cover": {
+    "_block": "generative",
+    "generative": "contour",
+    "seed": 1
+  },
+  "compare": {
+    "before": {
+      "src": "/images/photography/concrete-stair.jpg",
+      "alt": "v",
+      "width": 0,
+      "height": 0,
+      "variants": false
+    },
+    "after": {
+      "src": "/images/tech/workbench.jpg",
+      "alt": "hi",
+      "width": 0,
+      "height": 0,
+      "variants": false
+    }
+  },
+  "body": "## How to play\n\n**Demonstration project — fully original and genuinely interactive.** Move or drag across the canvas to stir currents. Press **Sound** to let the field emit a soft tone shaped by particle velocity (opt-in; nothing plays automatically).",
+  "software": [
+    "TypeScript",
+    "Canvas 2D",
+    "Web Audio API"
+  ],
+  "techniques": [
+    "Flow fields",
+    "Particle systems",
+    "Value noise"
+  ],
+  "github": "https://github.com/[EDIT]",
+  "experiment": "flowfield",
+  "related": [
+    "tiny-language-model",
+    "low-tide"
+  ],
+  "accent": "#ffd23f",
+  "audio": {
+    "allowSpeed": false
+  }
+}

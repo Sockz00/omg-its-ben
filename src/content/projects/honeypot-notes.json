@@ -1,0 +1,140 @@
+{
+  "slug": "honeypot-notes",
+  "title": "Honeypot Notes",
+  "demo": true,
+  "description": "A home-lab research log on observing automated SSH scanning with a low-interaction honeypot.",
+  "category": "security",
+  "disciplines": [
+    "security",
+    "research",
+    "code"
+  ],
+  "tags": [
+    "cybersecurity",
+    "homelab",
+    "networking",
+    "research",
+    "live"
+  ],
+  "created": "2024-11-01",
+  "published": "2025-01-10",
+  "status": "ongoing",
+  "accent": "#ff5d73",
+  "cover": {
+    "generative": "noise",
+    "seed": 404,
+    "label": "SEC"
+  },
+  "experiment": "entropy",
+  "software": [
+    "Python",
+    "Docker",
+    "Grafana"
+  ],
+  "equipment": [
+    "Single-board computer [EDIT]",
+    "Isolated VLAN"
+  ],
+  "techniques": [
+    "Threat observation",
+    "Log analysis",
+    "Network segmentation"
+  ],
+  "code": [
+    {
+      "lang": "bash",
+      "filename": "isolate.sh",
+      "source": "# The honeypot lives on its own VLAN with no route to the LAN\nnft add table inet lab\nnft add chain inet lab forward '{ type filter hook forward priority 0; policy drop; }'\nnft add rule inet lab forward iifname \"vlan66\" oifname \"wan0\" accept\nnft add rule inet lab forward ct state established,related accept\n# everything else from vlan66 is dropped and logged\nnft add rule inet lab forward iifname \"vlan66\" log prefix \"LAB-DROP \" drop"
+    }
+  ],
+  "diagram": {
+    "nodes": [
+      {
+        "id": "i",
+        "label": "Internet",
+        "x": 8,
+        "y": 50,
+        "kind": "external"
+      },
+      {
+        "id": "f",
+        "label": "Firewall",
+        "x": 30,
+        "y": 50,
+        "kind": "process"
+      },
+      {
+        "id": "h",
+        "label": "Honeypot (VLAN 66)",
+        "x": 55,
+        "y": 22,
+        "kind": "process"
+      },
+      {
+        "id": "l",
+        "label": "Log store",
+        "x": 78,
+        "y": 22,
+        "kind": "store"
+      },
+      {
+        "id": "d",
+        "label": "Dashboard",
+        "x": 92,
+        "y": 62,
+        "kind": "io"
+      },
+      {
+        "id": "n",
+        "label": "Home LAN (no route)",
+        "x": 55,
+        "y": 80,
+        "kind": "external"
+      }
+    ],
+    "edges": [
+      {
+        "from": "i",
+        "to": "f"
+      },
+      {
+        "from": "f",
+        "to": "h",
+        "label": ":22"
+      },
+      {
+        "from": "h",
+        "to": "l",
+        "label": "json"
+      },
+      {
+        "from": "l",
+        "to": "d"
+      },
+      {
+        "from": "f",
+        "to": "n",
+        "label": "deny"
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "date": "2024-11",
+      "label": "Lab isolated"
+    },
+    {
+      "date": "2024-12",
+      "label": "Logging pipeline"
+    },
+    {
+      "date": "2025-01",
+      "label": "First write-up"
+    }
+  ],
+  "body": "## Scope & ethics\n**Demonstration project — educational framing only.** Defensive observation on equipment you own, isolated from everything else. No figures here are real measurements.\n\n## Live demo\nThe tool below estimates password strength entirely client-side — nothing you type is stored or sent. It illustrates why automated scanners succeed against short, predictable credentials.",
+  "related": [
+    "tiny-language-model",
+    "modular-bench"
+  ]
+}
