@@ -1,3 +1,4 @@
+
 # Personal Creative Archive
 
 A fully custom, responsive multidisciplinary portfolio built with Astro. Static output is deployed to Cloudflare Workers. All layout, styling, content and behaviour are owned in this repository.
@@ -63,3 +64,5 @@ public/          Your images, video poster frames, icons and other static assets
 - Category filters and project pages are generated from the same project data.
 - The sample project entries are placeholders. Replace descriptions, links and details with your own work before publishing.
 - Google Fonts are currently loaded remotely. Self-host font files if you want the site to avoid third-party font requests.
+
+# omg-its-ben
