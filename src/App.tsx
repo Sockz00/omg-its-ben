@@ -50,6 +50,7 @@ function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
         <h1 id="construction-title" className="under-construction__message">
           <em>shit</em> is <strong>BROKEN rn</strong>
         </h1>
+        <p className="under-construction__note">Sorry...</p>
         <div className={`under-construction__access${showPassword ? ' is-open' : ''}`}>
           <button className="btn under-construction__reveal" type="button" onClick={() => setShowPassword(true)} aria-expanded={showPassword} aria-controls="site-password-form">
             let me in anyway
