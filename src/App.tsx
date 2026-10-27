@@ -32,6 +32,7 @@ const ACCESS_KEY = 'ben-site-access';
 function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -46,22 +47,29 @@ function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
   return (
     <main className="under-construction" aria-labelledby="construction-title">
       <div className="under-construction__content">
-        <p className="mono">OMG, IT&apos;S BEN</p>
-        <h1 id="construction-title" className="serif">This website is underconstruction.</h1>
-        <p className="under-construction__note">sorry -ben</p>
-        <form className="under-construction__form" onSubmit={handleSubmit}>
-          <label className="sr-only" htmlFor="site-password">Password</label>
-          <input
-            id="site-password"
-            type="password"
-            value={password}
-            onChange={(event) => { setPassword(event.target.value); setError(false); }}
-            placeholder="Enter password"
-            autoComplete="current-password"
-            aria-invalid={error}
-          />
-          <button className="btn btn--solid" type="submit">Enter</button>
-        </form>
+        <h1 id="construction-title" className="under-construction__message">
+          <em>shit</em> is <strong>BROKEN</strong> rn
+        </h1>
+        {!showPassword ? (
+          <button className="btn btn--solid under-construction__reveal" type="button" onClick={() => setShowPassword(true)} aria-expanded="false" aria-controls="site-password-form">
+            let me in anyway
+          </button>
+        ) : (
+          <form id="site-password-form" className="under-construction__form under-construction__form--visible" onSubmit={handleSubmit}>
+            <label className="sr-only" htmlFor="site-password">Password</label>
+            <input
+              id="site-password"
+              type="password"
+              value={password}
+              onChange={(event) => { setPassword(event.target.value); setError(false); }}
+              placeholder="Enter secret password..."
+              autoComplete="current-password"
+              aria-invalid={error}
+              autoFocus
+            />
+            <button className="btn btn--solid" type="submit">let me in</button>
+          </form>
+        )}
         {error && <p className="under-construction__error" role="alert">That password didn&apos;t work.</p>}
       </div>
     </main>
