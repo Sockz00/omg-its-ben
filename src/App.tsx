@@ -48,14 +48,13 @@ function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
     <main className="under-construction" aria-labelledby="construction-title">
       <div className="under-construction__content">
         <h1 id="construction-title" className="under-construction__message">
-          <em>shit</em> is <strong>BROKEN</strong> rn
+          <em>shit</em> is <strong>BROKEN rn</strong>
         </h1>
-        {!showPassword ? (
-          <button className="btn btn--solid under-construction__reveal" type="button" onClick={() => setShowPassword(true)} aria-expanded="false" aria-controls="site-password-form">
-            let me in anyway
-          </button>
-        ) : (
-          <form id="site-password-form" className="under-construction__form under-construction__form--visible" onSubmit={handleSubmit}>
+        <button className="btn under-construction__reveal" type="button" onClick={() => setShowPassword(true)} aria-expanded={showPassword} aria-controls="site-password-form">
+          let me in anyway
+        </button>
+        <div className={`under-construction__form-shell${showPassword ? ' is-open' : ''}`}>
+          <form id="site-password-form" className="under-construction__form" onSubmit={handleSubmit}>
             <label className="sr-only" htmlFor="site-password">Password</label>
             <input
               id="site-password"
@@ -65,11 +64,11 @@ function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
               placeholder="Enter secret password..."
               autoComplete="current-password"
               aria-invalid={error}
-              autoFocus
+              tabIndex={showPassword ? 0 : -1}
             />
-            <button className="btn btn--solid" type="submit">let me in</button>
+            <button className="btn" type="submit" tabIndex={showPassword ? 0 : -1}>let me in</button>
           </form>
-        )}
+        </div>
         {error && <p className="under-construction__error" role="alert">That password didn&apos;t work.</p>}
       </div>
     </main>
