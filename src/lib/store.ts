@@ -71,7 +71,7 @@ export function makeNoise(seed = 1) {
 
 /* ── Page meta (title, description, canonical, OG) ── */
 export function setMeta(title: string, description: string, path: string, image = '/images/og.jpg') {
-  const full = title ? `${title} — OMG, IT'S BEN` : "OMG, IT'S BEN — a multidisciplinary archive";
+  const full = title ? `${title} — OMG, IT'S BEN` : "did that work?";
   document.title = full;
   const set = (sel: string, attr: string, val: string) => document.querySelector(sel)?.setAttribute(attr, val);
   set('meta[name="description"]', 'content', description);
