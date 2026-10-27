@@ -127,9 +127,9 @@ em.serif, .serif em, em { font-style: italic; }
   color: var(--ink);
 }
 .under-construction__content { width: min(100%, 560px); }
-.under-construction__content > .mono { color: var(--accent); margin: 0 0 2rem; }
-.under-construction h1 { margin: 0; font-size: clamp(3.5rem, 9vw, 7.5rem); line-height: .88; letter-spacing: -.04em; max-width: 8ch; }
-.under-construction__note { margin: 2rem 0 2.5rem; color: var(--ink-2); font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.25rem); }
+.under-construction__message { margin: 0 0 2.5rem; font-family: var(--sans); font-size: clamp(3rem, 12vw, 7rem); font-weight: 500; line-height: .92; letter-spacing: -.07em; max-width: 9ch; }
+.under-construction__message em { font-style: italic; }
+.under-construction__message strong { font-weight: 800; letter-spacing: -.08em; }
 .under-construction__form { display: flex; gap: .75rem; max-width: 440px; }
 .under-construction__form input { min-width: 0; flex: 1; border: 1px solid var(--line-2); background: var(--bg-2); padding: .8em 1em; }
 .under-construction__form input::placeholder { color: var(--ink-3); }
