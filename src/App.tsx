@@ -46,9 +46,9 @@ function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
   return (
     <main className="under-construction" aria-labelledby="construction-title">
       <div className="under-construction__content">
-        <h1 id="construction-title" className="under-construction__message">
-          <em>shit</em> is <strong>BROKEN</strong> lol... sorry
-        </h1>
+        <p className="mono">OMG, IT&apos;S BEN</p>
+        <h1 id="construction-title" className="serif">This website is underconstruction.</h1>
+        <p className="under-construction__note">sorry -ben</p>
         <form className="under-construction__form" onSubmit={handleSubmit}>
           <label className="sr-only" htmlFor="site-password">Password</label>
           <input
@@ -56,11 +56,11 @@ function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
             type="password"
             value={password}
             onChange={(event) => { setPassword(event.target.value); setError(false); }}
-            placeholder="Enter secret password..."
+            placeholder="Enter password"
             autoComplete="current-password"
             aria-invalid={error}
           />
-          <button className="btn btn--solid" type="submit">let me in</button>
+          <button className="btn btn--solid" type="submit">Enter</button>
         </form>
         {error && <p className="under-construction__error" role="alert">That password didn&apos;t work.</p>}
       </div>
