@@ -50,11 +50,11 @@ function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
         <h1 id="construction-title" className="under-construction__message">
           <em>shit</em> is <strong>BROKEN rn</strong>
         </h1>
-        <button className="btn under-construction__reveal" type="button" onClick={() => setShowPassword(true)} aria-expanded={showPassword} aria-controls="site-password-form">
-          let me in anyway
-        </button>
-        <div className={`under-construction__form-shell${showPassword ? ' is-open' : ''}`}>
-          <form id="site-password-form" className="under-construction__form" onSubmit={handleSubmit}>
+        <div className={`under-construction__access${showPassword ? ' is-open' : ''}`}>
+          <button className="btn under-construction__reveal" type="button" onClick={() => setShowPassword(true)} aria-expanded={showPassword} aria-controls="site-password-form">
+            let me in anyway
+          </button>
+          <form id="site-password-form" className="under-construction__form" onSubmit={handleSubmit} aria-hidden={!showPassword}>
             <label className="sr-only" htmlFor="site-password">Password</label>
             <input
               id="site-password"
@@ -74,6 +74,7 @@ function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
     </main>
   );
 }
+
 
 export default function App() {
   const [unlocked, setUnlocked] = useState(() => sessionStorage.getItem(ACCESS_KEY) === 'true');
