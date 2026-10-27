@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Shell } from './components/Shell';
 import { DISCIPLINES, SITE } from './data/site';
 import { getJournal, getProject, isImage } from './lib/content';
@@ -26,7 +26,59 @@ const META: Record<string, [string, string]> = {
   '/about': ['About', 'About Ben and the idea of one interconnected creative practice.'],
 };
 
+const SITE_PASSWORD = 'sixlongleopardslovelounging';
+const ACCESS_KEY = 'ben-site-access';
+
+function UnderConstruction({ onUnlock }: { onUnlock: () => void }) {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (password === SITE_PASSWORD) {
+      sessionStorage.setItem(ACCESS_KEY, 'true');
+      onUnlock();
+    } else {
+      setError(true);
+    }
+  }
+
+  return (
+    <main className="under-construction" aria-labelledby="construction-title">
+      <div className="under-construction__content">
+        <h1 id="construction-title" className="under-construction__message">
+          <em>shit</em> is <strong>BROKEN rn</strong>
+        </h1>
+        <p className="under-construction__note">Sorry...</p>
+        <div className={`under-construction__access${showPassword ? ' is-open' : ''}`}>
+          <button className="btn under-construction__reveal" type="button" onClick={() => setShowPassword(true)} aria-expanded={showPassword} aria-controls="site-password-form">
+            let me in anyway
+          </button>
+          <form id="site-password-form" className="under-construction__form" onSubmit={handleSubmit} aria-hidden={!showPassword}>
+            <label className="sr-only" htmlFor="site-password">Password</label>
+            <input
+              id="site-password"
+              type="password"
+              value={password}
+              onChange={(event) => { setPassword(event.target.value); setError(false); }}
+              placeholder="Enter secret password..."
+              autoComplete="current-password"
+              aria-invalid={error}
+              tabIndex={showPassword ? 0 : -1}
+            />
+            <button className="btn" type="submit" tabIndex={showPassword ? 0 : -1}>let me in</button>
+          </form>
+        </div>
+        {error && <p className="under-construction__error" role="alert">That password didn&apos;t work.</p>}
+      </div>
+    </main>
+  );
+}
+
+
 export default function App() {
+  const [unlocked, setUnlocked] = useState(() => sessionStorage.getItem(ACCESS_KEY) === 'true');
   const { path, params } = useRoute();
   const [, seg, slug] = path.split('/');
   const base = `/${seg ?? ''}`;
@@ -55,6 +107,8 @@ export default function App() {
   else if (base === '/journal') page = <Journal />;
   else if (base === '/about') page = <About />;
   else page = <NotFound />;
+
+  if (!unlocked) return <UnderConstruction onUnlock={() => setUnlocked(true)} />;
 
   return (
     <Shell path={path}>
