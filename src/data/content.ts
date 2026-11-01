@@ -47,6 +47,6 @@ export type Project = { title: string; category: string; year: string; descripti
 
 export const heroTitle = site.heroTitle;
 export const aboutIntro = site.aboutIntro;
-export const projects = projectData.items as Project[];
+export const projects = (projectData as { items?: Project[] }).items ?? [];
 export const photosIntro = photoData.intro;
 export const photos = photoData.items as Media[];

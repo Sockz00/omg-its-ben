@@ -5,13 +5,15 @@ const path = require('node:path');
 const Module = require('node:module');
 const ts = require('typescript');
 
-function loadTypeScript(relativePath) {
+function loadTypeScript(relativePath, overrides = {}) {
   const filename = path.resolve(__dirname, '..', relativePath);
   const source = fs.readFileSync(filename, 'utf8');
-  const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true } }).outputText;
+  const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true, jsx: ts.JsxEmit.ReactJSX } }).outputText;
   const mod = new Module(filename, module);
   mod.filename = filename;
   mod.paths = Module._nodeModulePaths(path.dirname(filename));
+  const originalRequire = mod.require.bind(mod);
+  mod.require = (id) => Object.hasOwn(overrides, id) ? overrides[id] : originalRequire(id);
   mod._compile(js, filename);
   return mod.exports;
 }
@@ -28,11 +30,29 @@ test('site content is read from the files edited by Pages CMS', () => {
   assert.deepEqual(content.photos, photos.items);
 });
 
+test('homepage displays an empty message only when there are no projects', () => {
+  const React = require('react');
+  const { renderToStaticMarkup } = require('react-dom/server');
+  const renderHome = (projects) => {
+    const { Home } = loadTypeScript('src/pages/Home.tsx', {
+      '@/components/FitHeadline': { FitHeadline: () => null },
+      '@/components/ScrollDownCursor': { ScrollDownCursor: () => null },
+      '@/components/ProjectSection': { ProjectSection: ({ project }) => React.createElement('p', null, project.title) },
+      '@/data/content': { heroTitle: 'hello', projects },
+    });
+    return renderToStaticMarkup(React.createElement(Home));
+  };
+  assert.match(renderHome([]), /nothing here yet/i);
+  const populated = renderHome([{ title: 'My project' }]);
+  assert.match(populated, /My project/);
+  assert.doesNotMatch(populated, /nothing here yet/i);
+});
+
 test('About text and image stack are read from the CMS file', () => {
   const about = loadTypeScript('src/data/about.ts');
   const data = require('../src/data/about.json');
   assert.deepEqual(about.aboutSections, data.sections);
-  assert.deepEqual(about.aboutImages, data.images);
+  assert.deepEqual(about.aboutImages, data.images ?? []);
 });
 
 test('uploaded images use their own path without old CDN variants', () => {
@@ -56,3 +76,4 @@ test('uploaded videos use the uploaded file instead of CDN-generated URLs', () =
   assert.equal(video.mp4, undefined);
   assert.equal(video.poster, undefined);
 });
+

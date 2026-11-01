@@ -9,5 +9,6 @@ export type AboutImage =
   | { key: string; type: 'image'; src: string }
   | { key: string; type: 'video'; id?: string; src?: string };
 
-export const aboutSections = data.sections as AboutSection[];
-export const aboutImages = data.images as AboutImage[];
+const about = data as { sections?: AboutSection[]; images?: AboutImage[] };
+export const aboutSections = about.sections ?? [];
+export const aboutImages = about.images ?? [];
