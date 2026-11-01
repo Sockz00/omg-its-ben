@@ -1,48 +1,27 @@
 <!doctype html>
-<html lang="en-GB" data-theme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OMG, IT'S BEN — a multidisciplinary archive</title>
-    <meta name="description" content="." />
-    <meta name="author" content="Ben" />
-    <meta name="theme-color" content="#0e0e0c" />
-    <meta name="color-scheme" content="dark light" />
-    <link rel="canonical" href="https://omg-its-ben.example/" />
-    <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ben wroth – web and brand designer</title>
+    <meta name="description" content="a showcase of my creative work as a brand and web designer." />
+    <meta property="og:title" content="ben wroth – web and brand designer" />
+    <meta property="og:description" content="a showcase of my creative work as a brand and web designer." />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="hi" />
-    <meta property="og:title" content="lea is fat" />
-    <meta property="og:description" content="." />
-    <meta property="og:image" content="/images/og.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://omg-its-ben.example/" />
+    <meta name="twitter:title" content="ben wroth – web and brand designer" />
+    <meta name="twitter:description" content="a showcase of my creative work as a brand and web designer." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="e" />
-    <meta name="twitter:description" content="." />
-    <meta name="twitter:image" content="/images/og.jpg" />
-
-    <link rel="preload" href="/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
-    <script>
-      // Apply persisted theme before first paint (no flash).
-      try {
-        var t = localStorage.getItem('oib:theme');
-        if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        document.documentElement.dataset.theme = t;
-      } catch (e) {}
-    </script>
-    <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"WebSite","name":"OMG, IT'S BEN","url":"https://omg-its-ben.example/","author":{"@type":"Person","name":"Ben"}}
-    </script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69300f34d8543dbe7c5b174d_Favicon.png" />
+    <link rel="apple-touch-icon" href="https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69300e782831d4c9f167ca6a_Webclip.png" />
+    <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692c485307fbc15ab082acbc_Bugrino-Regular.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692c49030a6a05d986bb8e45_PPNeueMontrealMono-Medium.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/6916118994cb3be1a3d1403a_PPNeueMontreal-Book.woff2" />
   </head>
   <body>
+    <!-- black cover until the app's page transition takes over (prevents a white flash) -->
+    <div id="boot-cover" style="position: fixed; inset: 0; z-index: 1001; background: #000"></div>
     <div id="root"></div>
-    <noscript><p style="padding:2rem;font-family:serif">OMG, IT'S BEN is an interactive archive and needs JavaScript. Projects are listed in <a href="/sitemap.xml">the sitemap</a>.</p></noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
