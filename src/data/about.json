@@ -5,7 +5,7 @@
       "content": [
         {
           "type": "text",
-          "value": "I first started my professional career as a apprentice at namics ag (now "
+          "value": "foreground"
         },
         {
           "type": "link",
@@ -15,7 +15,7 @@
         },
         {
           "type": "text",
-          "value": "), where I developed websites and mobile apps. Having gathered a lot of technical know-how over these 4 years, I decided to turn my focus to design. I then completed the BMS with a focus on design and art, and worked at the Museum of Design Zurich for six months, which deepened my understanding and interest in design."
+          "value": "d"
         }
       ]
     },
@@ -24,7 +24,7 @@
       "content": [
         {
           "type": "text",
-          "value": "My work mainly focuses on web and brand design but it also frequently extends into communication, campaigning, photography and web development. Always eager to learn something new, I like being pushed by projects that stretch my skill sets. In almost all of my work my background in software development has remained a key asset in shaping how I approach projects, helping me to think further about how something should work and how it can be realized."
+          "value": "Md"
         }
       ]
     },
@@ -33,7 +33,7 @@
       "content": [
         {
           "type": "text",
-          "value": "For the past three years, I've been working at "
+          "value": "d"
         },
         {
           "type": "link",
@@ -43,7 +43,7 @@
         },
         {
           "type": "text",
-          "value": " a small design agency in St.Gallen, as a UI/UX and graphic designer. Having worked in very different environments, from large corporate companies to small creative teams and cultural spaces, each with their own ways of working and thinking, has taught me a lot. Through that I've built a broad understanding of how different projects and people work. These experiences have shaped my way of working, allowing me to approach different projects and needs from various angles."
+          "value": " d"
         }
       ]
     },
@@ -57,7 +57,8 @@
         {
           "type": "link",
           "text": "mail@benwroth.com",
-          "href": "mailto:mail@benwroth.com"
+          "href": "mailto:mail@benwroth.com",
+          "external": false
         },
         {
           "type": "break"
@@ -86,28 +87,6 @@
           "external": true
         }
       ]
-    }
-  ],
-  "images": [
-    {
-      "key": "about-img_4",
-      "type": "video",
-      "id": "6967cb5bb88d4a4c0242fd29_about-img_4"
-    },
-    {
-      "key": "about-img_3",
-      "type": "image",
-      "src": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/6967c6f4a370aa87081b74ee_about-img_3.avif"
-    },
-    {
-      "key": "about-img_2",
-      "type": "image",
-      "src": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/6967c6f40f305629735ecf78_about-img_2.avif"
-    },
-    {
-      "key": "about-img_1",
-      "type": "image",
-      "src": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/6967c6f400fc6c7fbace4427_about-img_1.avif"
     }
   ]
 }
