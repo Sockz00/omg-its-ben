@@ -4,671 +4,587 @@
     {
       "type": "image",
       "name": "ph_001.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08806dd897915723e6_ph_001.avif",
       "alt": "Person blindfolded holding a stick, preparing to hit a colorful donkey-shaped piñata on the ground.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "video",
       "name": "ph_002.mp4",
+      "hidden": true,
       "shape": "square",
-      "id": "69e1e83427659841a90c762c_ph_002",
-      "hidden": true
+      "id": "69e1e83427659841a90c762c_ph_002"
     },
     {
       "type": "image",
       "name": "ph_003.jpg",
+      "hidden": false,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c089f625906a74bb152_ph_003.avif",
       "alt": "Person with short pink hair looking away, sitting inside a cardboard structure partially covered with black tape.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_004.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c07d8cc0a6bb7e6f841_ph_004.avif",
       "alt": "Black and white photo of a large high-rise apartment building with a swimming pool in the foreground and a person walking near the pool.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_005.jpg",
+      "hidden": false,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c087b8d5e2a68917dc6_ph_005.avif",
       "alt": "Person wearing a brown corduroy jacket and blue jeans standing next to a urinal in a restroom with a tiled wall.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_006.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c07edd4add25a4f1d76_ph_006.avif",
       "alt": "Empty outdoor basketball court with a single hoop in front of an unfinished multi-story brick building and trees.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_007.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c07da6d13c1e3209d2b_ph_007.avif",
       "alt": "A bare foot and lower leg in jeans hanging from a white awning against a black sky at night.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_008.jpg",
+      "hidden": false,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08cf753df7a5934e29_ph_008.avif",
       "alt": "Person wearing white gloves spraying red paint from a can onto a gray concrete wall.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_009.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c07e1d62b05a32619d1_ph_009.avif",
       "alt": "Old refrigerator covered with a worn cloth and a rustic wooden bench nearby on rocky ground inside a dark cave or rock shelter.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_010.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c076eeaafd67e3b4921_ph_010.avif",
       "alt": "Black and white photo of a boat named '42 k' anchored on water viewed from above near a waterslide with a kayak floating nearby.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "video",
       "name": "ph_011.mp4",
+      "hidden": true,
       "shape": "portrait",
-      "id": "692d8ea7950915109b743f0d_ph_011",
-      "hidden": true
+      "id": "692d8ea7950915109b743f0d_ph_011"
     },
     {
       "type": "image",
       "name": "ph_012.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08954fadadfaac6fc9_ph_012.avif",
       "alt": "Bright green motorcycle parked behind a wire fence near a river with a cloudy sky.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_013.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c07107fc43db0af61fb_ph_013.avif",
       "alt": "Black and white photo of a man standing barefoot on grass, looking to the left.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_014.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0709cc3e0d4608a919_9629a7b539b1276f1e2ee98e59045556_ph_014.avif",
       "alt": "Group of people on a boat with a person wearing a monkey mask and life jacket, and a crew member in a green and black uniform.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_015.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c086b736315e5f642df_ph_015.avif",
       "alt": "Narrow stream flowing between grassy hills with dense red and green vegetation and a small stone building on the right hillside.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_016.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08057b0f00fd2bcb78_ph_016.avif",
       "alt": "Buffalo partially hidden among dense foliage in a natural forest setting, shown in black and white.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_017.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08a7a0b47f3a2b5dc0_ph_017.avif",
       "alt": "Close-up of a black car hood with a Mercedes-Benz emblem held on by multiple pieces of black tape above the front grille.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_018.jpg",
+      "hidden": true,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08475114c2c82db243_ph_018.avif",
       "alt": "Person in a striped coat and colorful cap lying face down on grass at night next to a bottle.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_019.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08d441b99ecddf72a9_ph_019.avif",
       "alt": "Black and white photo of a large group of climbers trekking in a line across a snowy mountain slope beneath rugged rock formations.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_020.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08d7c379b6f294676f_ph_020.avif",
       "alt": "Construction worker wearing a yellow helmet and jacket spraying water with a hose at a partially demolished building.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_021.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08e0a3f54ab8bde1b7_ph_021.avif",
       "alt": "Black and white image of a car's front wheel and fender parked on a tiled driveway next to a potted plant with long leaves and a cactus.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_022.jpg",
+      "hidden": true,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c086db98c2510cc0e12_ph_022.avif",
       "alt": "Person in a black leather jacket holding a telephone receiver with a Ferris wheel lit up at night in the background.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "video",
       "name": "ph_023.mp4",
+      "hidden": true,
       "shape": "portrait",
-      "id": "692d9a3fc7b24bc4d04be91d_ph_023",
-      "hidden": true
+      "id": "692d9a3fc7b24bc4d04be91d_ph_023"
     },
     {
       "type": "image",
       "name": "ph_024.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08ac804096e886e0b0_ph_024.avif",
       "alt": "Black and white image of old, rough stone walls with mist or smoke creating an eerie atmosphere and blurry trees in the background.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_025.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c089bcbcb0c462dd2a3_bd4a35f25bcc6a0b80a63b75f4747f59_ph_025.avif",
       "alt": "Outdoor clock mounted on a wooden pole surrounded by rocky terrain and green vegetation under a partly cloudy sky.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_026.jpg",
+      "hidden": false,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c087dce19fafaa45d4f_ph_026.avif",
       "alt": "Low-angle view of a person in a white tank top and dark pants standing with hands by their sides, partially obscured by bright light above.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_027.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c088f862c7eb6c1751f_ph_027.avif",
       "alt": "Black and white photo of a protest with people wearing face masks, one holding a 'Black Lives Matter' sign.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_028.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08dd8ff3256c010100_ph_028.avif",
       "alt": "Black and white photo of a bicycle covered in plastic sheets secured with tape, surrounded by four traffic cones on the pavement.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_029.jpg",
+      "hidden": false,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c09739346479c2b9f2c_ph_029.avif",
       "alt": "Green grassy field scattered with small white flowers and several pigeons with a white plastic container standing in the grass.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_030.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d9aa82fb022ed7e06320d_ph_030.avif",
       "alt": "Person sitting on a chair wearing a house costume, with bare legs and arms, holding a cigarette in one hand against a dark background.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_031.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c082d96b14b0884539c_ph_031.avif",
       "alt": "Black and white photo of an ornate traditional Asian building facade with decorative carvings and vertical poles extending from the roof, partially obscured by scaffolding.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_032.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c09f8d2711b16e67177_ph_032.avif",
       "alt": "Soccer field with goalpost and net in the foreground, large modern apartment building and trees in the background under an overcast sky.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_033.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c095958e8e20257b050_ph_033.avif",
       "alt": "Black and white photo of an old building with a small balcony and door sealed with bricks.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_034.jpg",
+      "hidden": true,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0902a69288e7cba132_ph_034.avif",
       "alt": "Man with curly hair and mustache holding partially eaten pink cotton candy, colorful character balloons in the dark background.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_035.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0992de3498df85bb33_18056872ea55960b1644a40af4405372_ph_035.avif",
       "alt": "Coastal scene with turquoise water, a sandy beach, palm trees, and a cactus in the foreground, with a forested island in the background.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_036.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c097b8d5e2a68917de2_9f4150c16e6908b29a4ef8c141a77adf_ph_036.avif",
       "alt": "Person bending down on pavement near scooters and parked cars with tall palm trees and clear blue sky in the background.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_037.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0936c93fd83ca14a2e_ph_037.avif",
       "alt": "Close-up of two curved glass and metal greenhouse domes under a cloudy sky.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_038.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c09fd3d9fdee573be4c_0a8590ee487c1e890a495d6145017e31_ph_038.avif",
       "alt": "Close-up of a bicycle wheel covered in thick mud, tangled debris, and cobwebs.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_039.jpg",
+      "hidden": false,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c09950915109b739872_ph_039.avif",
       "alt": "Close-up of a person performing a wheelie on an electric scooter on a leaf-strewn pavement at night.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
-    },
-    {
-      "type": "image",
-      "name": "ph_040.jpg",
-      "shape": "portrait",
-      "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c09cfca4deb9726e491_ph_040.avif",
-      "alt": "Black-and-white photo showing a burning bicycle wheel on the ground with a person’s legs and polished shoes nearby.",
-      "widths": [
-        500
-      ],
-      "full": 686,
-      "hidden": false
-    },
-    {
-      "type": "image",
-      "name": "ph_041.jpg",
-      "shape": "portrait",
-      "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0984963ec4ae12d22b_ph_041.avif",
-      "alt": "Two small covered rail cars on a narrow track ascending through a forested hillside.",
-      "widths": [
-        500
-      ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_042.jpg",
+      "hidden": false,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c09086a117530e58154_ph_042.avif",
       "alt": "Black and white photo of a calm river with stone steps on the left and large crumpled bags in the foreground beside the water.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_043.jpg",
+      "hidden": false,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c093e6f2057b402c37a_ph_043.avif",
       "alt": "Tall white elevated view tower with a metal ladder and canopy, set against green tree foliage and overcast sky.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
-    },
-    {
-      "type": "image",
-      "name": "ph_044.jpg",
-      "shape": "portrait",
-      "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0a2b31e145abc775d8_ph_044.avif",
-      "alt": "Close-up of a person standing on uneven rocks next to a rusty ladder, wearing jeans and white shoes.",
-      "widths": [
-        500
-      ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_045.jpg",
+      "hidden": false,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0ac3c83e12f57fec00_ph_045.avif",
       "alt": "Two people playing an Ibach piano with their hands on the keys and their feet near the pedals.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
-    },
-    {
-      "type": "image",
-      "name": "ph_046.jpg",
-      "shape": "square",
-      "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0ae118ada4d1aa411b_ph_046.avif",
-      "alt": "Cargo delivery by helicopter above a valley with mountains in the background.",
-      "widths": [
-        500
-      ],
-      "full": 686,
-      "hidden": false
-    },
-    {
-      "type": "image",
-      "name": "ph_047.jpg",
-      "shape": "portrait",
-      "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0ada6d13c1e3209e03_ph_047.avif",
-      "alt": "Empty outdoor swimming pool with large rocks in foreground and tall buildings and trees in the background.",
-      "widths": [
-        500
-      ],
-      "full": 686,
-      "hidden": false
-    },
-    {
-      "type": "image",
-      "name": "ph_048.jpg",
-      "shape": "portrait",
-      "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0a5ee476efb18f63ac_ph_048.avif",
-      "alt": "Building under construction covered with white protective sheeting and metal scaffolding, against a clear blue sky.",
-      "widths": [
-        500
-      ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_049.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0affcf7f8c51c22f54_ph_049.avif",
       "alt": "Silver sedan parked near fallen metal roofing sheets, cordoned off with warning tape, with trees in background under a cloudy sky.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
-    },
-    {
-      "type": "image",
-      "name": "ph_050.jpg",
-      "shape": "square",
-      "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c0a3307041eff868905_a1afa464e795f05aef46aa61a52f1d21_ph_050.avif",
-      "alt": "Silver minivan partially hidden by dense foliage in a tropical forest with tall palm trees in the background.",
-      "widths": [
-        500
-      ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_051.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69d2a538eb6727aec5991e93_ph_051.avif",
       "alt": "Abandoned van partially covered by dense foliage and surrounded by tall palm trees in a forested area.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_052.jpg",
+      "hidden": false,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69d2a53875c38f7e79544167_ph_052.avif",
       "alt": "Covered arcade game machine labeled Wheel of Boxing near a waterfront at sunset with cloudy sky and distant hills.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_053.jpg",
+      "hidden": true,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69d2a5386c31fde4aa240952_ph_053.avif",
       "alt": "Stone bell tower partially submerged in a lake with mountains and trees in the background under a cloudy sky.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_054.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69d2a53822e3b552489b4463_ph_054.avif",
       "alt": "Close-up of a bike wheel heavily covered in spider webs and debris, with another tire visible in the background.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_055.jpg",
+      "hidden": true,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69d2a5381a984020bed5dbc5_ph_055.avif",
       "alt": "Small car driving on a curving road surrounded by lush green hills and large conifer tree under a partly cloudy sky.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_056.jpg",
+      "hidden": false,
       "shape": "portrait",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69d2a53871e0258c4c342d97_ph_056.avif",
       "alt": "White and blue pedal boat resting on dry ground in a wooded area with tall pine trees.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": false
+      "full": 686
     },
     {
       "type": "image",
       "name": "ph_057.jpg",
+      "hidden": true,
       "shape": "square",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/69e0f612e23201a9ba4e39c8_ph_057.avif",
       "alt": "Small golden spirit house shrine on ground near rocks with green plants and ocean in the background.",
       "widths": [
         500
       ],
-      "full": 686,
-      "hidden": true
+      "full": 686
     }
   ]
 }
