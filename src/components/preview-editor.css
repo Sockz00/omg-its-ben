@@ -1,0 +1,25 @@
+.ascii-editor { position: fixed; z-index: 2000; top: 12px; right: 12px; width: min(360px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow: auto; box-sizing: border-box; padding: 22px; border: 1px solid #d4d4d4; background: #fff; color: #171717; box-shadow: 0 12px 40px #0002; font: 13px/1.45 system-ui, sans-serif; text-transform: none; }
+.ascii-editor * { box-sizing: border-box; }
+.ascii-editor-header { display: flex; justify-content: space-between; align-items: start; gap: 14px; }
+.ascii-editor-header h1 { font: 600 20px/1.2 system-ui, sans-serif; margin: 4px 0 0; }
+.ascii-editor-header a { font-size: 25px; line-height: 1; text-decoration: none; }
+.ascii-editor-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #686868; }
+.ascii-editor p { color: #555; margin: 12px 0; }
+.ascii-editor .ascii-editor-hint { font-size: 11px; line-height: 1.45; color: #737373; }
+.ascii-editor label { display: block; font-weight: 550; }
+.ascii-editor input[type=text], .ascii-editor textarea { width: 100%; margin-top: 5px; padding: 7px; border: 1px solid #ccc; border-radius: 3px; font: inherit; color: #171717; background: #fff; }
+.ascii-editor input[type=file] { display: block; width: 100%; font: 11px system-ui, sans-serif; margin-top: 6px; }
+.ascii-editor-colors { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin: 16px 0; }
+.ascii-editor-colors input { display: block; width: 42px; height: 29px; margin-top: 5px; border: 1px solid #ccc; padding: 2px; background: white; }
+.ascii-editor-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0; }
+.ascii-editor-checks label { font-size: 12px; font-weight: 400; }
+.ascii-editor-slider { margin: 15px 0; }
+.ascii-editor-slider span { display: flex; justify-content: space-between; }
+.ascii-editor-slider output { color: #737373; font-variant-numeric: tabular-nums; }
+.ascii-editor-slider input { width: 100%; margin: 7px 0 0; accent-color: #222; }
+.ascii-editor-actions { display: flex; gap: 8px; margin-top: 18px; }
+.ascii-editor button { cursor: pointer; font: 12px system-ui, sans-serif; padding: 8px 12px; background: #171717; color: white; border: 1px solid #171717; border-radius: 3px; }
+.ascii-editor .ascii-editor-button, .ascii-editor-actions button + button { background: white; color: #171717; border-color: #ccc; }
+.ascii-editor details { margin-top: 14px; }
+.ascii-editor textarea { min-height: 180px; font: 11px/1.4 monospace; }
+body:has(.ascii-editor) .scroll-down-tag { display: none; }

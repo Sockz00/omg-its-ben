@@ -4,12 +4,13 @@ import "lenis/dist/lenis.css";
 import "./index.css";
 import App from "./App";
 import { initLenis } from "./lib/motion";
+import { PreviewEditor } from "./components/PreviewEditor";
 
 // smooth scrolling (same as the original: new Lenis({ autoRaf: true }))
 initLenis();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    {new URLSearchParams(window.location.search).get('preview') === 'ascii' ? <PreviewEditor /> : <App />}
   </StrictMode>
 );

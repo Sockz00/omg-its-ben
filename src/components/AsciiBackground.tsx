@@ -5,8 +5,9 @@ import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import rawSettings from '@/data/background.json';
 import { cameraDistanceForViewport, normalizeBackgroundSettings } from '@/lib/ascii-settings';
+import { usePreview } from './PreviewContext';
 
-const settings = normalizeBackgroundSettings(rawSettings);
+const savedSettings = normalizeBackgroundSettings(rawSettings);
 
 function disposeObject(object: THREE.Object3D) {
   object.traverse((child) => {
@@ -23,7 +24,17 @@ function disposeObject(object: THREE.Object3D) {
 }
 
 export function AsciiBackground() {
+  const preview = usePreview();
+  const settings = preview?.settings ?? savedSettings;
+  const modelUrl = preview?.modelUrl || settings.model;
+  const modelName = preview?.modelName || settings.model;
+  const settingsRef = useRef(settings);
+  settingsRef.current = settings;
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    window.dispatchEvent(new Event('ascii-settings-change'));
+  }, [settings]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,7 +53,8 @@ export function AsciiBackground() {
     const sampleCanvas = document.createElement('canvas');
     const sample = sampleCanvas.getContext('2d', { willReadFrequently: true });
     const scene = new THREE.Scene();
-    scene.add(new THREE.AmbientLight(0xffffff, settings.ambientIntensity));
+    const ambient = new THREE.AmbientLight(0xffffff, settings.ambientIntensity);
+    scene.add(ambient);
     const light = new THREE.DirectionalLight(0xffffff, settings.lightIntensity);
     light.position.set(3, 5, 6);
     scene.add(light);
@@ -69,6 +81,7 @@ export function AsciiBackground() {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     const resize = () => {
+      const settings = settingsRef.current;
       const width = window.innerWidth;
       const height = window.innerHeight;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -95,6 +108,7 @@ export function AsciiBackground() {
 
     const draw = () => {
       if (!active || !cols || !rows) return;
+      const settings = settingsRef.current;
       const width = window.innerWidth;
       const height = window.innerHeight;
       output.clearRect(0, 0, width, height);
@@ -106,6 +120,9 @@ export function AsciiBackground() {
       output.fillStyle = settings.color;
       output.globalAlpha = settings.opacity;
       const ramp = settings.characters;
+      ambient.intensity = settings.ambientIntensity;
+      light.intensity = settings.lightIntensity;
+      pivot.position.set(settings.offsetX, settings.offsetY, 0);
       pivot.rotation.set(settings.tiltX + elapsed * settings.rotationX, settings.tiltY + elapsed * settings.rotationY, elapsed * settings.rotationZ);
       pivot.scale.setScalar(settings.scale);
 
@@ -146,7 +163,7 @@ export function AsciiBackground() {
       if (previousFrame) {
         const delta = Math.min((now - previousFrame) / 1000, 0.1);
         elapsed += delta;
-        mixer?.update(delta * settings.animationSpeed);
+        mixer?.update(delta * settingsRef.current.animationSpeed);
       }
       previousFrame = now;
       if (now - lastDraw >= 50) { draw(); lastDraw = now; }
@@ -160,13 +177,13 @@ export function AsciiBackground() {
       if (!document.hidden && !motion.matches) frame = requestAnimationFrame(tick);
     };
 
-    if (renderer && settings.model) {
-      const load = settings.model.toLowerCase().endsWith('.stl')
-        ? new STLLoader().loadAsync(settings.model).then((geometry) => ({
+    if (renderer && modelUrl) {
+      const load = modelName.toLowerCase().endsWith('.stl')
+        ? new STLLoader().loadAsync(modelUrl).then((geometry) => ({
             model: new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.8 })),
             animations: [] as THREE.AnimationClip[],
           }))
-        : new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(settings.model).then((gltf) => ({ model: gltf.scene, animations: gltf.animations }));
+        : new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(modelUrl).then((gltf) => ({ model: gltf.scene, animations: gltf.animations }));
       load.then(({ model, animations }) => {
         if (!active) { disposeObject(model); return; }
         const box = new THREE.Box3().setFromObject(model);
@@ -199,19 +216,22 @@ export function AsciiBackground() {
     resize();
     restart();
     window.addEventListener('resize', resize);
+    window.addEventListener('ascii-settings-change', resize);
     document.addEventListener('visibilitychange', restart);
     motion.addEventListener('change', restart);
     return () => {
       active = false;
       if (frame) cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('ascii-settings-change', resize);
       document.removeEventListener('visibilitychange', restart);
       motion.removeEventListener('change', restart);
       mixer?.stopAllAction();
       disposeObject(object);
       renderer?.dispose();
+      renderer?.forceContextLoss();
     };
-  }, []);
+  }, [settings.enabled, settings.wireframe, settings.animationClip, settings.playModelAnimation, modelUrl, modelName]);
 
   return settings.enabled ? <canvas ref={canvasRef} className="ascii-animation" aria-hidden="true" /> : null;
 }
