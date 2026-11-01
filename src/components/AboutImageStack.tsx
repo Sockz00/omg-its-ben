@@ -240,7 +240,7 @@ export function AboutImageStack() {
         <div key={img.key} className={img.key} data-key={img.key}>
           <div className="image-wrapper">
             {img.type === "video" ? (
-              <VideoBox id={img.id} shape="square" />
+              <VideoBox id={img.src || img.id || ""} shape="square" />
             ) : (
               <img className="thumbnail square" src={img.src} alt="" loading="eager" draggable={false} />
             )}

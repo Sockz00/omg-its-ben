@@ -41,10 +41,10 @@ export function BackgroundVideo({ id }: { id: string }) {
         playsInline
         preload="none"
         disablePictureInPicture
-        style={{ backgroundImage: `url("${poster}")` }}
+        style={poster ? { backgroundImage: `url("${poster}")` } : undefined}
       >
-        <source src={mp4} type="video/mp4" />
-        <source src={webm} type="video/webm" />
+        {mp4 && <source src={mp4} type="video/mp4" />}
+        {webm && <source src={webm} type="video/webm" />}
       </video>
     </div>
   );
@@ -76,7 +76,7 @@ export function MediaTile({ media, sizes }: { media: Media; sizes: string }) {
             />
           </div>
         ) : (
-          <VideoBox id={media.id} shape={media.shape} />
+          <VideoBox id={media.src || media.id || ""} shape={media.shape} />
         )}
         <div className="project-title_wrapper">
           <div className="project-image-tag">{media.name}</div>

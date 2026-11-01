@@ -4,8 +4,8 @@ import { aboutSections, type AboutPart } from "@/data/about";
 import { aboutIntro } from "@/data/content";
 
 function renderPart(part: AboutPart, i: number) {
-  if (typeof part === "string") return part;
-  if ("br" in part) return <br key={i} />;
+  if (part.type === "text") return part.value;
+  if (part.type === "break") return <br key={i} />;
   return (
     <a key={i} href={part.href} {...(part.external ? { target: "_blank", rel: "noreferrer" } : {})}>
       {part.text}

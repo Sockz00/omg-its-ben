@@ -1,0 +1,203 @@
+media:
+  - name: images
+    label: Images
+    input: public/images
+    output: /images
+    rename: safe
+    extensions: [jpg, jpeg, png, webp, avif, gif]
+  - name: videos
+    label: Videos
+    input: public/videos
+    output: /videos
+    rename: safe
+    extensions: [mp4, webm]
+
+components:
+  mediaItems:
+    type: block
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{name}"
+    blockKey: type
+    blocks:
+      - name: image
+        label: Image
+        fields:
+          - name: name
+            label: Caption / filename
+            type: string
+            required: true
+          - name: shape
+            type: select
+            required: true
+            options:
+              values: [portrait, landscape, square]
+          - name: file
+            label: Image
+            type: image
+            required: true
+            options:
+              media: images
+          - name: alt
+            label: Image description
+            type: string
+            required: true
+          - name: widths
+            label: Original CDN variant widths
+            description: Retained for existing CDN images; leave empty for uploads.
+            type: number
+            list: true
+          - name: full
+            label: Original CDN image width
+            description: Retained for existing CDN images; leave empty for uploads.
+            type: number
+      - name: video
+        label: Video
+        fields:
+          - name: name
+            label: Caption / filename
+            type: string
+            required: true
+          - name: shape
+            type: select
+            required: true
+            options:
+              values: [portrait, landscape, square]
+          - name: src
+            label: Upload video
+            type: file
+            options:
+              media: videos
+          - name: id
+            label: Original CDN video ID
+            description: Used for existing videos; an uploaded video takes priority.
+            type: string
+
+content:
+  - name: site
+    label: Homepage and About introductions
+    type: file
+    path: src/data/site.json
+    format: json
+    operations: { create: false, delete: false }
+    fields:
+      - name: heroTitle
+        label: Homepage headline
+        type: text
+        required: true
+      - name: aboutIntro
+        label: About page introduction
+        type: text
+        required: true
+
+  - name: projects
+    label: Homepage projects
+    type: file
+    path: src/data/projects.json
+    format: json
+    operations: { create: false, delete: false }
+    fields:
+      - name: items
+        label: Projects (in display order)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: category, label: Category, type: string, required: true }
+          - { name: year, label: Year, type: string, required: true }
+          - { name: description, label: Description, type: text, required: true }
+          - name: credits
+            label: Credits
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Role, type: string, required: true }
+              - name: parts
+                label: Names and links
+                type: object
+                list: true
+                fields:
+                  - { name: text, label: Text, type: string, required: true }
+                  - { name: href, label: Link URL, type: string }
+          - name: media
+            label: Project images and videos
+            component: mediaItems
+
+  - name: photos
+    label: Photos page
+    type: file
+    path: src/data/photos.json
+    format: json
+    operations: { create: false, delete: false }
+    fields:
+      - { name: intro, label: Introduction, type: text, required: true }
+      - name: items
+        label: Gallery (in display order)
+        component: mediaItems
+
+  - name: about
+    label: About page
+    type: file
+    path: src/data/about.json
+    format: json
+    operations: { create: false, delete: false }
+    fields:
+      - name: sections
+        label: Text sections
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Heading, type: string, required: true }
+          - name: content
+            label: Text and links (in display order)
+            type: block
+            list: true
+            blockKey: type
+            blocks:
+              - name: text
+                label: Text
+                fields:
+                  - { name: value, label: Text, type: text, required: true }
+              - name: link
+                label: Link
+                fields:
+                  - { name: text, label: Link text, type: string, required: true }
+                  - { name: href, label: Link URL, type: string, required: true }
+                  - { name: external, label: Open in a new tab, type: boolean }
+              - name: break
+                label: Line break
+                fields: []
+      - name: images
+        label: Image stack
+        description: Replace the existing four images or video; keep their position IDs unchanged.
+        type: block
+        list:
+          max: 4
+          collapsible: true
+        blockKey: type
+        blocks:
+          - name: image
+            label: Image
+            fields:
+              - { name: key, label: Position ID, type: string, required: true }
+              - name: src
+                label: Image
+                type: image
+                required: true
+                options: { media: images }
+          - name: video
+            label: Video
+            fields:
+              - { name: key, label: Position ID, type: string, required: true }
+              - name: src
+                label: Upload video
+                type: file
+                options: { media: videos }
+              - { name: id, label: Original CDN video ID, type: string }

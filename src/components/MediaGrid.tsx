@@ -156,7 +156,7 @@ export function MediaGrid({ items, columns = 4, sizes, className, imageGridClass
         <div className="layout-grid_collection" data-layout-grid-collection="" ref={collectionRef}>
           <div className="layout-grid_list" data-layout-grid-list="" data-gsap="stagger-container" ref={listRef}>
             {items.map((m) => (
-              <MediaTile key={m.name + (m.type === "image" ? m.file : m.id)} media={m} sizes={sizes} />
+              <MediaTile key={m.name + (m.type === "image" ? m.file : (m.src || m.id))} media={m} sizes={sizes} />
             ))}
           </div>
         </div>
