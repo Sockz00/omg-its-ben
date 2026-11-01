@@ -74,6 +74,56 @@ components:
             description: Used for existing videos; an uploaded video takes priority.
             type: string
 
+  photoItems:
+    type: block
+    list:
+      collapsible:
+        collapsed: true
+        summary: "{name}"
+    blockKey: type
+    blocks:
+      - name: image
+        label: Image
+        fields:
+          - { name: name, label: Caption / filename, type: string, required: true }
+          - { name: hidden, label: Hide from gallery, type: boolean }
+          - name: shape
+            type: select
+            required: true
+            options: { values: [portrait, landscape, square] }
+          - name: file
+            label: Image
+            type: image
+            required: true
+            options: { media: images }
+          - { name: alt, label: Image description, type: string, required: true }
+          - name: widths
+            label: Original CDN variant widths
+            description: Retained for existing CDN images; leave empty for uploads.
+            type: number
+            list: true
+          - name: full
+            label: Original CDN image width
+            description: Retained for existing CDN images; leave empty for uploads.
+            type: number
+      - name: video
+        label: Video
+        fields:
+          - { name: name, label: Caption / filename, type: string, required: true }
+          - { name: hidden, label: Hide from gallery, type: boolean }
+          - name: shape
+            type: select
+            required: true
+            options: { values: [portrait, landscape, square] }
+          - name: src
+            label: Upload video
+            type: file
+            options: { media: videos }
+          - name: id
+            label: Original CDN video ID
+            description: Used for existing videos; an uploaded video takes priority.
+            type: string
+
 content:
   - name: site
     label: Homepage and About introductions
@@ -137,7 +187,7 @@ content:
       - { name: intro, label: Introduction, type: text, required: true }
       - name: items
         label: Gallery (in display order)
-        component: mediaItems
+        component: photoItems
 
   - name: about
     label: About page

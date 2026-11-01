@@ -27,7 +27,18 @@ test('site content is read from the files edited by Pages CMS', () => {
   assert.equal(content.aboutIntro, site.aboutIntro);
   assert.deepEqual(content.projects, projects.items);
   assert.equal(content.photosIntro, photos.intro);
-  assert.deepEqual(content.photos, photos.items);
+  assert.deepEqual(content.photos, photos.items.filter(item => !item.hidden));
+});
+
+test('hidden gallery items are excluded while other items stay visible', () => {
+  const { photos } = loadTypeScript('src/data/content.ts', {
+    './photos.json': { intro: '', items: [
+      { name: 'visible.jpg', type: 'image' },
+      { name: 'hidden.jpg', type: 'image', hidden: true },
+      { name: 'new.jpg', type: 'image', hidden: false },
+    ] },
+  });
+  assert.deepEqual(photos.map(item => item.name), ['visible.jpg', 'new.jpg']);
 });
 
 test('homepage displays an empty message only when there are no projects', () => {
@@ -76,4 +87,3 @@ test('uploaded videos use the uploaded file instead of CDN-generated URLs', () =
   assert.equal(video.mp4, undefined);
   assert.equal(video.poster, undefined);
 });
-

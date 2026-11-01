@@ -8,6 +8,7 @@ const CDN_VIDEO = 'https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061%2
 export type Shape = 'portrait' | 'landscape' | 'square';
 export type ImageMedia = {
   type: 'image';
+  hidden?: boolean;
   name: string;
   shape: Shape;
   file: string;
@@ -17,6 +18,7 @@ export type ImageMedia = {
 };
 export type VideoMedia = {
   type: 'video';
+  hidden?: boolean;
   name: string;
   shape: Shape;
   id?: string;
@@ -49,4 +51,4 @@ export const heroTitle = site.heroTitle;
 export const aboutIntro = site.aboutIntro;
 export const projects = (projectData as { items?: Project[] }).items ?? [];
 export const photosIntro = photoData.intro;
-export const photos = photoData.items as Media[];
+export const photos = (photoData.items as Media[]).filter((item) => !item.hidden);
