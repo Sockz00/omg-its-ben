@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
-// NOTE: this is the only remaining reference to the original owner's name – it is the
-// live asset hosting the background ASCII renderer. Point it at your own host (or an
-// /assets/ascii-animation folder) to remove it completely.
-const ASCII_URL = "https://maximiliankaspar.github.io/ascii-animation/";
+import { AsciiBackground } from "./AsciiBackground";
 
 /** 12-column helper grid, toggled with shift + g (easter egg from the original). */
 export function GridOverlay() {
@@ -62,22 +58,6 @@ function PixelGrid() {
   );
 }
 
-/** three.js ascii renderer, lazily injected after 1s like the original embed. */
-function AsciiAnimation() {
-  const [src, setSrc] = useState("about:blank");
-
-  useEffect(() => {
-    const t = window.setTimeout(() => setSrc(ASCII_URL), 1000);
-    return () => window.clearTimeout(t);
-  }, []);
-
-  return (
-    <div className="ascii-animation" aria-hidden="true">
-      <iframe src={src} title="ascii animation" loading="lazy" tabIndex={-1} />
-    </div>
-  );
-}
-
 export function Background() {
   return (
     <>
@@ -87,7 +67,7 @@ export function Background() {
         ))}
       </div>
       <PixelGrid />
-      <AsciiAnimation />
+      <AsciiBackground />
     </>
   );
 }

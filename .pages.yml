@@ -11,6 +11,12 @@ media:
     output: /videos
     rename: safe
     extensions: [mp4, webm]
+  - name: models
+    label: 3D models
+    input: public/models
+    output: /models
+    rename: safe
+    extensions: [glb, stl]
 
 components:
   mediaItems:
@@ -125,6 +131,100 @@ components:
             type: string
 
 content:
+  - name: background
+    label: ASCII background
+    type: file
+    path: src/data/background.json
+    format: json
+    operations: { create: false, delete: false }
+    fields:
+      - { name: enabled, label: Show background animation, type: boolean }
+      - name: model
+        label: 3D model
+        description: Upload a self-contained GLB or STL. Meshopt is supported; Draco and KTX2 compression are not. Leave empty for the built-in shape.
+        type: file
+        options: { media: models, extensions: [glb, stl] }
+      - name: color
+        label: Character colour
+        description: Hex colour such as #999999.
+        type: string
+        pattern: "^#[0-9a-fA-F]{6}$"
+      - name: backgroundColor
+        label: Background colour
+        description: Optional hex colour; leave empty for the site's default background.
+        type: string
+        pattern: "^$|^#[0-9a-fA-F]{6}$"
+      - name: opacity
+        label: Opacity
+        description: 0 is invisible; 1 is fully opaque.
+        type: number
+        options: { min: 0, max: 1 }
+      - name: fontSize
+        label: Character size
+        description: Smaller characters add detail but need more processing.
+        type: number
+        options: { min: 6, max: 24 }
+      - name: characters
+        label: ASCII characters
+        description: Ordered from lightest to darkest; spaces at the start leave dark areas empty.
+        type: string
+      - { name: invert, label: Invert shading, type: boolean }
+      - { name: wireframe, label: Wireframe effect, type: boolean }
+      - { name: playModelAnimation, label: Play animations embedded in GLB models, type: boolean }
+      - name: animationClip
+        label: GLB animation clip name
+        description: Optional; leave blank to play the first clip. Names must match the model exactly.
+        type: string
+      - name: animationSpeed
+        label: GLB animation speed
+        description: 1 is normal speed; 0 pauses embedded animations.
+        type: number
+        options: { min: 0, max: 3 }
+      - name: lightIntensity
+        label: Directional light intensity
+        type: number
+        options: { min: 0, max: 5 }
+      - name: ambientIntensity
+        label: Ambient light intensity
+        type: number
+        options: { min: 0, max: 5 }
+      - name: scale
+        label: Model size
+        type: number
+        options: { min: 0.25, max: 3 }
+      - name: offsetX
+        label: Horizontal position
+        description: Negative moves left; positive moves right.
+        type: number
+        options: { min: -3, max: 3 }
+      - name: offsetY
+        label: Vertical position
+        description: Negative moves down; positive moves up.
+        type: number
+        options: { min: -3, max: 3 }
+      - name: rotationX
+        label: Rotation speed — X axis
+        description: Radians per second; negative values reverse direction, zero stops rotation.
+        type: number
+        options: { min: -3, max: 3 }
+      - name: rotationY
+        label: Rotation speed — Y axis
+        type: number
+        options: { min: -3, max: 3 }
+      - name: rotationZ
+        label: Rotation speed — Z axis
+        type: number
+        options: { min: -3, max: 3 }
+      - name: tiltX
+        label: Starting tilt — X axis
+        description: Angle in radians.
+        type: number
+        options: { min: -3.14, max: 3.14 }
+      - name: tiltY
+        label: Starting tilt — Y axis
+        type: number
+        options: { min: -3.14, max: 3.14 }
+
   - name: site
     label: Homepage and About introductions
     type: file

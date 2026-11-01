@@ -1,0 +1,1 @@
+Upload GLB or STL files here through Pages CMS. GLB files should contain all textures and other assets; separate `.gltf` files are not supported. Meshopt compression is supported, but Draco and KTX2 are not. Smaller, simplified models load faster. The repository host may impose upload and file-size limits.

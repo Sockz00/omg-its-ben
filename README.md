@@ -6,11 +6,16 @@ Images and videos can be uploaded in Pages CMS. Existing media and fonts are loa
 
 The CMS configuration is `.pages.yml`, and content is stored in the JSON files in `src/data/`. The TypeScript files in that folder provide the types and media handling used by the site.
 
+## ASCII background
+
+In Pages CMS, select **ASCII background** to upload a self-contained `.glb` or `.stl` model and adjust its colours, opacity, characters, lighting, size, position, rotation, shading, wireframe and embedded GLB animation. Leave the model empty to use the built-in shape. GLB models must include their textures and other assets. Meshopt compression is supported; export without Draco or KTX2 compression. Simplify large models for better performance. Motion respects the visitor's reduced-motion preference. If a model fails to load, the built-in shape is shown.
+
 ```sh
 npm ci
 npm run dev
 npm run build
-node --test tests/cms-content.test.cjs
+node --test tests/*.test.cjs
 ```
 
 Cloudflare builds the site from this repository. Its static output is `dist/`, configured in `wrangler.jsonc`. The previous site's source and content remain available in the repository's earlier commits.
+

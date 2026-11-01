@@ -278,16 +278,12 @@ a,
 
 .ascii-animation {
   z-index: -20;
-  height: 115vh;
-  position: fixed;
-  inset: -2% 0% auto;
-  pointer-events: none;
-}
-.ascii-animation iframe {
   display: block;
   width: 100%;
   height: 100%;
-  border: none;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
 }
 
 /* ------------------------------------------------------------------ */
@@ -778,10 +774,6 @@ h2.project-info {
   }
   .grid-line {
     transform: scaleX(0.25);
-  }
-  .ascii-animation {
-    height: 100vh;
-    top: 2%;
   }
   .title-h1 {
     font-size: 4.5vh;
