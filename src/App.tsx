@@ -9,7 +9,7 @@ import { Home } from "@/pages/Home";
 import { Photos } from "@/pages/Photos";
 
 const TITLES = {
-  "/": "ben wroth – web and brand designer",
+  "/": "ben wroth",
   "/photos": "photos – ben wroth",
   "/about": "about – ben wroth",
 } as const;
