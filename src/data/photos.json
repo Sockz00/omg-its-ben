@@ -198,7 +198,7 @@
     {
       "type": "image",
       "name": "ph_018.jpg",
-      "hidden": true,
+      "hidden": false,
       "shape": "landscape",
       "file": "https://cdn.prod.website-files.com/6915dc055cdc24f198ca9061/692d8c08475114c2c82db243_ph_018.avif",
       "alt": "Person in a striped coat and colorful cap lying face down on grass at night next to a bottle.",

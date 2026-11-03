@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Background, GridOverlay } from "@/components/Background";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
@@ -20,6 +20,11 @@ function Shell() {
 
   useEffect(() => {
     document.title = TITLES[path];
+  }, [path]);
+
+  useLayoutEffect(() => {
+    document.body.classList.toggle("photos-page", path === "/photos");
+    return () => document.body.classList.remove("photos-page");
   }, [path]);
 
   return (

@@ -328,6 +328,12 @@ a,
   height: 100%;
   will-change: transform;
 }
+.transition-wave {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: var(--black);
+}
 
 /* ------------------------------------------------------------------ */
 /*  Hero                                                               */
@@ -621,6 +627,43 @@ h2.project-info {
 .photos_wrapper {
   width: 100vw;
   margin-top: 20vh;
+}
+body.photos-page {
+  background: var(--black);
+  color: var(--white);
+}
+.photos-page .hero {
+  color: var(--white);
+}
+.photos-page .image-wrapper {
+  position: relative;
+  isolation: isolate;
+  background-size: cover;
+}
+.photos-page .image-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: inherit;
+  filter: blur(18px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.photos-page .navbar,
+.photos-page .footer {
+  mix-blend-mode: normal;
+}
+.photos-page .background-gridlines {
+  display: none;
+}
+.photos-page .ascii-animation > div {
+  color: #aaa !important;
+  background-color: #000 !important;
+}
+.photos-page .line_horizontal,
+.photos-page .line_vertical {
+  background-color: var(--white);
 }
 
 /* ------------------------------------------------------------------ */

@@ -28,7 +28,7 @@ type RouterValue = {
   path: Path;
   /** increments on every navigation, used to remount the page (= original full page load) */
   visit: number;
-  navigate: (to: Path) => void;
+  navigate: (to: Path, origin?: { x: number; y: number }) => void;
 };
 
 const RouterContext = createContext<RouterValue>({ path: "/", visit: 0, navigate: () => {} });
@@ -43,13 +43,13 @@ export function RouterProvider({ children }: { children: ReactNode }) {
   const busy = useRef(true);
   const pathRef = useRef<Path>(state.path);
 
-  const go = useCallback(async (to: Path, push: boolean) => {
+  const go = useCallback(async (to: Path, push: boolean, origin?: { x: number; y: number }) => {
     if (busy.current) return;
     busy.current = true;
     lockScroll();
     window.dispatchEvent(new Event(NAVIGATE_START_EVENT));
 
-    await overlay.current?.cover();
+    await overlay.current?.cover(origin);
 
     if (push && parseHash() !== to) window.history.pushState(null, "", hrefFor(to));
     pathRef.current = to;
@@ -94,7 +94,7 @@ export function RouterProvider({ children }: { children: ReactNode }) {
     };
   }, [go]);
 
-  const navigate = useCallback((to: Path) => go(to, true), [go]);
+  const navigate = useCallback((to: Path, origin?: { x: number; y: number }) => go(to, true, origin), [go]);
 
   return (
     <RouterContext.Provider value={{ path: state.path, visit: state.visit, navigate }}>
@@ -112,7 +112,8 @@ export function Link({ to, onClick, children, ...rest }: LinkProps) {
     onClick?.(e);
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
-    navigate(to);
+    const rect = e.currentTarget.getBoundingClientRect();
+    navigate(to, to === "/photos" ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 } : undefined);
   };
   return (
     <a href={hrefFor(to)} aria-current={path === to ? "page" : undefined} onClick={handle} {...rest}>

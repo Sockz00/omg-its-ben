@@ -58,12 +58,12 @@ export function VideoBox({ id, shape }: { id: string; shape: Shape }) {
   );
 }
 
-export function MediaTile({ media, sizes }: { media: Media; sizes: string }) {
+export function MediaTile({ media, sizes, glow = false }: { media: Media; sizes: string; glow?: boolean }) {
   return (
     <div className="layout-grid_item" data-layout-grid-item="">
       <div className="project-image_outer">
         {media.type === "image" ? (
-          <div className="image-wrapper">
+          <div className="image-wrapper" style={glow ? { backgroundImage: `url(${JSON.stringify(imageSrc(media))})` } : undefined}>
             <img
               className={clsx("thumbnail", media.shape)}
               src={imageSrc(media)}

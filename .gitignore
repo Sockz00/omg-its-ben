@@ -7,3 +7,6 @@ dist
 public/audio/**/*.wav
 public/video/**/*.mp4
 public/video/**/*.webm
+
+# Local agent instructions
+AGENTS.md
